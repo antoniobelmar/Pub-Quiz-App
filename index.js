@@ -14,6 +14,7 @@ app.get('/', function(req, res){
 });
 
 wss.on('connection', function connection(ws, req){
+  console.log('person joined');
   const location = url.parse(req.url, true);
   ws.identifier = wss.clients.size;
 
