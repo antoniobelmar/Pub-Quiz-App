@@ -1,29 +1,20 @@
 <div id="test">
   1
 </div>
-
-<button type="button" id="button"></button>
 <script type="text/javascript">
   var ws = new WebSocket(`ws://${location.host}`);
   var div = document.getElementById('test')
-  var button = document.getElementById('button')
-
   ws.onopen = function(){
 
     function sendMessage(){
       var increment = parseInt(div.innerHTML)
       increment += 1
       ws.send(increment);
-      setTimeout(sendMessage, 5000);
     };
-    sendMessage();
+    setInterval(sendMessage, 2000);
   };
 
-    ws.onmessage = function(event){
-      div.innerHTML = event.data;
-    };
-
-
-
-
+  ws.onmessage = function(event){
+    div.innerHTML = event.data;
+  };
 </script>
