@@ -7,11 +7,23 @@ const WebSocket = require('ws');
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server })
 
-let leader;
+const Quiz = require('./models/quiz')
 
-app.get('/', function(req, res){
-  res.sendFile(__dirname + '/websockettest.html')
-});
+app.get('/api/quiz/:id', function(req, res) {
+  Quiz.findById(req.params.id, function(err, quiz) {
+    if (err) {
+      res.json({error: "Not Found"})
+    } else {
+      res.json(quiz)
+    }
+  })
+})
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(__dirname + "/client/build"));
+} else {
+  app.use(express.static(__dirname + "/client/public"))
+}
 
 wss.on('connection', function connection(ws, req){
   console.log('person joined');
@@ -33,6 +45,17 @@ wss.on('connection', function connection(ws, req){
   })
 });
 
+app.get('/api/quizzes/1', function(req, res){
+  res.send({
+    "name": "the quiz of theo",
+    "questions": [{
+      "text": "what is the capital of France?",
+      "options": ["Brussels", "Paris", "Oslo"]
+    }]
+  })
+})
+
 server.listen(5000, function(){
   console.log('server running on port 5000');
-})
+});
+
