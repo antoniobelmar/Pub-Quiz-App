@@ -12,9 +12,9 @@ var questions = [
   new Question({
     type: 'MultipleChoice',
     text: 'What is the color of the sky?',
-    options: ['Purple', 'Blue', 'Green'],
+    options: ['Purple', 'Blue', 'Green', 'Yellow'],
     answer: [1]
-  });
+  }),
 
   new Question({
     type: 'MultipleChoice',
