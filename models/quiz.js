@@ -15,14 +15,46 @@ const questionFrance = new Question({
   answer: [2]
 });
 
-const makersQuiz =  new Quiz({name : 'Makers Quizz'}); // Document(data in the collection/table)
+const questionSky = new Question({
+  type: 'MultipleChoice',
+  text: 'What is the color of the sky?',
+  options: ['Purple', 'Blue', 'Green'],
+  answer: [1]
+});
 
-makersQuiz.questions.push(questionFrance)
 
-makersQuiz.save(function (err, quiz) {
+const multipleChoiceQuiz =  new Quiz({name : 'Multiple Choice Quiz'}); // Document(data in the collection/table)
+multipleChoiceQuiz.questions.push(questionFrance)
+multipleChoiceQuiz.questions.push(questionSky)
+
+multipleChoiceQuiz.save(function (err, quiz) {
   if (err) {
     console.error('Could not save');
-  }else{
-    console.log(quiz.id)
-  }
+  };
+});
+
+const questionPingPong = new Question({
+  type: 'Text',
+  text: 'What do Oleg and Tabish love to play?',
+  options: ['Ping Pong'],
+  answer: [0]
+});
+
+const questionRob = new Question({
+  type: 'Text',
+  text: "What is Rob's nickname?",
+  options: ['Sneaky Rob'],
+  answer: [0]
+});
+
+const textQuiz = new Quiz({name : 'Text Quiz'});
+
+
+textQuiz.questions.push(questionPingPong)
+textQuiz.questions.push(questionRob)
+
+textQuiz.save(function (err, quiz) {
+  if (err) {
+    console.error('Could not save');
+  };
 });
