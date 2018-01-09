@@ -4,7 +4,8 @@
   "private": true,
   "dependencies": {
     "express": "^4.16.2",
-    "mongoose": "^4.13.9",
+    "ws": "^4.0.0",
+    "mongoose": "^4.13.9"
   },
   "scripts": {
     "start": "concurrently \"npm run server\" \"npm run client\"",
