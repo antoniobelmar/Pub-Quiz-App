@@ -31,31 +31,40 @@ wss.on('connection', function connection(ws, req){
   ws.identifier = wss.clients.size;
 
   ws.on('message', function incoming(message) {
-    wss.clients.forEach(function each(client){
-      if (client.readyState === WebSocket.OPEN){
-        if(ws.identifier == 1){
+    wss.clients.forEach(function each(client) {
+      if (client.readyState === WebSocket.OPEN) {
+        if (ws.identifier == 1) {
           client.send(message);
         };
       };
     });
   });
 
-  ws.on('error', function(error){
+  ws.on('error', function(error) {
     console.log('one person has left');
-  })
+  });
 });
 
 app.get('/api/quizzes/1', function(req, res){
   res.send({
     "name": "the quiz of theo",
-    "questions": [{
-      "text": "what is the capital of France?",
-      "options": ["Brussels", "Paris", "Oslo"]
-    }]
+    "questions": [
+      {
+        "text": "what is the capital of France?",
+        "options": ["Brussels", "Paris", "Oslo"]
+      },
+      {
+        "text": "what is the capital of Poland?",
+        "options": ["Warsaw", "Iceland", "Oslo"]
+      },
+      {
+        "text": "what is the capital of Kazakhstan?",
+        "options": ["Jordan", "Astana", "Pakistan"]
+      }
+     ]
   })
 })
 
 server.listen(5000, function(){
   console.log('server running on port 5000');
 });
-
