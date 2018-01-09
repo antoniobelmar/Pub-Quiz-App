@@ -11,8 +11,14 @@ app.get('/', function(req, res){
   res.sendFile('index.html')
 })
 
-app.get('/hello', function(req, res){
-  res.send('hello')
+app.get('/api/quizzes/1', function(req, res){
+  res.send({
+    "name": "the quiz of theo",
+    "questions": [{
+      "text": "what is the capital of France?",
+      "options": ["Brussels", "Paris", "Oslo"]
+    }]
+  })
 })
 
 app.listen(5000, function(){
