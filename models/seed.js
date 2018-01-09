@@ -1,24 +1,49 @@
 const Question = require('./question');
 const Quiz = require('./quiz');
 
-const questionFrance = new Question({
-  type: 'MultipleChoice',
-  text: 'What is the capital of the France',
-  options: ['Rome', 'London', 'Paris'],
-  answer: [2]
+var questions = [
+  new Question({
+    type: 'MultipleChoice',
+    text: 'What is the capital of the France',
+    options: ['Rome', 'London', 'Paris'],
+    answer: [2]
+  }),
+
+  new Question({
+    type: 'MultipleChoice',
+    text: 'What is the color of the sky?',
+    options: ['Purple', 'Blue', 'Green'],
+    answer: [1]
+  });
+
+  new Question({
+    type: 'MultipleChoice',
+    text: 'What is Allan\'s favourite band?',
+    options: ['Spice Girls', 'Oasis', 'One Direction'],
+    answer: [2]
+  }),
+
+  new Question({
+    type: 'MultipleChoice',
+    text: 'What is Theo\s favourite food?',
+    options: ['Marmite', 'Hummous', 'Turnips'],
+    answer: [2]
+  }),
+
+  new Question({
+    type: 'MultipleChoice',
+    text: 'How many names has Kay had in her entire lifetime?',
+    options: ['5', '6', '7'],
+    answer: [0]
+  })
+]
+
+
+const multipleChoiceQuiz =  new Quiz({ name : 'Multiple Choice Quiz' }); // Document(data in the collection/table)
+
+questions.forEach(function(question) {
+  multipleChoiceQuiz.questions.push(question);
 });
-
-const questionSky = new Question({
-  type: 'MultipleChoice',
-  text: 'What is the color of the sky?',
-  options: ['Purple', 'Blue', 'Green'],
-  answer: [1]
-});
-
-
-const multipleChoiceQuiz =  new Quiz({name : 'Multiple Choice Quiz'}); // Document(data in the collection/table)
-multipleChoiceQuiz.questions.push(questionFrance)
-multipleChoiceQuiz.questions.push(questionSky)
 
 multipleChoiceQuiz.save(function (err, quiz) {
   if (err) {
