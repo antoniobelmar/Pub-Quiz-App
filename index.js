@@ -8,7 +8,7 @@ app.get('/api/quiz/:id', function(req, res) {
   Quiz.findById(req.params.id, function(err, quiz) {
     if (err) {
       res.json({error: "Not Found"})
-    }else {
+    } else {
       res.json(quiz)
     }
   })
