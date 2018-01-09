@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express();
 const Quiz = require('./models/quiz')
-const hello = 123;
 
 app.use(express.static(__dirname + '/build'));
 
