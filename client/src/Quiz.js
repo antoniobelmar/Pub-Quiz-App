@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Question from './Question';
 
 class Quiz extends Component {
   constructor(props){
@@ -15,10 +16,17 @@ class Quiz extends Component {
   };
 
   render() {
-    return(
-      <h1>{this.state.name}</h1>
+      return(
+        <div>
+        <h1>{this.state.name}</h1>
+        { this.state.questions.length > 0 &&
+          <Question question={this.state.questions[0]} />
+        }
+        </div>
     )
   }
 }
+
+
 
 export default Quiz;
