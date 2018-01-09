@@ -2,8 +2,6 @@ const express = require('express');
 const app = express();
 const Quiz = require('./models/quiz')
 
-app.use(express.static(__dirname + '/build'));
-
 app.get('/api/quiz/:id', function(req, res) {
   Quiz.findById(req.params.id, function(err, quiz) {
     if (err) {
@@ -13,6 +11,12 @@ app.get('/api/quiz/:id', function(req, res) {
     }
   })
 })
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(__dirname + "/client/build"));
+} else {
+  app.use(express.static(__dirname + "/client/public"))
+}
 
 app.get('/', function(req, res){
   res.sendFile('index.html')
