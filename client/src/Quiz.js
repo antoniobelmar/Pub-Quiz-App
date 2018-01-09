@@ -10,7 +10,7 @@ class Quiz extends Component {
   componentDidMount(){
     let self = this;
 
-    fetch('/api/quizzes/1')
+    fetch('/api/quiz/5a54f59aaf30e8c27e90ab89')
       .then((resp) => resp.json())
       .then(function(data){
         self.setState({name: data.name, questions: data.questions });
