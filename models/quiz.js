@@ -58,3 +58,5 @@ textQuiz.save(function (err, quiz) {
     console.error('Could not save');
   };
 });
+
+module.exports = Quiz
