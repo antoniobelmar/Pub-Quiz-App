@@ -1,5 +1,16 @@
 const express = require('express');
 const app = express();
+const Quiz = require('./models/quiz')
+
+app.get('/api/quiz/:id', function(req, res) {
+  Quiz.findById(req.params.id, function(err, quiz) {
+    if (err) {
+      res.json({error: "Not Found"})
+    } else {
+      res.json(quiz)
+    }
+  })
+})
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(__dirname + "/client/build"));
