@@ -13,7 +13,7 @@ class Question extends Component {
         {this.props.question.options.map(function(answer, index){
           return(
             <div key={index}>
-              <input type='radio' value={answer} />
+              <input type='radio' name='options' value={answer} />
               <label>{answer}</label>
             </div>
           )
