@@ -7,7 +7,6 @@ class Question extends Component {
   }
 
   render(){
-    console.log(this.props.question.options)
     return(
       <div>
         <p>{this.props.question.text}</p>
