@@ -6,35 +6,35 @@ var questions = [
     type: 'MultipleChoice',
     text: 'What is the capital of the France',
     options: ['Rome', 'London', 'Paris'],
-    answer: [2]
+    answer: ['Paris']
   }),
 
   new Question({
     type: 'MultipleChoice',
     text: 'What is the color of the sky?',
     options: ['Purple', 'Blue', 'Green', 'Yellow'],
-    answer: [1]
+    answer: ['Blue']
   }),
 
   new Question({
     type: 'MultipleChoice',
     text: 'What is Allan\'s favourite band?',
     options: ['Spice Girls', 'Oasis', 'One Direction'],
-    answer: [2]
+    answer: ['One Direction']
   }),
 
   new Question({
     type: 'MultipleChoice',
     text: 'What is Theo\s favourite food?',
     options: ['Marmite', 'Hummous', 'Turnips'],
-    answer: [2]
+    answer: ['Marmite']
   }),
 
   new Question({
     type: 'MultipleChoice',
     text: 'How many names has Kay had in her entire lifetime?',
     options: ['5', '6', '7'],
-    answer: [0]
+    answer: ['5']
   })
 ]
 
