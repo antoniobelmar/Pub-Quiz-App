@@ -10,7 +10,7 @@ class Quiz extends Component {
   componentDidMount(){
     let self = this;
 
-    fetch('/api/quiz/5a54f59aaf30e8c27e90ab89')
+    fetch('/api/quiz/5a55ad6fcc74d9ccf3705c5b')
       .then((resp) => resp.json())
       .then(function(data){
         self.setState({name: data.name, questions: data.questions });
@@ -36,7 +36,7 @@ class Quiz extends Component {
       return(
         <div>
         <h1>{this.state.name}</h1>
-        { this.state.questions.length > 0 &&
+        { this.state.questions.length > 0 && this.state.number < this.state.questions.length &&
           <Question question={this.state.questions[this.state.number]} />
         }
         </div>
