@@ -1,23 +1,26 @@
 import React, { Component } from 'react';
 import Question from './Question';
 import ToggleDisplay from 'react-toggle-display';
+import Axios from 'axios';
 
 class Quiz extends Component {
   constructor(props){
     super(props);
-    this.state = { name: 'Loading', questions: [], number: 0, score: 0, show: false }
+    this.state = { name: 'Loading', questions: [], number: 0, score: 0, show: true }
   };
 
   componentDidMount(){
     let self = this;
 
-    fetch('/api/quiz/5a5602c29e64c01785ddd8b8')
-      .then((resp) => resp.json())
-      .then(function(data){
-        self.setState({name: data.name, questions: data.questions });
-      });
+    Axios.get("https://pub-quiz-api.herokuapp.com/api/quiz/5a56302e0a8cc10014501d8f")
+     .then(function (response) {
+       self.setState({name: response.data.name, questions: response.data.questions});
+     })
+     .catch(function (error) {
+       console.log(error);
+     });
 
-    let ws = new WebSocket('ws://localhost:5000');
+    let ws = new WebSocket('ws://pub-quiz-api.herokuapp.com');
 
     ws.onopen = function() {
       function sendMessage() {
@@ -48,16 +51,15 @@ class Quiz extends Component {
       return(
         <div>
 
-        <ToggleDisplay if={!this.state.show}>
+        {/* <ToggleDisplay if={!this.state.show}>
         <button type="button" onClick={ () => this.hideButtonShowQuiz() } >Start QUIZ!</button>
-        </ToggleDisplay>
+        </ToggleDisplay> */}
 
         <ToggleDisplay show={this.state.show}>
         <h1>{this.state.name}</h1>
         { this.state.questions.length > 0 && this.state.number < this.state.questions.length &&
           <Question question={this.state.questions[this.state.number]} />
         }
-          {console.log(this.state.questions)}
         { this.state.number >= this.state.questions.length &&
           <div>
             <h2> Thanks for playing! </h2>
@@ -71,17 +73,3 @@ class Quiz extends Component {
 }
 
 export default Quiz;
-
-// NOT CODE
-
-// class Test extends Component {
-//   constructor(props) {
-//     this.handleData = this.handleData.bind(this);
-//
-//
-//
-//   }
-//
-//   handleData(data) {
-//     console.log(data);
-//   }
