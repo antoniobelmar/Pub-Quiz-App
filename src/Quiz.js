@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import Question from './Question';
+import StartPage from './startPage';
 import ToggleDisplay from 'react-toggle-display';
 import Axios from 'axios';
 
 class Quiz extends Component {
   constructor(props){
     super(props);
-    this.state = { name: 'Loading', questions: [], number: 0, score: 0, show: true }
+    this.state = { name: 'Loading', questions: [], number: 0, score: 0, show: false, teamName: "" }
   };
 
   componentDidMount(){
@@ -19,17 +20,24 @@ class Quiz extends Component {
      .catch(function (error) {
        console.log(error);
      });
+  };
 
-    let ws = new WebSocket('ws://pub-quiz-api.herokuapp.com');
+  hideButtonShowQuiz() {
+    let self = this
 
+    this.setState({show: true, teamName: document.getElementById('team-name').value})
+    let ws = new WebSocket('ws://localhost:5000');
     ws.onopen = function() {
       function sendMessage() {
-        ws.send(self.state.number + 1);
+        let questionsLength = self.state.questions.length;
+        if (self.state.number <= questionsLength) {
+          ws.send(self.state.number + 1);
+        }
       };
       setInterval(sendMessage, 10000);
     };
-
     ws.onmessage = function(event) {
+
       var radios = document.getElementsByName('options')
       radios.forEach(function(option) {
         if(option.checked === true && option.value === self.state.questions[self.state.number].answer[0]) {
@@ -38,12 +46,7 @@ class Quiz extends Component {
       })
       self.setState({ number: parseInt(event.data) });
     };
-
     this.setState({ ws: ws });
-  };
-
-  hideButtonShowQuiz() {
-    this.setState({show: true})
   }
 
   render() {
@@ -51,9 +54,7 @@ class Quiz extends Component {
       return(
         <div>
 
-        {/* <ToggleDisplay if={!this.state.show}>
-        <button type="button" onClick={ () => this.hideButtonShowQuiz() } >Start QUIZ!</button>
-        </ToggleDisplay> */}
+        <StartPage show={this.state.show} hideFunction={ () => this.hideButtonShowQuiz() }/>
 
         <ToggleDisplay show={this.state.show}>
         <h1>{this.state.name}</h1>
