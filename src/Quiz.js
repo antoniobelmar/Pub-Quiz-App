@@ -46,7 +46,10 @@ class Quiz extends Component {
     let ws = new WebSocket('ws://localhost:5000');
     ws.onopen = function() {
       function sendMessage() {
-        ws.send(self.state.number + 1);
+        let questionsLength = self.state.questions.length;
+        if (self.state.number <= questionsLength) {
+          ws.send(self.state.number + 1);
+        }
       };
       setInterval(sendMessage, 2000);
     };
