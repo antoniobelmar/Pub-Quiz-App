@@ -50,11 +50,6 @@ class Quiz extends Component {
 
       return(
         <div>
-
-        {/* <ToggleDisplay if={!this.state.show}>
-        <button type="button" onClick={ () => this.hideButtonShowQuiz() } >Start QUIZ!</button>
-        </ToggleDisplay> */}
-
         <ToggleDisplay show={this.state.show}>
         <h1>{this.state.name}</h1>
         { this.state.questions.length > 0 && this.state.number < this.state.questions.length &&
