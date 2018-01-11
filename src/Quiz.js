@@ -49,7 +49,7 @@ class Quiz extends Component {
   render() {
 
       return(
-        <div>
+        <div class='quiz'>
 
         {/* <ToggleDisplay if={!this.state.show}>
         <button type="button" onClick={ () => this.hideButtonShowQuiz() } >Start QUIZ!</button>
