@@ -20,23 +20,25 @@ class Quiz extends Component {
        console.log(error);
      });
 
-    let ws = new WebSocket('ws://pub-quiz-api.herokuapp.com');
+    // let ws = new WebSocket('ws://pub-quiz-api.herokuapp.com');
+    let ws = new WebSocket('ws://localhost:5000')
 
     function sendMessage() {
       if(self.state.number < self.state.questions.length) {
-        ws.send(self.state.number + 1);
-      }
+        ws.send(JSON.stringify({type: "question", question: self.state.number + 1}));
+      };
     };
 
     function sendScore() {
       if(self.state.number === self.state.questions.length) {
-        ws.send({"team name": self.state.score})
+        console.log('message sent')
+        ws.send(JSON.stringify({type: "score", teamName: "teamname", score: self.state.score}))
       }
     }
 
     ws.onopen = function() {
       setInterval(sendMessage, self.state.time);
-      setTimeout(sendScore, self.state.time * self.state.questions.length + 1000);
+      setTimeout(sendScore, 27000);
     };
 
     ws.onmessage = function(event) {
@@ -48,7 +50,9 @@ class Quiz extends Component {
           }
         })
         self.setState({ number: parseInt(event.data) });
-      }
+      } else {
+      console.log(JSON.parse(event.data))
+    };
     };
 
     this.setState({ ws: ws });
