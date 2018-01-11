@@ -16,7 +16,6 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
     "test": "mocha 'test/**/*.js'",
     "compile": "babel client/src -d client/lib",
     "test-react": "npm run compile && mocha --require babel-core/register 'client/test/**/*.js'",
