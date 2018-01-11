@@ -6,7 +6,7 @@ import Axios from 'axios';
 class Quiz extends Component {
   constructor(props){
     super(props);
-    this.state = { name: 'Loading', questions: [], number: 0, score: 0, show: true, time: 3000 }
+    this.state = { name: 'Loading', questions: [], number: 0, score: 0, show: true, time: 3000, allScores: [] }
   };
 
   componentDidMount(){
@@ -38,21 +38,22 @@ class Quiz extends Component {
 
     ws.onopen = function() {
       setInterval(sendMessage, self.state.time);
-      setTimeout(sendScore, 27000);
+      setTimeout(sendScore, 20000);
     };
 
     ws.onmessage = function(event) {
-      if(self.state.number < self.state.questions.length) {
+      var jsonEvent = JSON.parse(event.data)
+      if(jsonEvent.type === "question") {
         var radios = document.getElementsByName('options')
         radios.forEach(function(option) {
           if(option.checked === true && option.value === self.state.questions[self.state.number].answer[0]) {
             self.state.score += 1
           }
         })
-        self.setState({ number: parseInt(event.data) });
-      } else {
-      console.log(JSON.parse(event.data))
-    };
+        self.setState({ number: parseInt(jsonEvent.question) });
+      } else if(jsonEvent[0].type === "score") {
+        self.setState({ allScores: jsonEvent })
+      }
     };
 
     this.setState({ ws: ws });
@@ -63,7 +64,6 @@ class Quiz extends Component {
   }
 
   render() {
-      console.log(this.state.number)
       return(
         <div>
         <ToggleDisplay show={this.state.show}>
@@ -76,6 +76,15 @@ class Quiz extends Component {
             <h2> Thanks for playing! </h2>
             <h3> Your score was {this.state.score} </h3>
           </div>
+        }
+        {this.state.allScores.length > 0 &&
+          this.state.allScores.map(function(score, index) {
+          return(
+            <div key={index}>
+              <h4> {score.teamName}: {score.score} </h4>
+            </div>
+            )
+          })
         }
         </ToggleDisplay>
         </div>
