@@ -20,27 +20,10 @@ class Quiz extends Component {
      .catch(function (error) {
        console.log(error);
      });
-
-    let ws = new WebSocket('ws://localhost:5000');
-
-    ws.onmessage = function(event) {
-
-      var radios = document.getElementsByName('options')
-      radios.forEach(function(option) {
-        if(option.checked === true && option.value === self.state.questions[self.state.number].answer[0]) {
-          self.state.score += 1
-        }
-      })
-      self.setState({ number: parseInt(event.data) });
-    };
-
-    this.setState({ ws: ws });
   };
 
   hideButtonShowQuiz() {
     let self = this
-
-
 
     this.setState({show: true, teamName: document.getElementById('team-name').value})
     let ws = new WebSocket('ws://localhost:5000');
@@ -51,8 +34,19 @@ class Quiz extends Component {
           ws.send(self.state.number + 1);
         }
       };
-      setInterval(sendMessage, 2000);
+      setInterval(sendMessage, 10000);
     };
+    ws.onmessage = function(event) {
+
+      var radios = document.getElementsByName('options')
+      radios.forEach(function(option) {
+        if(option.checked === true && option.value === self.state.questions[self.state.number].answer[0]) {
+          self.state.score += 1
+        }
+      })
+      self.setState({ number: parseInt(event.data) });
+    };
+    this.setState({ ws: ws });
   }
 
   render() {
