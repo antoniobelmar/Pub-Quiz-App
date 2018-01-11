@@ -11,7 +11,7 @@ class Question extends Component {
         <p>{this.props.question.text}</p>
         {this.props.question.options.map(function(answer, index){
           return(
-            <div key={index}>
+            <div class='option' key={index}>
               <input id={answer} type='radio' name='options' value={answer} />
               <label for={answer}>{answer}</label>
             </div>
