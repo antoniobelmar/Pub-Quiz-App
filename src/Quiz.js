@@ -34,7 +34,7 @@ class Quiz extends Component {
           ws.send(self.state.number + 1);
         }
       };
-      setInterval(sendMessage, 5000);
+      setInterval(sendMessage, 10000);
     };
     ws.onmessage = function(event) {
 
