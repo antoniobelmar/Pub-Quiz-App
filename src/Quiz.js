@@ -6,7 +6,7 @@ import Axios from 'axios';
 class Quiz extends Component {
   constructor(props){
     super(props);
-    this.state = { name: 'Loading', questions: [], number: 0, score: 0, show: true }
+    this.state = { name: 'Loading', questions: [], number: 0, score: 0, show: true, time: 3000 }
   };
 
   componentDidMount(){
@@ -22,23 +22,33 @@ class Quiz extends Component {
 
     let ws = new WebSocket('ws://pub-quiz-api.herokuapp.com');
 
+    function sendMessage() {
+      if(self.state.number < self.state.questions.length) {
+        ws.send(self.state.number + 1);
+      }
+    };
+
+    function sendScore() {
+      if(self.state.number === self.state.questions.length) {
+        ws.send({"team name": self.state.score})
+      }
+    }
+
     ws.onopen = function() {
-      function sendMessage() {
-        if(self.state.number < self.state.questions.length) {
-          ws.send(self.state.number + 1);
-        }
-      };
-      setInterval(sendMessage, 1000);
+      setInterval(sendMessage, self.state.time);
+      setTimeout(sendScore, self.state.time * self.state.questions.length + 1000);
     };
 
     ws.onmessage = function(event) {
-      var radios = document.getElementsByName('options')
-      radios.forEach(function(option) {
-        if(option.checked === true && option.value === self.state.questions[self.state.number].answer[0]) {
-          self.state.score += 1
-        }
-      })
-      self.setState({ number: parseInt(event.data) });
+      if(self.state.number < self.state.questions.length) {
+        var radios = document.getElementsByName('options')
+        radios.forEach(function(option) {
+          if(option.checked === true && option.value === self.state.questions[self.state.number].answer[0]) {
+            self.state.score += 1
+          }
+        })
+        self.setState({ number: parseInt(event.data) });
+      }
     };
 
     this.setState({ ws: ws });
