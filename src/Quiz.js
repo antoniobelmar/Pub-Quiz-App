@@ -24,9 +24,11 @@ class Quiz extends Component {
 
     ws.onopen = function() {
       function sendMessage() {
-        ws.send(self.state.number + 1);
+        if(self.state.number < self.state.questions.length) {
+          ws.send(self.state.number + 1);
+        }
       };
-      setInterval(sendMessage, 10000);
+      setInterval(sendMessage, 1000);
     };
 
     ws.onmessage = function(event) {
@@ -47,7 +49,7 @@ class Quiz extends Component {
   }
 
   render() {
-
+      console.log(this.state.number)
       return(
         <div>
         <ToggleDisplay show={this.state.show}>
