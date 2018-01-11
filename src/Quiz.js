@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import Question from './Question';
+import StartPage from './startPage';
 import ToggleDisplay from 'react-toggle-display';
 import Axios from 'axios';
 
 class Quiz extends Component {
   constructor(props){
     super(props);
-    this.state = { name: 'Loading', questions: [], number: 0, score: 0, show: false }
+    this.state = { name: 'Loading', questions: [], number: 0, score: 0, show: false, teamName: "" }
   };
 
   componentDidMount(){
@@ -22,15 +23,8 @@ class Quiz extends Component {
 
     let ws = new WebSocket('ws://localhost:5000');
 
-    // ws.onopen = function() {
-    //   function sendMessage() {
-    //     ws.send(self.state.number + 1);
-    //   };
-    //   setInterval(sendMessage, 2000);
-    // };
-
     ws.onmessage = function(event) {
-      console.log('HEREEE',event.data)
+
       var radios = document.getElementsByName('options')
       radios.forEach(function(option) {
         if(option.checked === true && option.value === self.state.questions[self.state.number].answer[0]) {
@@ -46,13 +40,13 @@ class Quiz extends Component {
   hideButtonShowQuiz() {
     let self = this
 
-    this.setState({show: true})
+
+
+    this.setState({show: true, teamName: document.getElementById('team-name').value})
     let ws = new WebSocket('ws://localhost:5000');
     ws.onopen = function() {
-      console.log(ws)
       function sendMessage() {
         ws.send(self.state.number + 1);
-        // console.log(self.state.number)
       };
       setInterval(sendMessage, 2000);
     };
@@ -63,9 +57,7 @@ class Quiz extends Component {
       return(
         <div>
 
-        <ToggleDisplay if={!this.state.show}>
-        <button type="button" onClick={ () => this.hideButtonShowQuiz() } >Start QUIZ!</button>
-        </ToggleDisplay>
+        <StartPage show={this.state.show} hideFunction={ () => this.hideButtonShowQuiz() }/>
 
         <ToggleDisplay show={this.state.show}>
         <h1>{this.state.name}</h1>
