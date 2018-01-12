@@ -14,9 +14,14 @@ class NewQuestion extends Component {
         onChange={(event)=>this.props.handleChangeQuestion(this.props.index, event)} >
       </input>
       <div
+        onClick={(event)=>this.props.removeQuestion(this.props.index, event)}
+        >
+          <button> X </button>
+      </div>
+      <div
         onClick={this.props.addQuestion}
         >
-          +
+          <button> + </button>
       </div>
     </div>
     );
