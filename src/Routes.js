@@ -4,7 +4,7 @@ import Quiz from './Quiz';
 
 const Routes = () => (
   <Router>
-    <Route path="/quiz" component={Quiz}/>
+    <Route path="/quiz/:quizId" component={Quiz}/>
   </Router>
 )
 
