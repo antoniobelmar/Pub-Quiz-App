@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import NewQuizQuestion from './NewQuizQuestion' ;
 import NewQuizName from './NewQuizName';
 import AddQuestionButton from './AddQuestionButton';
-import NewQuizOption from './NewQuizOption';
 const Question = {
   placeholder: "Add your question",
   type: '',
@@ -45,6 +44,12 @@ class NewQuiz extends Component {
     this.setState(state)
   }
 
+  handleChangeOption = (questionIndex, index, event) => {
+    var state = this.state
+    state.questions[questionIndex].options[index].text = event.target.value
+    this.setState(state)
+  }
+
   render() {
     {console.log(this.state)}
     return(
@@ -65,18 +70,8 @@ class NewQuiz extends Component {
             index={index}
             handleChangeQuestion={this.handleChangeQuestion}
             removeQuestion={this.removeQuestion}
+            handleChangeOption={this.handleChangeOption}
           />
-          { question.options.map((option, index) => {
-              return (
-                <NewQuizOption
-                key={index}
-                index={index}
-                text={option.text}
-                placeholder={option.placeholder}
-                />
-              )
-            }
-          )}
         )
       })}
       </div>
