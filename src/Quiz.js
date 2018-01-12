@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Question from './Question';
 import StartPage from './startPage';
 import ToggleDisplay from 'react-toggle-display';
-import Axios from 'axios';
+import axios from 'axios';
 
 class Quiz extends Component {
   constructor(props){
@@ -13,7 +13,7 @@ class Quiz extends Component {
   componentDidMount(){
     let self = this;
 
-    Axios.get("https://pub-quiz-api.herokuapp.com/quiz/5a56302e0a8cc10014501d8f")
+    axios.get("https://pub-quiz-api.herokuapp.com/quiz/5a56302e0a8cc10014501d8f")
      .then(function (response) {
        self.setState({name: response.data.name, questions: response.data.questions});
      })
