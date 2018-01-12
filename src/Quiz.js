@@ -20,29 +20,15 @@ class Quiz extends Component {
      .catch(function (error) {
        console.log(error);
      });
-    
-     ws.onmessage = function(event) {
-      var jsonEvent = JSON.parse(event.data)
-      if(jsonEvent.type === "question") {
-        var radios = document.getElementsByName('options')
-        radios.forEach(function(option) {
-          if(option.checked === true && option.value === self.state.questions[self.state.number].answer[0]) {
-            self.state.score += 1
-          }
-        })
-        self.setState({ number: parseInt(jsonEvent.question) });
-      } else if(jsonEvent[0].type === "score") {
-        self.setState({ allScores: jsonEvent })
-      }
-    };
-    
+
+
   };
 
   hideButtonShowQuiz() {
     let self = this
 
     this.setState({show: true, teamName: document.getElementById('team-name').value})
-    let ws = new WebSocket('ws://pub-quiz-api.herokuapp.com');
+    let ws = new WebSocket('ws://localhost:5000');
     ws.onopen = function() {
       function sendMessage() {
         if(self.state.number < self.state.questions.length) {
@@ -60,13 +46,28 @@ class Quiz extends Component {
       setInterval(sendMessage, self.state.time);
       setTimeout(sendScore, 20000);
     };
-    
+
+    ws.onmessage = function(event) {
+      var jsonEvent = JSON.parse(event.data)
+      if(jsonEvent.type === "question") {
+        var radios = document.getElementsByName('options')
+        radios.forEach(function(option) {
+          if(option.checked === true && option.value === self.state.questions[self.state.number].answer[0]) {
+            self.state.score += 1
+          }
+        })
+        self.setState({ number: parseInt(jsonEvent.question) });
+      } else if(jsonEvent[0].type === "score") {
+        self.setState({ allScores: jsonEvent })
+      }
+    };
+
     this.setState({ ws: ws });
   }
 
   render() {
       return(
-        <div class='quiz'>
+        <div className='quiz'>
 
         <StartPage show={this.state.show} hideFunction={ () => this.hideButtonShowQuiz() }/>
 
