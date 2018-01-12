@@ -7,7 +7,7 @@ import Axios from 'axios';
 class Quiz extends Component {
   constructor(props){
     super(props);
-    this.state = { name: 'Loading', questions: [], number: 0, score: 0, show: false, teamName: "" }
+    this.state = { name: 'Loading', questions: [], number: 0, score: 0, show: false, time: 3000, allScores: [], teamName: "" }
   };
 
   componentDidMount(){
@@ -20,6 +20,22 @@ class Quiz extends Component {
      .catch(function (error) {
        console.log(error);
      });
+    
+     ws.onmessage = function(event) {
+      var jsonEvent = JSON.parse(event.data)
+      if(jsonEvent.type === "question") {
+        var radios = document.getElementsByName('options')
+        radios.forEach(function(option) {
+          if(option.checked === true && option.value === self.state.questions[self.state.number].answer[0]) {
+            self.state.score += 1
+          }
+        })
+        self.setState({ number: parseInt(jsonEvent.question) });
+      } else if(jsonEvent[0].type === "score") {
+        self.setState({ allScores: jsonEvent })
+      }
+    };
+    
   };
 
   hideButtonShowQuiz() {
@@ -29,28 +45,26 @@ class Quiz extends Component {
     let ws = new WebSocket('ws://pub-quiz-api.herokuapp.com');
     ws.onopen = function() {
       function sendMessage() {
-        let questionsLength = self.state.questions.length;
-        if (self.state.number <= questionsLength) {
-          ws.send(self.state.number + 1);
-        }
+        if(self.state.number < self.state.questions.length) {
+          ws.send(JSON.stringify({type: "question", question: self.state.number + 1}));
+        };
       };
-      setInterval(sendMessage, 5000);
-    };
-    ws.onmessage = function(event) {
 
-      var radios = document.getElementsByName('options')
-      radios.forEach(function(option) {
-        if(option.checked === true && option.value === self.state.questions[self.state.number].answer[0]) {
-          self.state.score += 1
+      function sendScore() {
+        if(self.state.number === self.state.questions.length) {
+          console.log('message sent')
+          ws.send(JSON.stringify({type: "score", teamName: "teamname", score: self.state.score}))
         }
-      })
-      self.setState({ number: parseInt(event.data) });
+      }
+
+      setInterval(sendMessage, self.state.time);
+      setTimeout(sendScore, 20000);
     };
+    
     this.setState({ ws: ws });
   }
 
   render() {
-
       return(
         <div class='quiz'>
 
@@ -66,6 +80,15 @@ class Quiz extends Component {
             <h2> Thanks for playing! </h2>
             <h3> Your score was {this.state.score} </h3>
           </div>
+        }
+        {this.state.allScores.length > 0 &&
+          this.state.allScores.map(function(score, index) {
+          return(
+            <div key={index}>
+              <h4> {score.teamName}: {score.score} </h4>
+            </div>
+            )
+          })
         }
         </ToggleDisplay>
         </div>
