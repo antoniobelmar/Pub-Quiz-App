@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import NewQuizOption from './NewQuizOption';
 import AddOptionButton from './AddOptionButton'
+import RemoveQuestionButton from './RemoveQuestionButton'
 
 class NewQuizQuestion extends Component {
 
@@ -17,11 +18,10 @@ class NewQuizQuestion extends Component {
           value={this.props.question.text}
           onChange={(event)=>this.props.handleChangeQuestion(this.props.index, event)} >
         </input>
-        <div
-          onClick={(event)=>this.props.removeQuestion(this.props.index, event)}
-          >
-            <button> X </button>
-        </div>
+        <RemoveQuestionButton
+          removeQuestion={this.props.removeQuestion}
+          index={this.props.index}
+        />
         <AddOptionButton
           questionIndex={this.props.index}
           addOption={this.props.addOption}
