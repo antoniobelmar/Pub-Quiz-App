@@ -52,7 +52,7 @@ class Quiz extends Component {
   render() {
 
       return(
-        <div>
+        <div class='quiz'>
 
         <StartPage show={this.state.show} hideFunction={ () => this.hideButtonShowQuiz() }/>
 
