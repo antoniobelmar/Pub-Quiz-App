@@ -91,6 +91,7 @@ class Quiz extends Component {
 
         case 'scores':
           self.setState({ allScores: jsonEvent.scores });
+          ws.close();
           break;
       }
     };
