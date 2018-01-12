@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import NewQuizQuestion from './NewQuizQuestion' ;
 import NewQuizName from './NewQuizName';
+import AddQuestionButton from './AddQuestionButton';
 const Question = {
   placeholder: "Add your question",
   type: '',
@@ -52,13 +53,15 @@ class NewQuiz extends Component {
         placeholder={this.state.placeholder}
         handleChangeName = {this.handleChangeName}
       />
+      <AddQuestionButton
+        addQuestion={this.addQuestion}
+      />
       {this.state.questions.map((question, index) => {
         return (
           <NewQuizQuestion
             question={question}
             key={index}
             index={index}
-            addQuestion={this.addQuestion}
             handleChangeQuestion={this.handleChangeQuestion}
             removeQuestion={this.removeQuestion}
           />
