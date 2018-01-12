@@ -13,7 +13,7 @@ class Quiz extends Component {
   componentDidMount(){
     let self = this;
 
-    Axios.get("https://pub-quiz-api.herokuapp.com/api/quiz/5a56302e0a8cc10014501d8f")
+    Axios.get("https://pub-quiz-api.herokuapp.com/quiz/5a56302e0a8cc10014501d8f")
      .then(function (response) {
        self.setState({name: response.data.name, questions: response.data.questions});
      })
@@ -28,7 +28,7 @@ class Quiz extends Component {
     let self = this
 
     this.setState({show: true, teamName: document.getElementById('team-name').value})
-    let ws = new WebSocket('ws://localhost:5000');
+    let ws = new WebSocket('ws://pub-quiz-api.herokuapp.com');
     ws.onopen = function() {
       function sendMessage() {
         if(self.state.number < self.state.questions.length) {
@@ -39,7 +39,7 @@ class Quiz extends Component {
       function sendScore() {
         if(self.state.number === self.state.questions.length) {
           console.log('message sent')
-          ws.send(JSON.stringify({type: "score", teamName: "teamname", score: self.state.score}))
+          ws.send(JSON.stringify({type: "score", teamName: self.state.teamName, score: self.state.score}))
         }
       }
 
