@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class NewQuestion extends Component {
+class NewQuizQuestion extends Component {
   render(){
     return(
       <div style={localStyles.questionRow}>
@@ -36,4 +36,4 @@ const localStyles = {
   }
 }
 
-export default NewQuestion;
+export default NewQuizQuestion;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import NewQuestion from './NewQuestion' ;
-import QuizName from './QuizName';
+import NewQuizQuestion from './NewQuizQuestion' ;
+import NewQuizName from './NewQuizName';
 const Question = {
   placeholder: "Add your question",
   type: '',
@@ -47,14 +47,14 @@ class NewQuiz extends Component {
     {console.log(this.state)}
     return(
       <div>
-      <QuizName
+      <NewQuizName
         name={this.state.name}
         placeholder={this.state.placeholder}
         handleChangeName = {this.handleChangeName}
       />
       {this.state.questions.map((question, index) => {
         return (
-          <NewQuestion
+          <NewQuizQuestion
             question={question}
             key={index}
             index={index}
