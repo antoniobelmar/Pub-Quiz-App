@@ -7,7 +7,17 @@ import Axios from 'axios';
 class Quiz extends Component {
   constructor(props){
     super(props);
-    this.state = { name: 'Loading', questions: [], number: 0, score: 0, show: false, time: 3000, allScores: [], teamName: "" }
+    this.state = {
+      name: 'Loading',
+      questions: [],
+      questionsRecieved: false,
+      number: 0,
+      score: 0,
+      show: false,
+      time: 3000,
+      allScores: [],
+      teamName: "",
+    }
   };
 
   componentDidMount(){
@@ -15,7 +25,11 @@ class Quiz extends Component {
 
     Axios.get("https://pub-quiz-api.herokuapp.com/quiz/5a56302e0a8cc10014501d8f")
      .then(function (response) {
-       self.setState({name: response.data.name, questions: response.data.questions});
+       self.setState({
+         name: response.data.name,
+         questions: response.data.questions,
+         questionsRecieved: true
+       });
      })
      .catch(function (error) {
        console.log(error);
@@ -26,39 +40,58 @@ class Quiz extends Component {
 
   hideButtonShowQuiz() {
     let self = this
-
+    let intervalId
     this.setState({show: true, teamName: document.getElementById('team-name').value})
     let ws = new WebSocket('ws://pub-quiz-api.herokuapp.com');
     ws.onopen = function() {
+      function sendQuestionId() {
+        ws.send(JSON.stringify({type: "question", question: self.state.number + 1}));
+      };
+
+      function sendQuizEnd() {
+        ws.send(JSON.stringify({type: 'endQuiz'}))
+      }
+
       function sendMessage() {
-        if(self.state.number < self.state.questions.length) {
-          ws.send(JSON.stringify({type: "question", question: self.state.number + 1}));
+        var atEnd = self.state.number === self.state.questions.length;
+        if (atEnd || !self.state.questionsRecieved) {
+          sendQuizEnd();
+          clearInterval(intervalId)
+        } else {
+          sendQuestionId();
         };
       };
 
-      function sendScore() {
-        if(self.state.number === self.state.questions.length) {
-          console.log('message sent')
-          ws.send(JSON.stringify({type: "score", teamName: self.state.teamName, score: self.state.score}))
-        }
-      }
 
-      setInterval(sendMessage, self.state.time);
-      setTimeout(sendScore, 20000);
+      intervalId = setInterval(sendMessage, self.state.time);
     };
 
     ws.onmessage = function(event) {
+
+      function sendScore() {
+        console.log('message sent')
+        ws.send(JSON.stringify({type: "score", teamName: self.state.teamName, score: self.state.score}))
+      }
+
       var jsonEvent = JSON.parse(event.data)
-      if(jsonEvent.type === "question") {
-        var radios = document.getElementsByName('options')
-        radios.forEach(function(option) {
-          if(option.checked === true && option.value === self.state.questions[self.state.number].answer[0]) {
-            self.state.score += 1
-          }
-        })
-        self.setState({ number: parseInt(jsonEvent.question) });
-      } else if(jsonEvent[0].type === "score") {
-        self.setState({ allScores: jsonEvent })
+      switch (jsonEvent.type) {
+        case 'question':
+          var radios = document.getElementsByName('options')
+          radios.forEach(function(option) {
+            if(option.checked === true && option.value === self.state.questions[self.state.number].answer[0]) {
+              self.state.score += 1
+            }
+          })
+          self.setState({ number: parseInt(jsonEvent.question) });
+          break;
+
+        case 'endQuiz':
+          sendScore()
+          break;
+
+        case 'scores':
+          self.setState({ allScores: jsonEvent.scores });
+          break;
       }
     };
 
