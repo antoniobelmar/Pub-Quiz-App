@@ -36,6 +36,7 @@ class NewQuizQuestion extends Component {
               option={option}
               questionIndex={this.props.index}
               handleChangeOption={this.props.handleChangeOption}
+              removeOption={this.props.removeOption}
               />
             )
           }

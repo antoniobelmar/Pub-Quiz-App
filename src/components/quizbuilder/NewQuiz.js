@@ -62,6 +62,12 @@ class NewQuiz extends Component {
     this.setState(state)
   }
 
+  removeOption = (questionIndex, index, event) => {
+    var state = this.state
+    state.questions[questionIndex].options.splice(index, 1)
+    this.setState(state)
+  }
+
   render() {
     {console.log(this.state)}
     return(
@@ -84,6 +90,7 @@ class NewQuiz extends Component {
             removeQuestion={this.removeQuestion}
             handleChangeOption={this.handleChangeOption}
             addOption={this.addOption}
+            removeOption={this.removeOption}
           />
         )
       })}
