@@ -18,11 +18,6 @@ class NewQuizQuestion extends Component {
         >
           <button> X </button>
       </div>
-      <div
-        onClick={this.props.addQuestion}
-        >
-          <button> + </button>
-      </div>
     </div>
     );
   };
