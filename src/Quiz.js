@@ -42,7 +42,7 @@ class Quiz extends Component {
     let self = this
     let intervalId
     this.setState({show: true, teamName: document.getElementById('team-name').value})
-    let ws = new WebSocket('ws://localhost:5000');
+    let ws = new WebSocket('ws://pub-quiz-api.herokuapp.com');
     ws.onopen = function() {
       function sendQuestionId() {
         ws.send(JSON.stringify({type: "question", question: self.state.number + 1}));
