@@ -1,16 +1,41 @@
 import React, { Component } from 'react';
 import NewQuestion from './NewQuestion' ;
+const Question = {
+  placeholder: "Add your question",
+  type: '',
+  text: '',
+  options: [{text: ''}],
+  correctAnswer: [{text: ''}]
+}
 
 class NewQuiz extends Component {
   constructor(props) {
     super(props);
-    this.state = {name: '', questions: [{type: '', text: '', options: [{text: ''}], correctAnswer: [{text: ''}] }]}
+    this.state = {
+      name: '',
+      placeholder: "Type your quiz name",
+      questions: [Question]
+    }
 
     this.handleChangeName = this.handleChangeName.bind(this)
   }
 
-  handleChangeName(event) {
-    this.setState({name: event.target.value})
+  handleChangeName(index, event) {
+    var state = this.state
+    state[index].name = event.target.value
+    this.setState(state)
+  }
+
+  handleChangeQuestion = (index, event) => {
+    var state = this.state
+    state.questions[index].text = event.target.value
+    this.setState(state)
+  }
+
+  addQuestion = () => {
+    var state = this.state
+    state.questions.push(JSON.parse((JSON.stringify(Question))))
+    this.setState(state)
   }
 
   render() {
@@ -18,7 +43,18 @@ class NewQuiz extends Component {
     return(
       <div>
       <p>Quiz Name</p>
-      <input type="text" placeholder="Type your quiz name" value={this.state.name} onChange={this.handleChangeName} ></input>
+      <input>  </input>
+      {this.state.questions.map((question, index) => {
+        return (
+          <NewQuestion
+            question={question}
+            key={index}
+            index={index}
+            addQuestion={this.addQuestion}
+            handleChangeQuestion={this.handleChangeQuestion}
+          />
+        )
+      })}
       </div>
     );
   };
