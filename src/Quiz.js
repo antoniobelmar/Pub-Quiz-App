@@ -11,9 +11,10 @@ class Quiz extends Component {
   };
 
   componentDidMount(){
+    let quizId = this.props.match.params.quizId;
     let self = this;
 
-    Axios.get("https://pub-quiz-api.herokuapp.com/quiz/5a56302e0a8cc10014501d8f")
+    Axios.get(`https://pub-quiz-api.herokuapp.com/quiz/${quizId}`)
      .then(function (response) {
        self.setState({name: response.data.name, questions: response.data.questions});
      })
