@@ -2,13 +2,19 @@ import React, { Component } from 'react';
 import NewQuizQuestion from './NewQuizQuestion' ;
 import NewQuizName from './NewQuizName';
 import AddQuestionButton from './AddQuestionButton';
-const Question = {
+const Option = {
+  text: '',
+  placeholder: 'Add an answer option'
+}
+
+var Question = {
   placeholder: "Add your question",
   type: '',
   text: '',
-  options: [{text: '', placeholder: 'Add an answer option'}],
+  options: [Option],
   correctAnswer: [{text: ''}]
 }
+
 
 class NewQuiz extends Component {
   constructor(props) {
@@ -34,7 +40,7 @@ class NewQuiz extends Component {
 
   addQuestion = () => {
     var state = this.state
-    state.questions.push(JSON.parse((JSON.stringify(Question))))
+    state.questions.push(JSON.parse(JSON.stringify(Question)))
     this.setState(state)
   }
 
@@ -47,6 +53,12 @@ class NewQuiz extends Component {
   handleChangeOption = (questionIndex, index, event) => {
     var state = this.state
     state.questions[questionIndex].options[index].text = event.target.value
+    this.setState(state)
+  }
+
+  addOption = (questionIndex) => {
+    var state = this.state
+    state.questions[questionIndex].options.push(JSON.parse(JSON.stringify(Option)))
     this.setState(state)
   }
 
@@ -71,6 +83,7 @@ class NewQuiz extends Component {
             handleChangeQuestion={this.handleChangeQuestion}
             removeQuestion={this.removeQuestion}
             handleChangeOption={this.handleChangeOption}
+            addOption={this.addOption}
           />
         )
       })}

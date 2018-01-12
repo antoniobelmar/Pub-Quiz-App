@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import NewQuizOption from './NewQuizOption';
+import AddOptionButton from './AddOptionButton'
 
 class NewQuizQuestion extends Component {
 
@@ -21,6 +22,10 @@ class NewQuizQuestion extends Component {
           >
             <button> X </button>
         </div>
+        <AddOptionButton
+          questionIndex={this.props.index}
+          addOption={this.props.addOption}
+        />
       </div>
       <div>
         { this.props.question.options.map((option, index) => {
