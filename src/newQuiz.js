@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import NewQuestion from './NewQuestion' ;
+import QuizName from './QuizName';
 const Question = {
   placeholder: "Add your question",
   type: '',
@@ -16,13 +17,11 @@ class NewQuiz extends Component {
       placeholder: "Type your quiz name",
       questions: [Question]
     }
-
-    this.handleChangeName = this.handleChangeName.bind(this)
   }
 
-  handleChangeName(index, event) {
+  handleChangeName = (event) => {
     var state = this.state
-    state[index].name = event.target.value
+    state.name = event.target.value
     this.setState(state)
   }
 
@@ -42,8 +41,11 @@ class NewQuiz extends Component {
     {console.log(this.state)}
     return(
       <div>
-      <p>Quiz Name</p>
-      <input>  </input>
+      <QuizName
+        name={this.state.name}
+        placeholder={this.state.placeholder}
+        handleChangeName = {this.handleChangeName}
+      />
       {this.state.questions.map((question, index) => {
         return (
           <NewQuestion
