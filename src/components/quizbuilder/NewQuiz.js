@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import NewQuizQuestion from './NewQuizQuestion' ;
 import NewQuizName from './NewQuizName';
 import AddQuestionButton from './AddQuestionButton';
+import NewQuizOption from './NewQuizOption';
 const Question = {
   placeholder: "Add your question",
   type: '',
   text: '',
-  options: [{text: ''}],
+  options: [{text: '', placeholder: 'Add an answer option'}],
   correctAnswer: [{text: ''}]
 }
 
@@ -65,6 +66,17 @@ class NewQuiz extends Component {
             handleChangeQuestion={this.handleChangeQuestion}
             removeQuestion={this.removeQuestion}
           />
+          { question.options.map((option, index) => {
+              return (
+                <NewQuizOption
+                key={index}
+                index={index}
+                text={option.text}
+                placeholder={option.placeholder}
+                />
+              )
+            }
+          )}
         )
       })}
       </div>
