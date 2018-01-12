@@ -26,7 +26,7 @@ class Home extends Component {
     return(
       <div>
         <h1>Home page</h1>
-        <a><button>Create a quiz!</button></a>
+        <a href="/quiz/new"><button>Create a quiz!</button></a>
         <div>{this.state.quizLinks}</div>
       </div>
     )
