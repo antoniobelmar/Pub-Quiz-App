@@ -1,10 +1,35 @@
-import React from 'react';
+import React, { Component } from 'react';
+import Axios from 'axios';
 
-const Home = () => (
-  <div>
-    <h1>Home page</h1>
-    <a href="/quiz/5a56302e0a8cc10014501d8f">A quiz</a>
-  </div>
-)
+class Home extends Component {
+  constructor(props){
+    super(props);
+    this.state = { quizLinks: '' };
+  }
+
+  componentDidMount() {
+    let self = this;
+    Axios.get('https://pub-quiz-api.herokuapp.com/quiz/')
+      .then(function(response) {
+        let array = [];
+        response.data.forEach(function(quiz, key) {
+          array.push(<li key={key}><a href={'/quiz/' + quiz._id}>{quiz.name}</a></li>);
+        })
+        self.setState({ quizLinks: array })
+      })
+      .catch(function(error) {
+        console.log(error);
+      })
+  }
+
+  render() {
+    return(
+      <div>
+        <h1>Home page</h1>
+        <div>{this.state.quizLinks}</div>
+      </div>
+    )
+  }
+}
 
 export default Home;
