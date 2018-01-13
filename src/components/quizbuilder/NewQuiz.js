@@ -2,19 +2,8 @@ import React, { Component } from 'react';
 import NewQuizQuestion from './NewQuizQuestion' ;
 import NewQuizName from './NewQuizName';
 import AddQuestionButton from './AddQuestionButton';
-const Option = {
-  text: '',
-  placeholder: 'Add an answer option'
-}
-
-var Question = {
-  placeholder: "Add your question",
-  type: '',
-  text: '',
-  options: [Option],
-  answer: [{text: ''}]
-}
-
+import Question from '../../lib/Question';
+import Option from '../../lib/Option';
 
 class NewQuiz extends Component {
   constructor(props) {
@@ -22,7 +11,7 @@ class NewQuiz extends Component {
     this.state = {
       name: '',
       placeholder: "Type your quiz name",
-      questions: [Question]
+      questions: [new Question()]
     }
   }
 
@@ -40,7 +29,7 @@ class NewQuiz extends Component {
 
   addQuestion = () => {
     var state = this.state
-    state.questions.push(JSON.parse(JSON.stringify(Question)))
+    state.questions.push(new Question())
     this.setState(state)
   }
 
@@ -58,7 +47,7 @@ class NewQuiz extends Component {
 
   addOption = (questionIndex) => {
     var state = this.state
-    state.questions[questionIndex].options.push(JSON.parse(JSON.stringify(Option)))
+    state.questions[questionIndex].options.push(new Option())
     this.setState(state)
   }
 
