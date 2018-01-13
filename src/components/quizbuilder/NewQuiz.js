@@ -12,7 +12,7 @@ var Question = {
   type: '',
   text: '',
   options: [Option],
-  correctAnswer: [{text: ''}]
+  answer: [{text: ''}]
 }
 
 
@@ -65,6 +65,12 @@ class NewQuiz extends Component {
   removeOption = (questionIndex, index, event) => {
     var state = this.state
     state.questions[questionIndex].options.splice(index, 1)
+    this.setState(state)
+  }
+
+  handleChangeAnswer = (questionIndex, index, event) => {
+    var state = this,state
+    state.questions[questionIndex].answer[index].text = event.target.value
     this.setState(state)
   }
 
