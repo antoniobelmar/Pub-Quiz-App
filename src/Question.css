@@ -11,8 +11,12 @@ body {
 .questionText {
   /* font-family: 'Bungee Inline', cursive; */
   font-family: 'Righteous', cursive;
+  padding: 20px;
+  /* margin: 20px; */
 }
 .option {
+  width: 100px;
+  height: 100px;
   padding: 1px;
 }
 
@@ -51,9 +55,9 @@ body {
 
   border: 1px solid #b2b2b2;
   color: rgb(0, 0, 0);
-  padding: 30px 24px;
+  padding: 30px 44px;
   padding-bottom: 3px;
-  font-size: 20px;
+  font-size: 15px;
   cursor: pointer;
   font-family: 'Bungee Inline', cursive;
   border-radius: 20px;
@@ -69,12 +73,12 @@ body {
 
 .option:active{
   transform: translateY(3px);
-  box-shadow: 2px 4px;
 }
 
-div.option:hover label {
+/* div.option:hover label {
   color: red;
-}
+  DOESN'T WORK ON MOBILE
+} */
 
 input[type=radio]:checked ~ label{
   color: green;

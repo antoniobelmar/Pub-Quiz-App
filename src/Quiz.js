@@ -9,7 +9,7 @@ import './Quiz.css'
 class Quiz extends Component {
   constructor(props){
     super(props);
-    this.state = { name: 'Loading', questions: [], number: 0, score: 0, show: false, time: 30000000, allScores: [], teamName: "" }
+    this.state = { name: 'Loading', questions: [], number: 0, score: 0, show: false, time: 3000, allScores: [], teamName: "" }
   };
 
   componentDidMount(){
