@@ -1,15 +1,19 @@
 @import url('https://fonts.googleapis.com/css?family=Bungee+Inline');
+@import url('https://fonts.googleapis.com/css?family=Righteous');
+
 
 body {
-  font-family: sans-serif;
-  /* QUIZ NAME FONT  */
+    /* QUIZ NAME FONT  */
+  /* font-family: 'Righteous', cursive; */
+  font-family: 'Bungee Inline', cursive;
 }
 
 .questionText {
-  font-family: 'Bungee Inline', cursive;
+  /* font-family: 'Bungee Inline', cursive; */
+  font-family: 'Righteous', cursive;
 }
 .option {
-  padding: 12px;
+  padding: 1px;
 }
 
 .option input[type="radio"] {
@@ -32,7 +36,7 @@ body {
   -khtml-border-radius: 4px; */
   /* border-radius: 4px; */
 
-  background: -webkit-gradient(linear, 60% 0%, 50% 100%, color-stop(0%, #3399ff), color-stop(100%, #e4e4e4));
+  background: -webkit-gradient(linear, 50% 100%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #e4e4e4));
   /* background: -webkit-linear-gradient(#ffffff, #e4e4e4); */
   /* background: -moz-linear-gradient(#ffffff, #e4e4e4); */
   /* background: -o-linear-gradient(#ffffff, #e4e4e4); */
@@ -43,9 +47,10 @@ body {
   display: block;
   height: 30px;
   width: 100px;
-  text-shadow: white;
+  /* text-shadow: white; */
+
   border: 1px solid #b2b2b2;
-  color: #666666;
+  color: rgb(0, 0, 0);
   padding: 30px 24px;
   padding-bottom: 3px;
   font-size: 20px;
@@ -67,11 +72,10 @@ body {
   box-shadow: 2px 4px;
 }
 
+div.option:hover label {
+  color: red;
+}
 
 input[type=radio]:checked ~ label{
   color: green;
-}
-
-div.option:hover label {
-  color: red;
 }
