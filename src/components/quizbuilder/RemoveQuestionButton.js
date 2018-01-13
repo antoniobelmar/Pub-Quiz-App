@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
+import Button from './Button'
+
 class RemoveQuestionButton extends Component {
   render() {
     return(
       <div
         onClick={(event)=>this.props.removeQuestion(this.props.index, event)}
         >
-          <button> X </button>
+          <Button
+            text="X"
+          />
       </div>
     )
   }

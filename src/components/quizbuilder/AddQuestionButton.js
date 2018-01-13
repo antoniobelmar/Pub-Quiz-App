@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Button from './Button';
 
 class AddQuestionButton extends Component {
   render() {
@@ -7,7 +8,9 @@ class AddQuestionButton extends Component {
         onClick={this.props.addQuestion}
         style={localStyles.button}
         >
-          <button> Add Question </button>
+          <Button
+            text='Add Question'
+          />
         </div>
       )
     }

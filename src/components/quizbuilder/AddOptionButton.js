@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Button from './Button'
 
 class AddOptionButton extends Component {
   render(){
@@ -6,7 +7,9 @@ class AddOptionButton extends Component {
       <div
       onClick={(event)=> this.props.addOption(this.props.questionIndex, event)}
         >
-        <button>Add answer</button>
+        <Button
+          text='Add Option'
+        />
       </div>
     )
   }

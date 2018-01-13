@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
+import Button from './Button';
+
 class RemoveOptionButton extends Component {
   render() {
     return(
       <div
       onClick={(event)=> this.props.removeOption(this.props.questionIndex, this.props.index, event)}>
-        <button>X</button>
+        <Button
+          text='X'
+        />
       </div>
     )
   }
