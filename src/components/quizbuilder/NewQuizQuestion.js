@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import NewQuizOption from './NewQuizOption';
 import AddOptionButton from './AddOptionButton'
 import RemoveQuestionButton from './RemoveQuestionButton'
+import NewQuizAnswer from './NewQuizAnswer'
 
 class NewQuizQuestion extends Component {
 
@@ -31,12 +32,26 @@ class NewQuizQuestion extends Component {
         { this.props.question.options.map((option, index) => {
             return (
               <NewQuizOption
-              key={index}
-              index={index}
-              option={option}
-              questionIndex={this.props.index}
-              handleChangeOption={this.props.handleChangeOption}
-              removeOption={this.props.removeOption}
+                key={index}
+                index={index}
+                option={option}
+                questionIndex={this.props.index}
+                handleChangeOption={this.props.handleChangeOption}
+                removeOption={this.props.removeOption}
+              />
+            )
+          }
+        )}
+      </div>
+      <div>
+        { this.props.question.answer.map((answer, index) => {
+            return (
+              <NewQuizAnswer
+                key={index}
+                index={index}
+                answer={answer}
+                questionIndex={this.props.index}
+                handleChangeAnswer={this.props.handleChangeAnswer}
               />
             )
           }

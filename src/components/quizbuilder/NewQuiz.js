@@ -12,7 +12,7 @@ var Question = {
   type: '',
   text: '',
   options: [Option],
-  answer: [{text: ''}]
+  answer: [{text: '', placeholder: 'Add your correct answer'}]
 }
 
 
@@ -69,7 +69,7 @@ class NewQuiz extends Component {
   }
 
   handleChangeAnswer = (questionIndex, index, event) => {
-    var state = this,state
+    var state = this.state
     state.questions[questionIndex].answer[index].text = event.target.value
     this.setState(state)
   }
@@ -97,6 +97,7 @@ class NewQuiz extends Component {
             handleChangeOption={this.handleChangeOption}
             addOption={this.addOption}
             removeOption={this.removeOption}
+            handleChangeAnswer={this.handleChangeAnswer}
           />
         )
       })}
