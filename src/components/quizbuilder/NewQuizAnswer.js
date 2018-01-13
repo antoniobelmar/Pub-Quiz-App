@@ -8,12 +8,16 @@ class NewQuizAnswer extends Component {
           Answer
         </div>
         <div>
-        <input
-          type='text'
-          placeholder={this.props.answer.placeholder}
-          value={this.props.answer.text}
-          onChange={(event)=> this.props.handleChangeAnswer(this.props.questionIndex, this.props.index, event)}>
-        </input>
+          <select
+            onChange={(event)=> this.props.handleChangeAnswer(this.props.questionIndex, this.props.index, event)}>
+            >
+              { this.props.options.map((option, index) => {
+                  return (
+                    <option key={index} value={option.text}> {option.text} </option>
+                  )
+                }
+              )}
+          </select>
         </div>
       </div>
     )

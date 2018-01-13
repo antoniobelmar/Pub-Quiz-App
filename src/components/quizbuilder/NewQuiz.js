@@ -12,7 +12,7 @@ var Question = {
   type: '',
   text: '',
   options: [Option],
-  answer: [{text: '', placeholder: 'Add your correct answer'}]
+  answer: [{text: ''}]
 }
 
 

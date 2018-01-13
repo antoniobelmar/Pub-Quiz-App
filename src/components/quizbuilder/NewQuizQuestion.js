@@ -50,6 +50,7 @@ class NewQuizQuestion extends Component {
                 key={index}
                 index={index}
                 answer={answer}
+                options={this.props.question.options}
                 questionIndex={this.props.index}
                 handleChangeAnswer={this.props.handleChangeAnswer}
               />
