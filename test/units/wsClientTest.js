@@ -12,10 +12,21 @@ describe('WsClient', function() {
       updateQuestion: sinon.spy(),
       updateScores: sinon.spy(),
       getName: sinon.stub().returns('name'),
-      getScore: sinon.stub().returns('score')
+      getScore: sinon.stub().returns('score'),
+      isFinished: sinon.stub().returns('true'),
     };
     json_obj = { stringify: sinon.stub().returns('json') };
     client = new clientModule.WsClient(component, ws);
+  });
+
+  describe('#configure', function() {
+    beforeEach(function() {
+      client.configure()
+    });
+
+    it('sets onmessage to #route', function() {
+      expect(ws.onmessage).to.equal(client.route);
+    });
   });
 
   describe('#route', function() {
@@ -92,6 +103,38 @@ describe('WsClient', function() {
     });
   });
 
+  describe('#getFinishedState', function() {
+    it('returns component name', function() {
+      expect(client.getFinishedState()).to.equal('true');
+    });
+  });
+
+  describe('#sendMessage', function() {
+    describe('when finished', function() {
+      beforeEach(function() {
+        sinon.stub(client, 'getFinishedState').returns(true);
+        sinon.spy(client, 'sendQuizEnd');
+        client.sendMessage();
+      });
+
+      it('sends quiz end', function() {
+        sinon.assert.called(client.sendQuizEnd);
+      });
+    });
+
+    describe('when not finished', function() {
+      beforeEach(function() {
+        sinon.stub(client, 'getFinishedState').returns(false);
+        sinon.spy(client, 'sendQuestionId');
+        client.sendMessage();
+      });
+
+      it('sends question ID', function() {
+        sinon.assert.called(client.sendQuestionId);
+      });
+    });
+  });
+
   describe('#sendQuestionId', function() {
     beforeEach(function() {
       json = { type: "question", question: 5 };
@@ -138,16 +181,17 @@ describe('WsClient', function() {
   });
 
   describe('#startInterval', function() {
-    let action, manager;
+    let manager;
 
     beforeEach(function() {
+      sinon.spy(client, 'sendMessage');
       action = sinon.spy();
       manager = sinon.stub().returns(0);
-      client.startInterval(1, 2, manager);
+      client.startInterval(1, manager);
     });
 
     it('calls manager function', function() {
-      sinon.assert.calledWith(manager, 1, 2);
+      sinon.assert.calledWith(manager, client.sendMessage, 1);
     });
 
     it('sets intervalId', function() {
@@ -171,4 +215,30 @@ describe('WsClient', function() {
 });
 
 describe('buildWsClient', function() {
+  let client, constructor, ws_constructor, output;
+
+  beforeEach(function() {
+    client = { configure: sinon.spy() };
+    constructor = sinon.stub().returns(client);
+    ws_constructor = sinon.stub().returns('ws');
+    output = clientModule.buildWsClient(
+      'component', 'url', constructor, ws_constructor
+    );
+  });
+
+  it('creates client with web socket', function() {
+    sinon.assert.calledWith(constructor, 'component', 'ws');
+  });
+
+  it('creates web socket with url', function() {
+    sinon.assert.calledWith(ws_constructor, 'url');
+  });
+
+  it('configures client', function() {
+    sinon.assert.called(client.configure);
+  });
+
+  it('returns client', function() {
+    expect(output).to.equal(client);
+  });
 });

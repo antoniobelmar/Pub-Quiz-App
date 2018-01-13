@@ -1,3 +1,7 @@
+'use strict';
+
+const URL = 'ws://localhost:5000';
+
 class WsClient {
   constructor(component, ws) {
     this._component = component;
@@ -5,7 +9,11 @@ class WsClient {
   };
 
   // incoming messages
-
+  
+  configure() {
+    this._ws.onmessage = this.route;
+  };
+  
   route(data) {
     switch(data.type) {
       case 'question':
@@ -30,12 +38,25 @@ class WsClient {
 
   // outgoing messages
 
+  sendMessage() {
+    if (this.getFinishedState()) {
+      this.endInterval();
+      this.sendQuizEnd();
+    } else {
+      this.sendQuestionId();
+    };
+  };
+
   getName() {
     return this._component.getName();
   };
 
   getScore() {
     return this._component.getScore();
+  };
+
+  getFinishedState() {
+    return this._component.isFinished();
   };
 
   sendQuestionId(id, json_obj = JSON) {
@@ -66,8 +87,8 @@ class WsClient {
 
   // intervals
   
-  startInterval(message, timeout, func = setInterval) {
-    this._intervalId = func(message, timeout);
+  startInterval(timeout, func = setInterval) {
+    this._intervalId = func(this.sendMessage, timeout);
   };
 
   endInterval(func = clearInterval) {
@@ -75,23 +96,22 @@ class WsClient {
   };
 };
 
-
-function sendMessage() {
-  var atEnd = self.state.number === self.state.questions.length;
-  if (atEnd || !self.state.questionsRecieved) {
-    sendQuizEnd();
-    clearInterval(intervalId)
-  } else {
-    sendQuestionId();
-  };
+function newWs(constructor, url) {
+  return new constructor(url);
 };
 
-function buildWsClient(url, ws_constructor = WebSocket) {
-  let ws = new ws_constructor(url);
-  return new WsClient(ws);
+function newWsClient(constructor, component, ws) {
+  return new constructor(component, ws);
 };
 
-const URL = 'ws://localhost:5000';
+function buildWsClient(component, url, constructor = newWsClient, 
+                       ws_constructor = newWs) {
+  let ws = ws_constructor(url);
+  let client = constructor(component, ws);
+  client.configure();
+  return client;
+};
+
 
 module.exports.buildWsClient = buildWsClient;
 module.exports.WsClient = WsClient;
