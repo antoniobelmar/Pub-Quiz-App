@@ -8,4 +8,8 @@ function Question(option = new Option()) {
   this.answer= [{text: ''}];
 }
 
+Question.prototype.addOption = function(option = new Option()) {
+  this.options.push(option)
+}
+
 export default Question

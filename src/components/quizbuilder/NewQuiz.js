@@ -3,7 +3,6 @@ import NewQuizQuestion from './NewQuizQuestion' ;
 import NewQuizName from './NewQuizName';
 import AddQuestionButton from './AddQuestionButton';
 import Question from '../../lib/Question';
-import Option from '../../lib/Option';
 
 class NewQuiz extends Component {
   constructor(props) {
@@ -47,7 +46,7 @@ class NewQuiz extends Component {
 
   addOption = (questionIndex) => {
     var state = this.state
-    state.questions[questionIndex].options.push(new Option())
+    state.questions[questionIndex].addOption()
     this.setState(state)
   }
 
