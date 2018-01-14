@@ -75,6 +75,9 @@ class NewQuiz extends Component {
     axios.post('http://localhost:5000/quiz', {
       QuizName: this.state.name,
       Questions: this.state.questions
+    },
+    {
+      'Content-Type': 'application/json'
     })
     .then(function (response){
       console.log(response);
