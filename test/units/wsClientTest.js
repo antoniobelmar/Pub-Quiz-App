@@ -13,6 +13,7 @@ describe('WsClient', function() {
       updateScores: sinon.spy(),
       getName: sinon.stub().returns('name'),
       getScore: sinon.stub().returns('score'),
+      getQuestion: sinon.stub().returns('question'),
       isFinished: sinon.stub().returns('true'),
     };
     json_obj = { stringify: sinon.stub().returns('json') };
@@ -21,22 +22,33 @@ describe('WsClient', function() {
 
   describe('#configure', function() {
     beforeEach(function() {
-      client.configure()
+      sinon.spy(client, 'startInterval');
+      sinon.stub(client, 'getRoute').returns(0);
+      client.configure(5000)
     });
 
     it('sets onmessage to #route', function() {
-      expect(ws.onmessage).to.equal(client.route);
+      expect(ws.onmessage).to.equal(0);
+    });
+
+    it('starts interval', function() {
+      sinon.assert.calledWith(client.startInterval, 5000);
     });
   });
 
   describe('#route', function() {
-    let data;
+    let event, func, json_obj;
+
+    beforeEach(function() {
+      func = client.getRoute(client);
+    });
 
     describe('when receiving question signal', function() {
       beforeEach(function() {
-        data = { type: 'question', question: 0 };
+        event = { data: { type: 'question', question: 0 } };
+        json_obj = { parse: sinon.stub().returns(event.data) };
         sinon.spy(client, 'updateQuestion');
-        client.route(data);
+        func(event, json_obj);
       });
 
       it('updates question', function() {
@@ -46,11 +58,12 @@ describe('WsClient', function() {
 
     describe('when receiving endQuiz signal', function() {
       beforeEach(function() {
-        data = { type: 'endQuiz' };
+        event = { data: { type: 'endQuiz' } };
+        json_obj = { parse: sinon.stub().returns(event.data) };
         sinon.spy(client, 'sendScore');
         sinon.stub(client, 'getName').returns('name');
         sinon.stub(client, 'getScore').returns('score');
-        client.route(data);
+        func(event, json_obj);
       });
 
       it('updates question', function() {
@@ -60,9 +73,10 @@ describe('WsClient', function() {
     
     describe('when receiving scores signal', function() {
       beforeEach(function() {
-        data = { type: 'scores', scores: 0 };
+        event = { data: { type: 'scores', scores: 0 } };
+        json_obj = { parse: sinon.stub().returns(event.data) };
         sinon.spy(client, 'updateScores');
-        client.route(data);
+        func(event, json_obj);
       });
 
       it('updates question', function() {
@@ -109,12 +123,18 @@ describe('WsClient', function() {
     });
   });
 
-  describe('#sendMessage', function() {
+  describe('#getSendMessage', function() {
+    var func;
+
+    beforeEach(function() {
+      func = client.getSendMessage(client);
+    });
+
     describe('when finished', function() {
       beforeEach(function() {
         sinon.stub(client, 'getFinishedState').returns(true);
         sinon.spy(client, 'sendQuizEnd');
-        client.sendMessage();
+        func();
       });
 
       it('sends quiz end', function() {
@@ -126,7 +146,7 @@ describe('WsClient', function() {
       beforeEach(function() {
         sinon.stub(client, 'getFinishedState').returns(false);
         sinon.spy(client, 'sendQuestionId');
-        client.sendMessage();
+        func();
       });
 
       it('sends question ID', function() {
@@ -184,14 +204,13 @@ describe('WsClient', function() {
     let manager;
 
     beforeEach(function() {
-      sinon.spy(client, 'sendMessage');
-      action = sinon.spy();
+      sinon.stub(client, 'getSendMessage').returns(2);
       manager = sinon.stub().returns(0);
       client.startInterval(1, manager);
     });
 
     it('calls manager function', function() {
-      sinon.assert.calledWith(manager, client.sendMessage, 1);
+      sinon.assert.calledWith(manager, 2, 1);
     });
 
     it('sets intervalId', function() {

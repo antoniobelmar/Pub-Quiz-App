@@ -10,21 +10,27 @@ class WsClient {
 
   // incoming messages
   
-  configure() {
-    this._ws.onmessage = this.route;
+  configure(timeout = 1000) {
+    this._ws.onmessage = this.getRoute(this);
+    this.startInterval(timeout);
   };
   
-  route(data) {
-    switch(data.type) {
-      case 'question':
-        this.updateQuestion(data.question);
-        break;
-      case 'endQuiz':
-        this.sendScore(this.getName(), this.getScore());
-        break;
-      case 'scores':
-        this.updateScores(data.scores);
-        break;
+  getRoute(self) {
+    return function route(event, json_obj = JSON) {
+      let data = json_obj.parse(event.data);
+      console.log(data);
+      switch(data.type) {
+        case 'question':
+          self.updateQuestion(parseInt(data.question));
+          break;
+        case 'endQuiz':
+          self.sendScore(self.getName(), self.getScore());
+          break;
+        case 'scores':
+          console.log(data.scores);
+          self.updateScores(data.scores);
+          break;
+      };
     };
   };
 
@@ -38,12 +44,14 @@ class WsClient {
 
   // outgoing messages
 
-  sendMessage() {
-    if (this.getFinishedState()) {
-      this.endInterval();
-      this.sendQuizEnd();
-    } else {
-      this.sendQuestionId();
+  getSendMessage(self) {
+    return function sendMessage() {
+      if (self.getFinishedState()) {
+        self.endInterval();
+        self.sendQuizEnd();
+      } else {
+        self.sendQuestionId(self.getQuestionId() + 1);
+      };
     };
   };
 
@@ -57,6 +65,10 @@ class WsClient {
 
   getFinishedState() {
     return this._component.isFinished();
+  };
+
+  getQuestionId() {
+    return this._component.getQuestion();
   };
 
   sendQuestionId(id, json_obj = JSON) {
@@ -88,7 +100,8 @@ class WsClient {
   // intervals
   
   startInterval(timeout, func = setInterval) {
-    this._intervalId = func(this.sendMessage, timeout);
+    let sendMessage = this.getSendMessage(this);
+    this._intervalId = func(sendMessage, timeout);
   };
 
   endInterval(func = clearInterval) {
@@ -96,11 +109,11 @@ class WsClient {
   };
 };
 
-function newWs(constructor, url) {
+function newWs(url, constructor = WebSocket) {
   return new constructor(url);
 };
 
-function newWsClient(constructor, component, ws) {
+function newWsClient(component, ws, constructor = WsClient) {
   return new constructor(component, ws);
 };
 
@@ -112,6 +125,4 @@ function buildWsClient(component, url, constructor = newWsClient,
   return client;
 };
 
-
-module.exports.buildWsClient = buildWsClient;
-module.exports.WsClient = WsClient;
+module.exports = { buildWsClient, WsClient };
