@@ -1,19 +1,19 @@
 import Option from './Option';
 
 function Question(option = new Option()) {
-  this.placeholder = "Add your question";
-  this.type = '';
-  this.text =  '';
-  this.options = [option];
-  this.answer= [{text: ''}];
+  this._placeholder = "Add your question";
+  this._type = '';
+  this._text =  '';
+  this._options = [option];
+  this._answer= [{text: ''}];
 }
 
 Question.prototype.addOption = function(option = new Option()) {
-  this.options.push(option)
+  this._options.push(option)
 }
 
 Question.prototype.removeOption = function(index) {
-  this.options.splice(index, 1)
+  this._options.splice(index, 1)
 }
 
 export default Question

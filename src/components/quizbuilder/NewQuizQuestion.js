@@ -15,8 +15,8 @@ class NewQuizQuestion extends Component {
           </div>
         <input
           type="text"
-          placeholder={this.props.question.placeholder}
-          value={this.props.question.text}
+          placeholder={this.props.question._placeholder}
+          value={this.props.question._text}
           onChange={(event)=>this.props.handleChangeQuestion(this.props.index, event)} >
         </input>
         <RemoveQuestionButton
@@ -29,7 +29,7 @@ class NewQuizQuestion extends Component {
         />
       </div>
       <div>
-        { this.props.question.options.map((option, index) => {
+        { this.props.question._options.map((option, index) => {
             return (
               <NewQuizOption
                 key={index}
@@ -44,13 +44,13 @@ class NewQuizQuestion extends Component {
         )}
       </div>
       <div>
-        { this.props.question.answer.map((answer, index) => {
+        { this.props.question._answer.map((answer, index) => {
             return (
               <NewQuizAnswer
                 key={index}
                 index={index}
                 answer={answer}
-                options={this.props.question.options}
+                options={this.props.question._options}
                 questionIndex={this.props.index}
                 handleChangeAnswer={this.props.handleChangeAnswer}
               />
