@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import Question from './Question';
 import StartPage from './startPage';
 import ToggleDisplay from 'react-toggle-display';
-import Axios from 'axios';
+import axios from 'axios';
 import './Quiz.css'
-
 
 class Quiz extends Component {
   constructor(props){
@@ -26,7 +25,7 @@ class Quiz extends Component {
     let quizId = this.props.match.params.quizId;
     let self = this;
 
-    Axios.get(`https://pub-quiz-api.herokuapp.com/quiz/${quizId}`)
+    axios.get(`https://pub-quiz-api.herokuapp.com/quiz/${quizId}`)
      .then(function (response) {
        self.setState({
          name: response.data.name,
@@ -37,8 +36,6 @@ class Quiz extends Component {
      .catch(function (error) {
        console.log(error);
      });
-
-
   };
 
   hideButtonShowQuiz() {
