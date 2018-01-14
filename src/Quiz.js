@@ -6,8 +6,6 @@ import client from './wsClient';
 import axios from 'axios';
 import './Quiz.css'
 
-const URL = "https://pub-quiz-api.herokuapp.com/quiz/5a56302e0a8cc10014501d8f";
-
 class Quiz extends Component {
   constructor(props){
     super(props);
@@ -32,7 +30,8 @@ class Quiz extends Component {
     let quizId = this.props.match.params.quizId;
     let self = this;
 
-    axios.get(URL)
+    // axios.get(`http://pub-quiz-api.herokuapp.com/quiz/${quizId}`)
+    axios.get(`http://localhost:5000/quiz/${quizId}`)
       .then(function (response) {
         self.setState({
           name: response.data.name,
@@ -46,9 +45,10 @@ class Quiz extends Component {
   };
 
   hideButtonShowQuiz() {
-    this.setState({ 
-      show: true, 
+    this.setState({
+      show: true,
       teamName: document.getElementById('team-name').value,
+      // client: client.buildWsClient(this, 'ws://pub-quiz-api.herokuapp.com/')
       client: client.buildWsClient(this, 'ws://localhost:5000')
     });
   };
@@ -60,10 +60,11 @@ class Quiz extends Component {
   updateQuestion(id) {
     let self = this;
     let radios = document.getElementsByName('options');
-    console.log(this.state);
-    let answer = this.state.questions[this.state.number].answer[0];
+    // console.log(this.state);
+    let answer = this.state.questions[this.state.number]._answer[0];
+    console.log(answer)
     radios.forEach(function(option) {
-      if (option.checked === true && option.value === answer) {
+      if (option.checked === true && option.value === answer.text) {
         self.state.score += 1;
       };
     });
