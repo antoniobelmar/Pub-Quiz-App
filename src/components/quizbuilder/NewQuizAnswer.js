@@ -9,8 +9,10 @@ class NewQuizAnswer extends Component {
         </div>
         <div>
           <select
-            onChange={(event)=> this.props.handleChangeAnswer(this.props.questionIndex, this.props.index, event)}>
+            onChange={(event)=> this.props.handleChangeAnswer(this.props.questionIndex, this.props.index, event)}
+            required='true'
             >
+              <option selected="selected" disabled="disabled">Select the correct answer</option>
               { this.props.options.map((option, index) => {
                   return (
                     <option key={index} value={option._text}> {option._text} </option>
