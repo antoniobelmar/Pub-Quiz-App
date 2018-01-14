@@ -4,17 +4,16 @@ import Button from './Button'
 class AddOptionButton extends Component {
   render(){
     return(
-      <div
-      onClick={(event)=> this.props.addOption(this.props.questionIndex, event)}
-        >
+      <div>
         <Button
           text='Add Option'
+          callback={this.props.addOption}
+          arg1={this.props.questionIndex}
+          arg2=''
         />
       </div>
     )
   }
 }
-
-
 
 export default AddOptionButton;

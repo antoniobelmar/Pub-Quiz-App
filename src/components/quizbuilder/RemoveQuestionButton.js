@@ -4,12 +4,13 @@ import Button from './Button'
 class RemoveQuestionButton extends Component {
   render() {
     return(
-      <div
-        onClick={(event)=>this.props.removeQuestion(this.props.index, event)}
-        >
-          <Button
-            text="X"
-          />
+      <div>
+        <Button
+          text="X"
+          callback={this.props.removeQuestion}
+          arg1={this.props.index}
+          arg2=''
+        />
       </div>
     )
   }

@@ -4,23 +4,16 @@ import Button from './Button';
 class AddQuestionButton extends Component {
   render() {
     return(
-      <div
-        onClick={this.props.addQuestion}
-        style={localStyles.button}
-        >
-          <Button
-            text='Add Question'
-          />
-        </div>
-      )
-    }
-}
-
-const localStyles = {
-  button: {
-    padding: '20px',
+      <div>
+        <Button
+          text='Add Question'
+          callback={this.props.addQuestion}
+          arg1=''
+          arg2=''
+        />
+      </div>
+    )
   }
 }
-
 
 export default AddQuestionButton
