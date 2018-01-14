@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import Question from './Question';
 import StartPage from './startPage';
 import ToggleDisplay from 'react-toggle-display';
-import Axios from 'axios';
 import client from './wsClient';
+import axios from 'axios';
+import './Quiz.css'
 
 const URL = "https://pub-quiz-api.herokuapp.com/quiz/5a56302e0a8cc10014501d8f";
 
@@ -28,9 +29,10 @@ class Quiz extends Component {
   };
 
   componentDidMount(){
+    let quizId = this.props.match.params.quizId;
     let self = this;
 
-    Axios.get(URL)
+    axios.get(URL)
       .then(function (response) {
         self.setState({
           name: response.data.name,
@@ -112,8 +114,8 @@ class Quiz extends Component {
       }
       </ToggleDisplay>
       </div>
-    )
-  }
-}
+    );
+  };
+};
 
 export default Quiz;

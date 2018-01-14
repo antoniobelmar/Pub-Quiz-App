@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css?family=Bungee+Inline');
+@import url('https://fonts.googleapis.com/css?family=Righteous');
+
+
+body {
+  font-family: 'Bungee Inline', cursive;
+}
+
+.questionText {
+  font-family: 'Righteous', cursive;
+  padding: 20px;
+  /* margin: 20px; */
+}
+.option {
+  width: 100px;
+  height: 100px;
+  padding: 1px;
+}
+
+.option input[type="radio"] {
+  width: 0px;
+  height: 0px;
+  display: none;
+}
+
+.option label {
+  background: -webkit-gradient(linear, 50% 100%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #e4e4e4));
+
+  margin: 5px;
+  display: block;
+  height: 30px;
+  width: 100px;
+
+  border: 1px solid #b2b2b2;
+  color: rgb(0, 0, 0);
+  padding: 30px 44px;
+  padding-bottom: 3px;
+  font-size: 15px;
+  cursor: pointer;
+  font-family: 'Bungee Inline', cursive;
+  border-radius: 20px;
+  box-shadow: 5px 10px;
+
+}
+
+.option:active{
+  transform: translateY(3px);
+}
+
+input[type=radio]:checked ~ label{
+  color: green;
+}
