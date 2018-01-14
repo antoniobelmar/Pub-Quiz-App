@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import Home from './Home';
 import Quiz from './Quiz';
-import NewQuiz from './NewQuiz';
+import NewQuiz from './components/quizbuilder/NewQuiz';
 import OtherPage from './OtherPage';
 
 const Routes = () => (
