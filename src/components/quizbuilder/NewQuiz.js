@@ -20,6 +20,12 @@ class NewQuiz extends Component {
     this.setState(state)
   }
 
+  handleChangeQuestionType = (index, event) => {
+    var state = this.state
+    state.questions[index]._type = event.target.value
+    this.setState(state)
+  }
+
   handleChangeQuestion = (index, event) => {
     var state = this.state
     state.questions[index]._text = event.target.value
@@ -86,6 +92,7 @@ class NewQuiz extends Component {
             addOption={this.addOption}
             removeOption={this.removeOption}
             handleChangeAnswer={this.handleChangeAnswer}
+            handleChangeQuestionType={this.handleChangeQuestionType}
           />
         )
       })}
