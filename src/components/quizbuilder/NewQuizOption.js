@@ -11,8 +11,8 @@ class NewQuizOption extends Component {
         <div>
         <input
           type='text'
-          placeholder={this.props.option.placeholder}
-          value={this.props.option.text}
+          placeholder={this.props.option._placeholder}
+          value={this.props.option._text}
           onChange={(event)=> this.props.handleChangeOption(this.props.questionIndex, this.props.index, event)}>
         </input>
         </div>

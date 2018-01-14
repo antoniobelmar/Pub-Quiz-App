@@ -40,7 +40,7 @@ class NewQuiz extends Component {
 
   handleChangeOption = (questionIndex, index, event) => {
     var state = this.state
-    state.questions[questionIndex]._options[index].text = event.target.value
+    state.questions[questionIndex]._options[index]._text = event.target.value
     this.setState(state)
   }
 
@@ -58,7 +58,7 @@ class NewQuiz extends Component {
 
   handleChangeAnswer = (questionIndex, index, event) => {
     var state = this.state
-    state.questions[questionIndex].answer[index].text = event.target.value
+    state.questions[questionIndex]._answer[index].text = event.target.value
     this.setState(state)
   }
 

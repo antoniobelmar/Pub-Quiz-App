@@ -1,6 +1,6 @@
 function Option() {
-  this.text =  '';
-  this.placeholder = 'Add an answer option'
+  this._text =  '';
+  this._placeholder = 'Add an answer option'
 }
 
 export default Option

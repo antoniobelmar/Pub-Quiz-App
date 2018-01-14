@@ -13,7 +13,7 @@ class NewQuizAnswer extends Component {
             >
               { this.props.options.map((option, index) => {
                   return (
-                    <option key={index} value={option.text}> {option.text} </option>
+                    <option key={index} value={option._text}> {option._text} </option>
                   )
                 }
               )}
