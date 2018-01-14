@@ -3,6 +3,7 @@ import NewQuizQuestion from './NewQuizQuestion' ;
 import NewQuizName from './NewQuizName';
 import AddQuestionButton from './AddQuestionButton';
 import Question from '../../lib/Question';
+import Button from './Button'
 
 class NewQuiz extends Component {
   constructor(props) {
@@ -68,34 +69,46 @@ class NewQuiz extends Component {
     this.setState(state)
   }
 
+  submitQuiz = () => {
+    console.log('quiz submitted')
+  }
+
   render() {
     {console.log(this.state)}
     return(
       <div>
-      <NewQuizName
-        name={this.state.name}
-        placeholder={this.state.placeholder}
-        handleChangeName = {this.handleChangeName}
-      />
-      <AddQuestionButton
-        addQuestion={this.addQuestion}
-      />
-      {this.state.questions.map((question, index) => {
-        return (
-          <NewQuizQuestion
-            question={question}
-            key={index}
-            index={index}
-            handleChangeQuestion={this.handleChangeQuestion}
-            removeQuestion={this.removeQuestion}
-            handleChangeOption={this.handleChangeOption}
-            addOption={this.addOption}
-            removeOption={this.removeOption}
-            handleChangeAnswer={this.handleChangeAnswer}
-            handleChangeQuestionType={this.handleChangeQuestionType}
+        <NewQuizName
+          name={this.state.name}
+          placeholder={this.state.placeholder}
+          handleChangeName = {this.handleChangeName}
+        />
+        <AddQuestionButton
+          addQuestion={this.addQuestion}
+        />
+        {this.state.questions.map((question, index) => {
+          return (
+            <NewQuizQuestion
+              question={question}
+              key={index}
+              index={index}
+              handleChangeQuestion={this.handleChangeQuestion}
+              removeQuestion={this.removeQuestion}
+              handleChangeOption={this.handleChangeOption}
+              addOption={this.addOption}
+              removeOption={this.removeOption}
+              handleChangeAnswer={this.handleChangeAnswer}
+              handleChangeQuestionType={this.handleChangeQuestionType}
+            />
+          )
+        })}
+        <div>
+          <Button
+            text='Add Quiz'
+            callback={this.submitQuiz}
+            arg1=''
+            arg2=''
           />
-        )
-      })}
+        </div>
       </div>
     );
   };
