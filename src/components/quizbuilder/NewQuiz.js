@@ -52,7 +52,7 @@ class NewQuiz extends Component {
 
   removeOption = (questionIndex, index, event) => {
     var state = this.state
-    state.questions[questionIndex].options.splice(index, 1)
+    state.questions[questionIndex].removeOption(index)
     this.setState(state)
   }
 

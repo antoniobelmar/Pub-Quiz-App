@@ -12,4 +12,8 @@ Question.prototype.addOption = function(option = new Option()) {
   this.options.push(option)
 }
 
+Question.prototype.removeOption = function(index) {
+  this.options.splice(index, 1)
+}
+
 export default Question
