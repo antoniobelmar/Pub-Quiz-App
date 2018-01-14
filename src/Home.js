@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Axios from 'axios';
+import axios from 'axios';
 
 class Home extends Component {
   constructor(props){
@@ -9,7 +9,8 @@ class Home extends Component {
 
   componentDidMount() {
     let self = this;
-    Axios.get('https://pub-quiz-api.herokuapp.com/quiz/')
+    // axios.get('http://pub-quiz-api.herokuapp.com/quiz')
+    axios.get('http://localhost:5000/quiz')
       .then(function(response) {
         let array = [];
         response.data.forEach(function(quiz, key) {
