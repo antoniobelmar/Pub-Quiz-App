@@ -61,8 +61,7 @@ class Quiz extends Component {
     let self = this;
     let radios = document.getElementsByName('options');
     // console.log(this.state);
-    let answer = this.state.questions[this.state.number]._answer[0];
-    console.log(answer)
+    let answer = this.state.questions[this.state.number].answer[0];
     radios.forEach(function(option) {
       if (option.checked === true && option.value === answer.text) {
         self.state.score += 1;
