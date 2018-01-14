@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './Question.css'
 
 class Question extends Component {
   constructor(props){
@@ -8,7 +9,7 @@ class Question extends Component {
   render(){
     return(
       <div>
-        <p>{this.props.question.text}</p>
+        <p className='questionText'>{this.props.question.text}</p>
         {this.props.question.options.map(function(answer, index){
           return(
             <div className='option' key={index}>

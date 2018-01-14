@@ -3,6 +3,8 @@ import Question from './Question';
 import StartPage from './startPage';
 import ToggleDisplay from 'react-toggle-display';
 import Axios from 'axios';
+import './Quiz.css'
+
 
 class Quiz extends Component {
   constructor(props){
@@ -104,29 +106,29 @@ class Quiz extends Component {
       return(
         <div className='quiz'>
 
-        <StartPage show={this.state.show} hideFunction={ () => this.hideButtonShowQuiz() }/>
+          <StartPage show={this.state.show} hideFunction={ () => this.hideButtonShowQuiz() }/>
 
-        <ToggleDisplay show={this.state.show}>
-        <h1>{this.state.name}</h1>
-        { this.state.questions.length > 0 && this.state.number < this.state.questions.length &&
-          <Question question={this.state.questions[this.state.number]} />
-        }
-        { this.state.number >= this.state.questions.length &&
-          <div>
-            <h2> Thanks for playing! </h2>
-            <h3> Your score was {this.state.score} </h3>
-          </div>
-        }
-        {this.state.allScores.length > 0 &&
-          this.state.allScores.map(function(score, index) {
-          return(
-            <div key={index}>
-              <h4> {score.teamName}: {score.score} </h4>
+          <ToggleDisplay show={this.state.show}>
+          <h1>{this.state.name}</h1>
+          { this.state.questions.length > 0 && this.state.number < this.state.questions.length &&
+            <Question question={this.state.questions[this.state.number]} />
+          }
+          { this.state.number >= this.state.questions.length &&
+            <div>
+              <h2> Thanks for playing! </h2>
+              <h3> Your score was {this.state.score} </h3>
             </div>
-            )
-          })
-        }
-        </ToggleDisplay>
+          }
+          {this.state.allScores.length > 0 &&
+            this.state.allScores.map(function(score, index) {
+            return(
+              <div key={index}>
+                <h4> {score.teamName}: {score.score} </h4>
+              </div>
+              )
+            })
+          }
+          </ToggleDisplay>
         </div>
     )
   }
