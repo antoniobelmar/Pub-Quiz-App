@@ -4,6 +4,8 @@ import NewQuizName from './NewQuizName';
 import AddQuestionButton from './AddQuestionButton';
 import Question from '../../lib/Question';
 import Button from './Button'
+import axios from 'axios';
+
 
 class NewQuiz extends Component {
   constructor(props) {
@@ -70,8 +72,14 @@ class NewQuiz extends Component {
   }
 
   submitQuiz = () => {
-    console.log('quiz submitted')
-  }
+    axios.post('http://localhost:5000/quiz', {
+      QuizName: this.state.name,
+      Questions: this.state.questions
+    })
+    .then(function (response){
+      console.log(response);
+    });
+  };
 
   render() {
     {console.log(this.state)}
