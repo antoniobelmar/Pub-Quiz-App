@@ -35,7 +35,6 @@
 #startQuizButton:active {
   transform: translateY(3px);
   box-shadow: 2px 4px;
-  /* background-color: rgb(3, 173, 218) */
 }
 
 #titleApp {

@@ -3,13 +3,10 @@
 
 
 body {
-    /* QUIZ NAME FONT  */
-  /* font-family: 'Righteous', cursive; */
   font-family: 'Bungee Inline', cursive;
 }
 
 .questionText {
-  /* font-family: 'Bungee Inline', cursive; */
   font-family: 'Righteous', cursive;
   padding: 20px;
   /* margin: 20px; */
@@ -27,31 +24,12 @@ body {
 }
 
 .option label {
-
-  /* display: -moz-inline-box;
-  -moz-box-orient: vertical;
-  display: inline-block;
-  vertical-align: middle;
-  *vertical-align: auto;
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
-  -o-border-radius: 4px;
-  -ms-border-radius: 4px;
-  -khtml-border-radius: 4px; */
-  /* border-radius: 4px; */
-
   background: -webkit-gradient(linear, 50% 100%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #e4e4e4));
-  /* background: -webkit-linear-gradient(#ffffff, #e4e4e4); */
-  /* background: -moz-linear-gradient(#ffffff, #e4e4e4); */
-  /* background: -o-linear-gradient(#ffffff, #e4e4e4); */
-  /* background: -ms-linear-gradient(#ffffff, #e4e4e4); */
-  /* background: linear-gradient(#ffffff, #e4e4e4); */
 
   margin: 5px;
   display: block;
   height: 30px;
   width: 100px;
-  /* text-shadow: white; */
 
   border: 1px solid #b2b2b2;
   color: rgb(0, 0, 0);
@@ -61,24 +39,13 @@ body {
   cursor: pointer;
   font-family: 'Bungee Inline', cursive;
   border-radius: 20px;
-  /* margin-right: -5px; */
   box-shadow: 5px 10px;
 
-   /* -moz-border-radius: 0px;
-  -webkit-border-radius: 0px;
-  -o-border-radius: 0px;
-  -ms-border-radius: 0px;
-  -khtml-border-radius: 0px; */
 }
 
 .option:active{
   transform: translateY(3px);
 }
-
-/* div.option:hover label {
-  color: red;
-  DOESN'T WORK ON MOBILE
-} */
 
 input[type=radio]:checked ~ label{
   color: green;
