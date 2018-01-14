@@ -5,6 +5,7 @@ import AddQuestionButton from './AddQuestionButton';
 import Question from '../../lib/Question';
 import Button from './Button'
 import axios from 'axios';
+import Redirect from 'react-router';
 
 
 class NewQuiz extends Component {
@@ -13,7 +14,8 @@ class NewQuiz extends Component {
     this.state = {
       name: '',
       placeholder: "Type your quiz name",
-      questions: [new Question()]
+      questions: [new Question()],
+      redirect: false
     }
   }
 
@@ -80,12 +82,15 @@ class NewQuiz extends Component {
       'Content-Type': 'application/json'
     })
     .then(function (response){
-      console.log(response);
+      this.setState({ redirect: true });
     });
   };
 
   render() {
     {console.log(this.state)}
+    if (this.state.redirect) {
+      return <Redirect to='/' />;
+    }
     return(
       <div>
         <NewQuizName
