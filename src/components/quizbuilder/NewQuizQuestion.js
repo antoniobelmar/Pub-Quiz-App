@@ -3,33 +3,38 @@ import NewQuizOption from './NewQuizOption';
 import AddOptionButton from './AddOptionButton'
 import RemoveQuestionButton from './RemoveQuestionButton'
 import NewQuizAnswer from './NewQuizAnswer'
+import NewQuizQuestionType from './NewQuizQuestionType'
 
 class NewQuizQuestion extends Component {
 
   render(){
     return(
       <div>
+        <NewQuizQuestionType
+          questionIndex={this.props.index}
+          handleChangeQuestionType={this.props.handleChangeQuestionType}
+        />
         <div style={localStyles.questionRow}>
           <div>
             {'Q' + (this.props.index + 1)}
           </div>
-        <input
-          type="text"
-          placeholder={this.props.question._placeholder}
-          value={this.props.question._text}
-          onChange={(event)=>this.props.handleChangeQuestion(this.props.index, event)} >
-        </input>
-        <RemoveQuestionButton
-          removeQuestion={this.props.removeQuestion}
-          index={this.props.index}
-        />
-        <AddOptionButton
-          questionIndex={this.props.index}
-          addOption={this.props.addOption}
-        />
-      </div>
-      <div>
-        { this.props.question._options.map((option, index) => {
+          <input
+            type="text"
+            placeholder={this.props.question._placeholder}
+            value={this.props.question._text}
+            onChange={(event)=>this.props.handleChangeQuestion(this.props.index, event)} >
+          </input>
+          <RemoveQuestionButton
+            removeQuestion={this.props.removeQuestion}
+            index={this.props.index}
+          />
+          <AddOptionButton
+            questionIndex={this.props.index}
+            addOption={this.props.addOption}
+          />
+        </div>
+        <div>
+          { this.props.question._options.map((option, index) => {
             return (
               <NewQuizOption
                 key={index}
@@ -40,11 +45,10 @@ class NewQuizQuestion extends Component {
                 removeOption={this.props.removeOption}
               />
             )
-          }
-        )}
-      </div>
-      <div>
-        { this.props.question._answer.map((answer, index) => {
+          })}
+        </div>
+        <div>
+          { this.props.question._answer.map((answer, index) => {
             return (
               <NewQuizAnswer
                 key={index}
@@ -55,10 +59,9 @@ class NewQuizQuestion extends Component {
                 handleChangeAnswer={this.props.handleChangeAnswer}
               />
             )
-          }
-        )}
+          })}
+        </div>
       </div>
-    </div>
     );
   };
 };
