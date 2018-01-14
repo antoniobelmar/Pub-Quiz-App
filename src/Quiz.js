@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import Question from './Question';
 import StartPage from './startPage';
 import ToggleDisplay from 'react-toggle-display';
+import client from './wsClient';
 import axios from 'axios';
 import './Quiz.css'
+
+const URL = "https://pub-quiz-api.herokuapp.com/quiz/5a56302e0a8cc10014501d8f";
 
 class Quiz extends Component {
   constructor(props){
@@ -19,116 +22,100 @@ class Quiz extends Component {
       allScores: [],
       teamName: "",
     }
+    this.isFinished = this.isFinished.bind(this);
+    this.getName = this.getName.bind(this);
+    this.getScore = this.getScore.bind(this);
+    this.getQuestion = this.getQuestion.bind(this);
   };
 
   componentDidMount(){
     let quizId = this.props.match.params.quizId;
     let self = this;
 
-    axios.get(`https://pub-quiz-api.herokuapp.com/quiz/${quizId}`)
-     .then(function (response) {
-       self.setState({
-         name: response.data.name,
-         questions: response.data.questions,
-         questionsRecieved: true
-       });
-     })
-     .catch(function (error) {
-       console.log(error);
-     });
+    axios.get(URL)
+      .then(function (response) {
+        self.setState({
+          name: response.data.name,
+          questions: response.data.questions,
+          questionsRecieved: true
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
 
   hideButtonShowQuiz() {
-    let self = this
-    let intervalId
-    this.setState({show: true, teamName: document.getElementById('team-name').value})
-    let ws = new WebSocket('ws://pub-quiz-api.herokuapp.com');
-    ws.onopen = function() {
-      function sendQuestionId() {
-        ws.send(JSON.stringify({type: "question", question: self.state.number + 1}));
+    this.setState({ 
+      show: true, 
+      teamName: document.getElementById('team-name').value,
+      client: client.buildWsClient(this, 'ws://localhost:5000')
+    });
+  };
+
+  updateScores(scores) {
+    this.setState({ allScores: scores });
+  };
+
+  updateQuestion(id) {
+    let self = this;
+    let radios = document.getElementsByName('options');
+    console.log(this.state);
+    let answer = this.state.questions[this.state.number].answer[0];
+    radios.forEach(function(option) {
+      if (option.checked === true && option.value === answer) {
+        self.state.score += 1;
       };
+    });
+    this.setState({ number: parseInt(id) });
+  };
 
-      function sendQuizEnd() {
-        ws.send(JSON.stringify({type: 'endQuiz'}))
-      }
+  isFinished() {
+    return this.getQuestion() === this.state.questions.length;
+  };
 
-      function sendMessage() {
-        var atEnd = self.state.number === self.state.questions.length;
-        if (atEnd || !self.state.questionsRecieved) {
-          sendQuizEnd();
-          clearInterval(intervalId)
-        } else {
-          sendQuestionId();
-        };
-      };
+  getName() {
+    return this.state.teamName;
+  };
 
+  getQuestion() {
+    return this.state.number;
+  };
 
-      intervalId = setInterval(sendMessage, self.state.time);
-    };
-
-    ws.onmessage = function(event) {
-
-      function sendScore() {
-        console.log('message sent')
-        ws.send(JSON.stringify({type: "score", teamName: self.state.teamName, score: self.state.score}))
-      }
-
-      var jsonEvent = JSON.parse(event.data)
-      switch (jsonEvent.type) {
-        case 'question':
-          var radios = document.getElementsByName('options')
-          radios.forEach(function(option) {
-            if(option.checked === true && option.value === self.state.questions[self.state.number].answer[0]) {
-              self.state.score += 1
-            }
-          })
-          self.setState({ number: parseInt(jsonEvent.question) });
-          break;
-
-        case 'endQuiz':
-          sendScore()
-          break;
-
-        case 'scores':
-          self.setState({ allScores: jsonEvent.scores });
-          ws.close();
-          break;
-      }
-    };
-
-    this.setState({ ws: ws });
-  }
+  getScore() {
+    return this.state.score;
+  };
 
   render() {
-      return(
-        <div className='quiz'>
+    return(
+      <div className='quiz'>
 
-          <StartPage show={this.state.show} hideFunction={ () => this.hideButtonShowQuiz() }/>
+      <StartPage show={this.state.show} hideFunction={ () => this.hideButtonShowQuiz() }/>
 
-          <ToggleDisplay show={this.state.show}>
-          <h1>{this.state.name}</h1>
-          { this.state.questions.length > 0 && this.state.number < this.state.questions.length &&
-            <Question question={this.state.questions[this.state.number]} />
-          }
-          { this.state.number >= this.state.questions.length &&
-            <div>
-              <h2> Thanks for playing! </h2>
-              <h3> Your score was {this.state.score} </h3>
-            </div>
-          }
-          {this.state.allScores.length > 0 &&
-            this.state.allScores.map(function(score, index) {
-            return(
-              <div key={index}>
-                <h4> {score.teamName}: {score.score} </h4>
-              </div>
-              )
-            })
-          }
-          </ToggleDisplay>
+      <ToggleDisplay show={this.state.show}>
+      <h1>{this.state.name}</h1>
+      { this.state.questions.length > 0 && this.state.number < this.state.questions.length &&
+        <Question question={this.state.questions[this.state.number]} />
+      }
+      { this.state.number >= this.state.questions.length &&
+        <div>
+          <h2> Thanks for playing! </h2>
+          <h3> Your score was {this.state.score} </h3>
         </div>
-    )
-  }
-}
+      }
+      {this.state.allScores.length > 0 &&
+        this.state.allScores.map(function(score, index) {
+        return(
+          <div key={index}>
+            <h4> {score.teamName}: {score.score} </h4>
+          </div>
+          )
+        })
+      }
+      </ToggleDisplay>
+      </div>
+    );
+  };
+};
 
 export default Quiz;
