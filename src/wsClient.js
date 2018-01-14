@@ -9,16 +9,16 @@ class WsClient {
   };
 
   // incoming messages
-  
+
   configure(timeout = 1000) {
     this._ws.onmessage = this.getRoute(this);
     this.startInterval(timeout);
   };
-  
+
   getRoute(self) {
     return function route(event, json_obj = JSON) {
       let data = json_obj.parse(event.data);
-      console.log(data);
+      // console.log(data);
       switch(data.type) {
         case 'question':
           self.updateQuestion(parseInt(data.question));
@@ -27,7 +27,7 @@ class WsClient {
           self.sendScore(self.getName(), self.getScore());
           break;
         case 'scores':
-          console.log(data.scores);
+          // console.log(data.scores);
           self.updateScores(data.scores);
           break;
       };
@@ -98,7 +98,7 @@ class WsClient {
   };
 
   // intervals
-  
+
   startInterval(timeout, func = setInterval) {
     let sendMessage = this.getSendMessage(this);
     this._intervalId = func(sendMessage, timeout);
@@ -117,7 +117,7 @@ function newWsClient(component, ws, constructor = WsClient) {
   return new constructor(component, ws);
 };
 
-function buildWsClient(component, url, constructor = newWsClient, 
+function buildWsClient(component, url, constructor = newWsClient,
                        ws_constructor = newWs) {
   let ws = ws_constructor(url);
   let client = constructor(component, ws);
