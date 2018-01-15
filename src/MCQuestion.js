@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Question.css'
 
-class Question extends Component {
+class MCQuestion extends Component {
   constructor(props){
     super(props);
   };
@@ -23,4 +23,4 @@ class Question extends Component {
   };
 };
 
-export default Question;
+export default MCQuestion;
