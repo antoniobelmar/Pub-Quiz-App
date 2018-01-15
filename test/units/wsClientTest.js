@@ -1,7 +1,7 @@
 
 const expect = require('chai').expect;
 const sinon = require('sinon');
-const clientModule = require('../../src/wsClient.js');
+const clientModule = require('../../src/lib/wsClient.js');
 
 describe('WsClient', function() {
   let client, component, ws, json_obj, json;
@@ -17,14 +17,14 @@ describe('WsClient', function() {
       isFinished: sinon.stub().returns('true'),
     };
     json_obj = { stringify: sinon.stub().returns('json') };
-    client = new clientModule.WsClient(component, ws);
+    client = new clientModule.WsClient(component, ws, 5000);
   });
 
   describe('#configure', function() {
     beforeEach(function() {
       sinon.spy(client, 'startInterval');
       sinon.stub(client, 'getRoute').returns(0);
-      client.configure(5000)
+      client.configure();
     });
 
     it('sets onmessage to #route', function() {
@@ -157,7 +157,7 @@ describe('WsClient', function() {
 
   describe('#sendQuestionId', function() {
     beforeEach(function() {
-      json = { type: "question", question: 5 };
+      json = { type: "question", question: 5, time: 5000 };
       client.sendQuestionId(5, json_obj);
     });
 
