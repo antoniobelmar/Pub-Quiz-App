@@ -16,7 +16,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "mocha —-compilers js:babel-core/register —-colors ./src/**/*.spec.js",
+    "test": "mocha —-compilers js:babel-core/register —-colors ./test/**/*Test.js",
     "compile": "babel client/src -d client/lib",
     "test-react": "npm run compile && mocha --require babel-core/register 'client/test/**/*.js'",
     "eject": "react-scripts eject"
