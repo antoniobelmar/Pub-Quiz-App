@@ -30,12 +30,10 @@ class NewQuizQuestion extends Component {
             index={this.props.index}
           />
 
-        <ToggleDisplay show={this.props.question._show} >
           <AddOptionButton
             questionIndex={this.props.index}
             addOption={this.props.addOption}
           />
-        </ToggleDisplay>
         </div>
         <div>
           { this.props.question._options.map((option, index) => {

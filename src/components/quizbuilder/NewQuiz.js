@@ -24,13 +24,8 @@ class NewQuiz extends Component {
 
   handleChangeQuestionType = (index, event) => {
     var state = this.state
-    var optionsNumber = state.questions[index]._options.length
     state.questions[index]._type = event.target.value
-    if (state.questions[index]._type === 'text') {
-      state.questions[index]._show = false
-      state.questions[index]._options.splice(1, optionsNumber - 1)
-      state.questions[index]._options[0]._text = ""
-    }else if (state.questions[index]._type === 'MultipleChoice') {
+    if (state.questions[index]._type === 'MultipleChoice') {
       state.questions[index]._show = true;
     }
     this.setState(state)
