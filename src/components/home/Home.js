@@ -14,7 +14,7 @@ class Home extends Component {
       .then(function(response) {
         let array = [];
         response.data.forEach(function(quiz, key) {
-          array.push(<li key={key}><a href={'/quiz/' + quiz._id}>{quiz.name}</a></li>);
+          array.push({key: key, id: quiz._id, name: quiz.name});
         })
         self.setState({ quizLinks: array })
       })
@@ -28,7 +28,6 @@ class Home extends Component {
       <div>
         <h1>Home page</h1>
         <a href="/quiz/new"><button>Create a quiz!</button></a>
-        <div>{this.state.quizLinks}</div>
       </div>
     )
   }

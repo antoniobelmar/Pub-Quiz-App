@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Home from './Home';
+import Home from './components/home/Home';
 import Quiz from './Quiz';
 import NewQuiz from './components/quizbuilder/NewQuiz';
 
