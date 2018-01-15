@@ -73,7 +73,7 @@ class NewQuiz extends Component {
     const options = event.target.options
     for (var i = 0, l = options.length; i < l; i++) {
     if (options[i].selected) {
-      value.push(options[i].value);
+      value.push(options[i].value.toLowerCase());
     }
     state.questions[questionIndex]._answer[index].text = value
   }

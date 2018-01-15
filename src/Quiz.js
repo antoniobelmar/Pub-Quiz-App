@@ -70,7 +70,7 @@ class Quiz extends Component {
         };
       });
     } else {
-      if (this.state.questions[this.state.number].answer[0].text.includes(textArea.value)) {
+      if (this.state.questions[this.state.number].answer[0].text.includes(textArea.value.toLowerCase())) {
         self.state.score += 1;
       }
     }
