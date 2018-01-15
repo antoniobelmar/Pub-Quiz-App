@@ -71,7 +71,6 @@ class Quiz extends Component {
       });
     } else {
       if (this.state.questions[this.state.number].answer[0].text.includes(textArea.value)) {
-        console.log(textArea.value)
         self.state.score += 1;
       }
     }
