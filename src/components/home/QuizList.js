@@ -11,7 +11,7 @@ class QuizList extends Component {
                 <li>{quiz.name}</li>
               </a>
               <button
-                onClick={(event) => this.props.handleDeleteQuiz(quiz.id)}>
+                onClick={(event) => this.props.handleClickDeleteQuiz(quiz.id)}>
                 Delete Quiz
               </button>
             </div>

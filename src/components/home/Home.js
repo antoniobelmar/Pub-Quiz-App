@@ -24,6 +24,14 @@ class Home extends Component {
       })
   }
 
+  handleClickDeleteQuiz = (quizId) => {
+    // axios.delete(`http://pub-quiz-api.herokuapp.com/quiz/${quizId}`)
+    axios.delete(`http://localhost:5000/quiz/${quizId}`)
+      .then(function(response) {
+        console.log('delete request sent')
+      })
+    }
+
   render() {
     return(
       <div>
@@ -32,6 +40,7 @@ class Home extends Component {
         {this.state.quizzes.length > 0 &&
           <QuizList
             quizzes = {this.state.quizzes}
+            handleClickDeleteQuiz = {this.handleClickDeleteQuiz}
           />
         }
       </div>
