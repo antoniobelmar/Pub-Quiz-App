@@ -9,12 +9,12 @@ class Question extends Component {
   render(){
     return(
       <div>
-        <p className='questionText'>{this.props.question._text}</p>
-        {this.props.question._options.map(function(option, index){
+        <p className='questionText'>{this.props.question.text}</p>
+        {this.props.question.options.map(function(option, index){
           return(
             <div className='option' key={index}>
-              <input id={option._text} type='radio' name='options' value={option._text} />
-              <label htmlFor={option._text}>{option._text}</label>
+              <input id={option.text} type='radio' name='options' value={option.text} />
+              <label htmlFor={option.text}>{option.text}</label>
             </div>
           )
         })}
