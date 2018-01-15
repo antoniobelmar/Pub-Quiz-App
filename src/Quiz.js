@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Question from './Question';
+import TextQuestion from './textQuestion';
 import StartPage from './startPage';
 import ToggleDisplay from 'react-toggle-display';
 import client from './wsClient';
@@ -94,8 +95,12 @@ class Quiz extends Component {
 
       <ToggleDisplay show={this.state.show}>
       <h1>{this.state.name}</h1>
-      { this.state.questions.length > 0 && this.state.number < this.state.questions.length &&
-        <Question question={this.state.questions[this.state.number]} />
+
+      { this.state.questions.length > 0 && this.state.number < this.state.questions.length && this.state.questions[this.state.number].type === 'MultipleChoice' &&
+          <Question question={this.state.questions[this.state.number]} />
+      }
+      { this.state.questions.length > 0 && this.state.number < this.state.questions.length && this.state.questions[this.state.number].type === 'text' &&
+          <TextQuestion question={this.state.questions[this.state.number]} />
       }
       { this.state.number >= this.state.questions.length &&
         <div>
