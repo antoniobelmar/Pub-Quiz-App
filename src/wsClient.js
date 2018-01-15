@@ -10,7 +10,7 @@ class WsClient {
 
   // incoming messages
 
-  configure(timeout = 1000) {
+  configure(timeout = 5000) {
     this._ws.onmessage = this.getRoute(this);
     this.startInterval(timeout);
   };
