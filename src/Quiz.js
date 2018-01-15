@@ -63,11 +63,13 @@ class Quiz extends Component {
     let radios = document.getElementsByName('options');
     // console.log(this.state);
     let answer = this.state.questions[this.state.number].answer[0];
-    radios.forEach(function(option) {
-      if (option.checked === true && option.value === answer.text) {
-        self.state.score += 1;
-      };
-    });
+    if (this.state.questions[this.state.number].type === 'MultipleChoice'){
+      radios.forEach(function(option) {
+        if (option.checked === true && option.value === answer.text) {
+          self.state.score += 1;
+        };
+      });
+    };
     this.setState({ number: parseInt(id) });
   };
 
@@ -88,6 +90,7 @@ class Quiz extends Component {
   };
 
   render() {
+
     return(
       <div className='quiz'>
 
