@@ -9,8 +9,8 @@ class Home extends Component {
 
   componentDidMount() {
     let self = this;
-    // axios.get('http://pub-quiz-api.herokuapp.com/quiz')
-    axios.get('http://localhost:5000/quiz')
+    axios.get('http://pub-quiz-api.herokuapp.com/quiz')
+    // axios.get('http://localhost:5000/quiz')
       .then(function(response) {
         let array = [];
         response.data.forEach(function(quiz, key) {
