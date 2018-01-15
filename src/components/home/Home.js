@@ -17,7 +17,7 @@ class Home extends Component {
         response.data.forEach(function(quiz, key) {
           state.quizzes.push({id: quiz._id, name: quiz.name});
         })
-        self.setState({state})
+        self.setState(state)
       })
       .catch(function(error) {
         console.log(error);
@@ -25,10 +25,19 @@ class Home extends Component {
   }
 
   handleClickDeleteQuiz = (quizId) => {
-    // axios.delete(`http://pub-quiz-api.herokuapp.com/quiz/${quizId}`)
-    axios.delete(`http://localhost:5000/quiz/${quizId}`)
+    let self = this
+    axios.delete(`http://pub-quiz-api.herokuapp.com/quiz/${quizId}`)
+    // axios.delete(`http://localhost:5000/quiz/${quizId}`)
       .then(function(response) {
         console.log('delete request sent')
+        let state = self.state
+        for(var i = 0; i < state.quizzes.length; i++) {
+          if(state.quizzes[i].id == quizId) {
+              state.quizzes.splice(i, 1);
+              break;
+          }
+        }
+        self.setState(state)
       })
     }
 
