@@ -3,39 +3,38 @@
 const URL = 'ws://localhost:5000';
 
 class WsClient {
-  constructor(component, ws) {
+  constructor(component, ws, timeout = 10000) {
     this._component = component;
     this._ws = ws;
+    this._timeout = timeout;
   };
 
   // incoming messages
 
-  configure(timeout = 1000) {
+  configure() {
     this._ws.onmessage = this.getRoute(this);
-    this.startInterval(timeout);
+    this.startInterval(this._timeout);
   };
 
   getRoute(self) {
     return function route(event, json_obj = JSON) {
       let data = json_obj.parse(event.data);
-      // console.log(data);
       switch(data.type) {
         case 'question':
-          self.updateQuestion(parseInt(data.question));
+          self.updateQuestion(parseInt(data.question), parseInt(data.time));
           break;
         case 'endQuiz':
           self.sendScore(self.getName(), self.getScore());
           break;
         case 'scores':
-          // console.log(data.scores);
           self.updateScores(data.scores);
           break;
       };
     };
   };
 
-  updateQuestion(questionId) {
-    this._component.updateQuestion(questionId);
+  updateQuestion(questionId, time) {
+    this._component.updateQuestion(questionId, time);
   };
 
   updateScores(scores) {
@@ -76,7 +75,11 @@ class WsClient {
   };
 
   _questionIdMessage(id, json_obj) {
-    return json_obj.stringify({ type: "question", question: id });
+    return json_obj.stringify({ 
+      type: "question", 
+      question: id, 
+      time: this._timeout
+    });
   };
 
   sendQuizEnd(json_obj = JSON) {
