@@ -11,7 +11,7 @@ class TextQuestion extends Component {
       <div>
         <p className='questionText'>{this.props.question.text}</p>
             <div>
-              <input type='text' placeholder='Your answer'/>
+              <input id='textAnswer' type='text' placeholder='Your answer'/>
             </div>
       </div>
     );
