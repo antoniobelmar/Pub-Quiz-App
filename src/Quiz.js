@@ -66,6 +66,7 @@ class Quiz extends Component {
       if (option.checked === true && option.value === answer.text) {
         self.state.score += 1;
       };
+      option.checked = false
     });
     this.setState({ number: parseInt(id) });
   };
