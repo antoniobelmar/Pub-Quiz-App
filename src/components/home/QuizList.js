@@ -6,9 +6,15 @@ class QuizList extends Component {
       <div>
         {this.props.quizzes.map((quiz, index) => {
           return(
-            <a key={index} href={'/quiz/' + quiz.id}>
-              <li>{quiz.name}</li>
-            </a>
+            <div key={index}>
+              <a href={'/quiz/' + quiz.id}>
+                <li>{quiz.name}</li>
+              </a>
+              <button
+                onClick={(event) => this.props.handleDeleteQuiz(quiz.id)}>
+                Delete Quiz
+              </button>
+            </div>
           )
         })}
       </div>
