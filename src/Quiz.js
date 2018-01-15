@@ -61,7 +61,7 @@ class Quiz extends Component {
   updateQuestion(id) {
     let self = this;
     let radios = document.getElementsByName('options');
-    // console.log(this.state);
+    let textArea = document.getElementById('textAnswer')
     let answer = this.state.questions[this.state.number].answer[0];
     if (this.state.questions[this.state.number].type === 'MultipleChoice'){
       radios.forEach(function(option) {
@@ -69,7 +69,12 @@ class Quiz extends Component {
           self.state.score += 1;
         };
       });
-    };
+    } else {
+      if (this.state.questions[this.state.number].answer[0].text.includes(textArea.value)) {
+        console.log(textArea.value)
+        self.state.score += 1;
+      }
+    }
     this.setState({ number: parseInt(id) });
   };
 
