@@ -68,8 +68,19 @@ class NewQuiz extends Component {
   }
 
   handleChangeAnswer = (questionIndex, index, event) => {
+    const value = []
     var state = this.state
+    if (state.questions[questionIndex]._type === 'MultipleChoice'){
     state.questions[questionIndex]._answer[index].text = event.target.value
+  } else if (state.questions[questionIndex]._type === 'text'){
+    const options = event.target.options
+    for (var i = 0, l = options.length; i < l; i++) {
+    if (options[i].selected) {
+      value.push(options[i].value);
+    }
+    state.questions[questionIndex]._answer[index].text = value
+  }
+  }
     this.setState(state)
   }
 
