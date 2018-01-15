@@ -4,6 +4,7 @@ function Question(option = new Option()) {
   this._placeholder = "Add your question";
   this._type = '';
   this._text =  '';
+  this._show = true;
   this._options = [option];
   this._answer= [{text: ''}];
 }
