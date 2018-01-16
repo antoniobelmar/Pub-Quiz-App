@@ -1,7 +1,7 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import Home from './components/home/Home';
-import Quiz from './Quiz';
+import Quiz from './components/quiz/Quiz';
 import NewQuiz from './components/quizbuilder/NewQuiz';
 
 const Routes = () => (
