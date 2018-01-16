@@ -3,7 +3,7 @@
 const URL = 'ws://localhost:5000';
 
 class WsClient {
-  constructor(component, ws, timeout = 10000) {
+  constructor(component, ws, timeout = 7000) {
     this._component = component;
     this._ws = ws;
     this._timeout = timeout;
@@ -13,13 +13,31 @@ class WsClient {
 
   configure() {
     this._ws.onmessage = this.getRoute(this);
-    this.startInterval(this._timeout);
   };
+
+  sendLeader() {
+    let self = this
+    this._ws.onopen = function(){
+      self._ws.send(JSON.stringify({ type: "here comes the leader"}));
+      console.log('Leader sent');
+    };
+  };
+
+  start() {
+    this.sendQuizStart();
+    console.log("start message sent")
+    this.startInterval(this._timeout);
+  }
 
   getRoute(self) {
     return function route(event, json_obj = JSON) {
       let data = json_obj.parse(event.data);
       switch(data.type) {
+        case 'Leader':
+          self.showLeaderMessage()
+        case 'startQuiz':
+          self.updateDisable()
+          break;
         case 'question':
           self.updateQuestion(parseInt(data.question), parseInt(data.time));
           break;
@@ -58,6 +76,13 @@ class WsClient {
     return this._component.getName();
   };
 
+  showLeaderMessage() {
+    return this._component.showLeaderMessage();
+  }
+
+  updateDisable() {
+    return this._component.updateDisable();
+  }
   getScore() {
     return this._component.getScore();
   };
@@ -75,11 +100,27 @@ class WsClient {
   };
 
   _questionIdMessage(id, json_obj) {
-    return json_obj.stringify({ 
-      type: "question", 
-      question: id, 
+    return json_obj.stringify({
+      type: "question",
+      question: id,
       time: this._timeout
     });
+  };
+
+  sendQuizLeader(json_obj = JSON) {
+    this._ws.send(this._quizLeaderMessage(json_obj))
+  };
+
+  _quizLeaderMessage(json_obj) {
+    return json_obj.stringify({ type: "Here comes the leader"})
+  }
+
+  sendQuizStart(json_obj = JSON) {
+    this._ws.send(this._quizStartMessage(json_obj))
+  };
+
+  _quizStartMessage(json_obj) {
+    return json_obj.stringify({ type: "startQuiz"})
   };
 
   sendQuizEnd(json_obj = JSON) {
@@ -125,6 +166,7 @@ function buildWsClient(component, url, constructor = newWsClient,
   let ws = ws_constructor(url);
   let client = constructor(component, ws);
   client.configure();
+  client.sendLeader();
   return client;
 };
 

@@ -12,11 +12,13 @@ class Quiz extends Component {
     super(props);
     this.state = {
       name: 'Loading',
+      leader: false,
       questions: [],
       questionsRecieved: false,
       number: 0,
       score: 0,
       show: false,
+      disabledButton: true,
       allScores: [],
       teamName: "",
       time: 10000
@@ -31,13 +33,14 @@ class Quiz extends Component {
     let quizId = this.props.match.params.quizId;
     let self = this;
 
-    axios.get(`http://pub-quiz-api.herokuapp.com/quiz/${quizId}`)
-    // axios.get(`http://localhost:5000/quiz/${quizId}`)
+    // axios.get(`http://pub-quiz-api.herokuapp.com/quiz/${quizId}`)
+    axios.get(`http://localhost:5000/quiz/${quizId}`)
       .then(function (response) {
         self.setState({
           name: response.data.name,
           questions: response.data.questions,
-          questionsRecieved: true
+          questionsRecieved: true,
+          client: client.buildWsClient(self, 'ws://localhost:5000/ws/1')
         });
       })
       .catch(function (error) {
@@ -49,13 +52,23 @@ class Quiz extends Component {
     this.setState({
       show: true,
       teamName: document.getElementById('team-name').value,
-      client: client.buildWsClient(this, 'ws://pub-quiz-api.herokuapp.com/')
-      // client: client.buildWsClient(this, 'ws://localhost:5000')
+      // client: client.buildWsClient(this, 'ws://pub-quiz-api.herokuapp.com/')
+      // client: client.buildWsClient(this, 'ws://localhost:5000/ws/1')
     });
+    this.state.client.start();
+
   };
+
+  showLeaderMessage() {
+    this.setState( { leader: true} );
+  }
 
   updateScores(scores) {
     this.setState({ allScores: scores });
+  };
+
+  updateDisable(){
+    this.setState({ disabledButton: false })
   };
 
   updateQuestion(id, time) {
@@ -101,7 +114,10 @@ class Quiz extends Component {
     return (
       <div className='quiz'>
 
-      <StartPage show={this.state.show} hideFunction={ () => this.hideButtonShowQuiz() }/>
+      <ToggleDisplay show={this.state.leader}>
+      <h1> You are the leader </h1>
+      </ToggleDisplay>
+      <StartPage disabled={this.state.disabledButton} show={this.state.show} hideFunction={ () => this.hideButtonShowQuiz() }/>
 
       <ToggleDisplay show={this.state.show}>
       <h1>{this.state.name}</h1>
