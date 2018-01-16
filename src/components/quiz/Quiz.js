@@ -61,7 +61,7 @@ class Quiz extends Component {
 
   connect(id) {
     var state = this.state
-    state.client = client.buildWsClient(this, `ws://${URL}/play/${id}`)
+    state.client = client.buildWsClient(this, `ws://${URL}/play/${id}`, id)
     state.wsId = id
     this.setState(state)
   }

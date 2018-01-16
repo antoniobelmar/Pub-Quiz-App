@@ -3,10 +3,11 @@
 const URL = 'ws://localhost:5000';
 
 class WsClient {
-  constructor(component, ws, timeout = 10000) {
+  constructor(component, ws, wsId, timeout = 10000) {
     this._component = component;
     this._ws = ws;
     this._timeout = timeout;
+    this._wsId = wsId
   };
 
   // incoming messages
@@ -109,7 +110,7 @@ class WsClient {
   };
 
   _killMessage(json_obj) {
-    return json_obj.stringify({ type: "kill" });
+    return json_obj.stringify({ type: "kill", wsId: this._wsId});
   };
 
   // intervals
@@ -128,14 +129,14 @@ function newWs(url, constructor = WebSocket) {
   return new constructor(url);
 };
 
-function newWsClient(component, ws, constructor = WsClient) {
-  return new constructor(component, ws);
+function newWsClient(component, ws, id, constructor = WsClient) {
+  return new constructor(component, ws, id);
 };
 
-function buildWsClient(component, url, constructor = newWsClient,
+function buildWsClient(component, url, id, constructor = newWsClient,
                        ws_constructor = newWs) {
   let ws = ws_constructor(url);
-  let client = constructor(component, ws);
+  let client = constructor(component, ws, id);
   client.configure();
   return client;
 };
