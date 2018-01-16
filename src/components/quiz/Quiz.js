@@ -33,6 +33,8 @@ class Quiz extends Component {
   componentDidMount(){
     let quizId = this.props.match.params.quizId;
     let self = this;
+    var wsId = new URLSearchParams(window.location.search).get('id')
+
     axios.get(`http://${URL}/quiz/${quizId}`)
       .then(function (response) {
         self.setState({
@@ -45,13 +47,21 @@ class Quiz extends Component {
         console.log(error);
       });
 
-    axios.get(`http://${URL}/play`)
+    if(wsId) {
+      self.connect(wsId)
+    } else {
+      axios.get(`http://${URL}/play`)
       .then(function (response) {
-        var state = self.state
-        state.client = client.buildWsClient(self, `ws://${URL}/play/${response.data.id}`)
-        self.setState(state)
+        self.connect(response.data.id)
       })
+    }
   };
+
+  connect(id) {
+    var state = this.state
+    state.client = client.buildWsClient(this, `ws://${URL}/play/${id}`)
+    this.setState(state)
+  }
 
   hideButtonShowQuiz() {
     this.setState({
