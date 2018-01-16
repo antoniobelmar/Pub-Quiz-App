@@ -32,8 +32,10 @@ class WsClient {
   getRoute(self) {
     return function route(event, json_obj = JSON) {
       let data = json_obj.parse(event.data);
-      console.log(data)
       switch(data.type) {
+        case 'Leader':
+          self.updateDisable();
+          break;
         case 'startQuiz':
           break;
         case 'question':
@@ -74,6 +76,9 @@ class WsClient {
     return this._component.getName();
   };
 
+  updateDisable() {
+    return this._component.updateDisable();
+  }
   getScore() {
     return this._component.getScore();
   };
