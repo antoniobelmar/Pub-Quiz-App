@@ -7,6 +7,9 @@ import client from '../../lib/wsClient';
 import axios from 'axios';
 import './Quiz.css'
 
+const URL = 'localhost:5000'
+// const URL = 'pub-quiz-api.herokuapp.com'
+
 class Quiz extends Component {
   constructor(props){
     super(props);
@@ -30,9 +33,7 @@ class Quiz extends Component {
   componentDidMount(){
     let quizId = this.props.match.params.quizId;
     let self = this;
-
-    axios.get(`http://pub-quiz-api.herokuapp.com/quiz/${quizId}`)
-    // axios.get(`http://localhost:5000/quiz/${quizId}`)
+    axios.get(`http://${URL}/quiz/${quizId}`)
       .then(function (response) {
         self.setState({
           name: response.data.name,
@@ -43,15 +44,21 @@ class Quiz extends Component {
       .catch(function (error) {
         console.log(error);
       });
+
+    axios.get(`http://${URL}/play`)
+      .then(function (response) {
+        var state = self.state
+        state.client = client.buildWsClient(self, `ws://${URL}/play/${response.data.id}`)
+        self.setState(state)
+      })
   };
 
   hideButtonShowQuiz() {
     this.setState({
       show: true,
-      teamName: document.getElementById('team-name').value,
-      client: client.buildWsClient(this, 'ws://pub-quiz-api.herokuapp.com/')
-      // client: client.buildWsClient(this, 'ws://localhost:5000')
+      teamName: document.getElementById('team-name').value
     });
+    this.state.client.start();
   };
 
   updateScores(scores) {
