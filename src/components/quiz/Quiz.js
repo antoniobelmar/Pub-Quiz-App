@@ -101,7 +101,7 @@ class Quiz extends Component {
     return (
       <div className='quiz'>
 
-      <StartPage show={this.state.show} hideFunction={ () => this.hideButtonShowQuiz() }/>
+      <StartPage disabled={true} show={this.state.show} hideFunction={ () => this.hideButtonShowQuiz() }/>
 
       <ToggleDisplay show={this.state.show}>
       <h1>{this.state.name}</h1>
