@@ -31,8 +31,8 @@ class Quiz extends Component {
     let quizId = this.props.match.params.quizId;
     let self = this;
 
-    // axios.get(`http://pub-quiz-api.herokuapp.com/quiz/${quizId}`)
-    axios.get(`http://localhost:5000/quiz/${quizId}`)
+    axios.get(`http://pub-quiz-api.herokuapp.com/quiz/${quizId}`)
+    // axios.get(`http://localhost:5000/quiz/${quizId}`)
       .then(function (response) {
         self.setState({
           name: response.data.name,
@@ -49,8 +49,8 @@ class Quiz extends Component {
     this.setState({
       show: true,
       teamName: document.getElementById('team-name').value,
-      // client: client.buildWsClient(this, 'ws://pub-quiz-api.herokuapp.com/')
-      client: client.buildWsClient(this, 'ws://localhost:5000')
+      client: client.buildWsClient(this, 'ws://pub-quiz-api.herokuapp.com/')
+      // client: client.buildWsClient(this, 'ws://localhost:5000')
     });
   };
 
@@ -69,11 +69,12 @@ class Quiz extends Component {
           self.state.score += 1;
         };
       });
+      option.checked = false
     } else {
       if (this.state.questions[this.state.number].answer[0].text.includes(textArea.value.toLowerCase())) {
         self.state.score += 1;
-      }
-    }
+      };
+    };
     this.setState({ number: parseInt(id) });
   };
 
