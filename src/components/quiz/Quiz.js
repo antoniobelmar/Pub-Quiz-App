@@ -72,7 +72,8 @@ class Quiz extends Component {
   hideButtonShowQuiz() {
     this.setState({
       show: true,
-      teamName: document.getElementById('team-name').value
+      teamName: document.getElementById('team-name').value,
+      leader: false
     });
     this.state.client.start();
   };
@@ -125,6 +126,10 @@ class Quiz extends Component {
     return this.state.score;
   };
 
+  changeTimeout(event) {
+    this.state.client.changeTimeout(event.target.value);
+  }
+
   render() {
     let number = this.state.number;
     let question = this.state.questions[number];
@@ -135,11 +140,12 @@ class Quiz extends Component {
 
           <ToggleDisplay show={this.state.leader}>
             <h1> You are the leader </h1>
+            <input type="text" onChange={(event) => this.changeTimeout(event)} />
           </ToggleDisplay>
-      
-          <StartPage 
-            disabled={this.state.disabledButton} 
-            show={this.state.show} 
+
+          <StartPage
+            disabled={this.state.disabledButton}
+            show={this.state.show}
             hideFunction={ () => this.hideButtonShowQuiz() }
           />
 
