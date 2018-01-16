@@ -13,8 +13,11 @@ class WsClient {
 
   configure() {
     this._ws.onmessage = this.getRoute(this);
-    this.startInterval(this._timeout);
   };
+
+  start() {
+    this.startInterval(this._timeout);
+  }
 
   getRoute(self) {
     return function route(event, json_obj = JSON) {
@@ -75,9 +78,9 @@ class WsClient {
   };
 
   _questionIdMessage(id, json_obj) {
-    return json_obj.stringify({ 
-      type: "question", 
-      question: id, 
+    return json_obj.stringify({
+      type: "question",
+      question: id,
       time: this._timeout
     });
   };
