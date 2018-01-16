@@ -3,7 +3,7 @@ import MCQuestion from './MCQuestion';
 import TextQuestion from './textQuestion';
 import StartPage from './startPage';
 import ToggleDisplay from 'react-toggle-display';
-import client from './wsClient';
+import client from '../../lib/wsClient';
 import axios from 'axios';
 import './Quiz.css'
 
@@ -17,9 +17,9 @@ class Quiz extends Component {
       number: 0,
       score: 0,
       show: false,
-      time: 3000,
       allScores: [],
       teamName: "",
+      time: 10000
     }
     this.isFinished = this.isFinished.bind(this);
     this.getName = this.getName.bind(this);
@@ -58,7 +58,7 @@ class Quiz extends Component {
     this.setState({ allScores: scores });
   };
 
-  updateQuestion(id) {
+  updateQuestion(id, time) {
     let self = this;
     let radios = document.getElementsByName('options');
     let textArea = document.getElementById('textAnswer')
@@ -75,7 +75,7 @@ class Quiz extends Component {
         self.state.score += 1;
       };
     };
-    this.setState({ number: parseInt(id) });
+    this.setState({ number: parseInt(id), time: time });
   };
 
   isFinished() {
@@ -95,20 +95,21 @@ class Quiz extends Component {
   };
 
   render() {
-
-    return(
+    let number = this.state.number;
+    let question = this.state.questions[number];
+    let time = this.state.time;
+    return (
       <div className='quiz'>
 
       <StartPage show={this.state.show} hideFunction={ () => this.hideButtonShowQuiz() }/>
 
       <ToggleDisplay show={this.state.show}>
       <h1>{this.state.name}</h1>
-
       { this.state.questions.length > 0 && this.state.number < this.state.questions.length && this.state.questions[this.state.number].type === 'MultipleChoice' &&
-          <MCQuestion question={this.state.questions[this.state.number]} />
+          <MCQuestion question={this.state.questions[this.state.number] time={time} />
       }
       { this.state.questions.length > 0 && this.state.number < this.state.questions.length && this.state.questions[this.state.number].type === 'text' &&
-          <TextQuestion question={this.state.questions[this.state.number]} />
+          <TextQuestion question={this.state.questions[this.state.number]} time={time} />
       }
       { this.state.number >= this.state.questions.length &&
         <div>
