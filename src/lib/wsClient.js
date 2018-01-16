@@ -31,6 +31,7 @@ class WsClient {
           break;
         case 'scores':
           self.updateScores(data.scores);
+          self.sendKill();
           break;
       };
     };
@@ -101,6 +102,14 @@ class WsClient {
     return json_obj.stringify(
       { type: "score", teamName: teamName, score: score }
     );
+  };
+
+  sendKill(json_obj = JSON) {
+    this._ws.send(this._killMessage(json_obj));
+  };
+
+  _killMessage(json_obj) {
+    return json_obj.stringify({ type: "kill" });
   };
 
   // intervals
