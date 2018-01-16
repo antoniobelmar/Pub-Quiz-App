@@ -19,7 +19,9 @@ class StartPage extends Component {
             id='team-name'/>
           <button
             id='startQuizButton'
-            type="button" onClick={this.props.hideFunction} >Start QUIZ!
+            type="button" onClick={this.props.hideFunction}
+            disabled={this.props.disabled}>
+            Start QUIZ!
           </button>
         </div>
       </ToggleDisplay>

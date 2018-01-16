@@ -16,11 +16,13 @@ class Quiz extends Component {
     super(props);
     this.state = {
       name: 'Loading',
+      leader: false,
       questions: [],
       questionsRecieved: false,
       number: 0,
       score: 0,
       show: false,
+      disabledButton: true,
       allScores: [],
       teamName: "",
       time: 10000,
@@ -42,7 +44,8 @@ class Quiz extends Component {
         self.setState({
           name: response.data.name,
           questions: response.data.questions,
-          questionsRecieved: true
+          questionsRecieved: true,
+          client: client.buildWsClient(self, 'ws://localhost:5000/ws/1')
         });
       })
       .catch(function (error) {
@@ -74,8 +77,16 @@ class Quiz extends Component {
     this.state.client.start();
   };
 
+  showLeaderMessage() {
+    this.setState( { leader: true} );
+  }
+
   updateScores(scores) {
     this.setState({ allScores: scores });
+  };
+
+  updateDisable(){
+    this.setState({ disabledButton: false })
   };
 
   updateQuestion(id, time) {
@@ -122,8 +133,13 @@ class Quiz extends Component {
       <div>
         <div className='quiz'>
 
-          <StartPage
-            show={this.state.show}
+          <ToggleDisplay show={this.state.leader}>
+            <h1> You are the leader </h1>
+          </ToggleDisplay>
+      
+          <StartPage 
+            disabled={this.state.disabledButton} 
+            show={this.state.show} 
             hideFunction={ () => this.hideButtonShowQuiz() }
           />
 
@@ -157,9 +173,8 @@ class Quiz extends Component {
             })
           }
           </ToggleDisplay>
-
-        </div>
-        <div className='shareable-link'>
+       </div>
+       <div className='shareable-link'>
           <ShareableLink
             wsId={this.state.wsId}
           />
