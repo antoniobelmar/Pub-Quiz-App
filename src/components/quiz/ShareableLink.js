@@ -1,4 +1,19 @@
 import React, { Component } from 'react';
+import Button from '../quizbuilder/Button'
+
+function copyLink() {
+  if(document.selection) {
+    var range = document.body.createTextRange();
+    range.moveToElementText(document.getElementById('shareable-link'));
+    range.select().createTextRange();
+    document.execCommand("copy")
+  } else if (window.getSelection) {
+    var range = document.createRange();
+    range.selectNode(document.getElementById('shareable-link'));
+    window.getSelection().addRange(range);
+    document.execCommand("copy");
+  }
+}
 
 class ShareableLink extends Component {
 
@@ -22,7 +37,17 @@ class ShareableLink extends Component {
     let URL = this.getURL()
     if(URL){
       return(
-        <p> Your shareable URL is {URL} </p>
+        <div style={localStyles.linkRow}>
+          <div>Your shareable URL is
+            <p id='shareable-link'>
+              {URL}
+            </p>
+        </div>
+        <Button
+          text='Copy Link'
+          callback={copyLink}
+        />
+        </div>
       )
     } else {
       return (
@@ -31,5 +56,14 @@ class ShareableLink extends Component {
     }
   }
 }
+
+const localStyles = {
+  linkRow: {
+    display: 'flex',
+    flexDirection: 'row',
+    padding: '5px',
+  },
+}
+
 
 export default ShareableLink
