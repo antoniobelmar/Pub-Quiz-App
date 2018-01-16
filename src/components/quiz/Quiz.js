@@ -17,6 +17,7 @@ class Quiz extends Component {
       number: 0,
       score: 0,
       show: false,
+      disabledButton: true,
       allScores: [],
       teamName: "",
       time: 10000
@@ -37,7 +38,8 @@ class Quiz extends Component {
         self.setState({
           name: response.data.name,
           questions: response.data.questions,
-          questionsRecieved: true
+          questionsRecieved: true,
+          disabledButton: false
         });
       })
       .catch(function (error) {
@@ -101,7 +103,7 @@ class Quiz extends Component {
     return (
       <div className='quiz'>
 
-      <StartPage disabled={true} show={this.state.show} hideFunction={ () => this.hideButtonShowQuiz() }/>
+      <StartPage disabled={this.state.disabledButton} show={this.state.show} hideFunction={ () => this.hideButtonShowQuiz() }/>
 
       <ToggleDisplay show={this.state.show}>
       <h1>{this.state.name}</h1>
