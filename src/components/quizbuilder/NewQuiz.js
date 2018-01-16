@@ -5,6 +5,7 @@ import AddQuestionButton from './AddQuestionButton';
 import Question from '../../lib/Question';
 import Button from './Button'
 import axios from 'axios';
+import { Redirect } from 'react-router';
 
 class NewQuiz extends Component {
   constructor(props) {
@@ -13,6 +14,7 @@ class NewQuiz extends Component {
       name: '',
       placeholder: "Type your quiz name",
       questions: [new Question()],
+      redirect: false
     }
   }
 
@@ -65,14 +67,25 @@ class NewQuiz extends Component {
   }
 
   handleChangeAnswer = (questionIndex, index, event) => {
+    const value = []
     var state = this.state
+    if (state.questions[questionIndex]._type === 'MultipleChoice'){
     state.questions[questionIndex]._answer[index].text = event.target.value
+  } else if (state.questions[questionIndex]._type === 'text'){
+    const options = event.target.options
+    for (var i = 0, l = options.length; i < l; i++) {
+    if (options[i].selected) {
+      value.push(options[i].value.toLowerCase());
+    }
+    state.questions[questionIndex]._answer[index].text = value
+  }
+  }
     this.setState(state)
   }
 
   submitQuiz = () => {
-    // axios.post('https://pub-quiz-api.herokuapp.com/quiz'), {
-    axios.post('http://localhost:5000/quiz', {
+    axios.post('https://pub-quiz-api.herokuapp.com/quiz', {
+    // axios.post('http://localhost:5000/quiz', {
       name: this.state.name,
       questions: this.state.questions
     },
@@ -81,11 +94,17 @@ class NewQuiz extends Component {
     })
     .then(() => {
       console.log('post request sent')
+      let state = this.state
+      state.redirect = true
+      this.setState(state)
     });
   };
 
   render() {
     {console.log(this.state)}
+    if (this.state.redirect) {
+      return <Redirect to='/' />;
+    }
     return(
       <div>
         <NewQuizName
@@ -113,14 +132,12 @@ class NewQuiz extends Component {
           )
         })}
         <div>
-          <a href="/">
-            <Button
-              text='Add Quiz'
-              callback={this.submitQuiz}
-              arg1=''
-              arg2=''
-            />
-          </a>
+          <Button
+            text='Add Quiz'
+            callback={this.submitQuiz}
+            arg1=''
+            arg2=''
+          />
         </div>
       </div>
     );
