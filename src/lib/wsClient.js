@@ -3,7 +3,7 @@
 const URL = 'ws://localhost:5000';
 
 class WsClient {
-  constructor(component, ws, timeout = 2500) {
+  constructor(component, ws, timeout = 7000) {
     this._component = component;
     this._ws = ws;
     this._timeout = timeout;
@@ -34,9 +34,9 @@ class WsClient {
       let data = json_obj.parse(event.data);
       switch(data.type) {
         case 'Leader':
-          self.updateDisable();
-          break;
+          self.showLeaderMessage()
         case 'startQuiz':
+          self.updateDisable()
           break;
         case 'question':
           self.updateQuestion(parseInt(data.question), parseInt(data.time));
@@ -75,6 +75,10 @@ class WsClient {
   getName() {
     return this._component.getName();
   };
+
+  showLeaderMessage() {
+    return this._component.showLeaderMessage();
+  }
 
   updateDisable() {
     return this._component.updateDisable();

@@ -12,6 +12,7 @@ class Quiz extends Component {
     super(props);
     this.state = {
       name: 'Loading',
+      leader: false,
       questions: [],
       questionsRecieved: false,
       number: 0,
@@ -55,7 +56,12 @@ class Quiz extends Component {
       // client: client.buildWsClient(this, 'ws://localhost:5000/ws/1')
     });
     this.state.client.start();
+
   };
+
+  showLeaderMessage() {
+    this.setState( { leader: true} );
+  }
 
   updateScores(scores) {
     this.setState({ allScores: scores });
@@ -108,6 +114,9 @@ class Quiz extends Component {
     return (
       <div className='quiz'>
 
+      <ToggleDisplay show={this.state.leader}>
+      <h1> You are the leader </h1>
+      </ToggleDisplay>
       <StartPage disabled={this.state.disabledButton} show={this.state.show} hideFunction={ () => this.hideButtonShowQuiz() }/>
 
       <ToggleDisplay show={this.state.show}>
