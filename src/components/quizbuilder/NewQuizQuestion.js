@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import NewQuizOption from './NewQuizOption';
 import AddOptionButton from './AddOptionButton'
 import RemoveQuestionButton from './RemoveQuestionButton'
+import ToggleDisplay from 'react-toggle-display';
 import NewQuizAnswer from './NewQuizAnswer'
 import NewQuizQuestionType from './NewQuizQuestionType'
 
@@ -28,6 +29,7 @@ class NewQuizQuestion extends Component {
             removeQuestion={this.props.removeQuestion}
             index={this.props.index}
           />
+
           <AddOptionButton
             questionIndex={this.props.index}
             addOption={this.props.addOption}
@@ -54,6 +56,7 @@ class NewQuizQuestion extends Component {
                 key={index}
                 index={index}
                 answer={answer}
+                question = {this.props.question}
                 options={this.props.question._options}
                 questionIndex={this.props.index}
                 handleChangeAnswer={this.props.handleChangeAnswer}

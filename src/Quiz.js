@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Question from './Question';
+import MCQuestion from './MCQuestion';
+import TextQuestion from './textQuestion';
 import StartPage from './startPage';
 import ToggleDisplay from 'react-toggle-display';
 import client from './wsClient';
@@ -60,14 +61,20 @@ class Quiz extends Component {
   updateQuestion(id) {
     let self = this;
     let radios = document.getElementsByName('options');
-    // console.log(this.state);
+    let textArea = document.getElementById('textAnswer')
     let answer = this.state.questions[this.state.number].answer[0];
-    radios.forEach(function(option) {
-      if (option.checked === true && option.value === answer.text) {
+    if (this.state.questions[this.state.number].type === 'MultipleChoice'){
+      radios.forEach(function(option) {
+        if (option.checked === true && option.value === answer.text) {
+          self.state.score += 1;
+        };
+      });
+      option.checked = false
+    } else {
+      if (this.state.questions[this.state.number].answer[0].text.includes(textArea.value.toLowerCase())) {
         self.state.score += 1;
       };
-      option.checked = false
-    });
+    };
     this.setState({ number: parseInt(id) });
   };
 
@@ -88,6 +95,7 @@ class Quiz extends Component {
   };
 
   render() {
+
     return(
       <div className='quiz'>
 
@@ -95,8 +103,12 @@ class Quiz extends Component {
 
       <ToggleDisplay show={this.state.show}>
       <h1>{this.state.name}</h1>
-      { this.state.questions.length > 0 && this.state.number < this.state.questions.length &&
-        <Question question={this.state.questions[this.state.number]} />
+
+      { this.state.questions.length > 0 && this.state.number < this.state.questions.length && this.state.questions[this.state.number].type === 'MultipleChoice' &&
+          <MCQuestion question={this.state.questions[this.state.number]} />
+      }
+      { this.state.questions.length > 0 && this.state.number < this.state.questions.length && this.state.questions[this.state.number].type === 'text' &&
+          <TextQuestion question={this.state.questions[this.state.number]} />
       }
       { this.state.number >= this.state.questions.length &&
         <div>
