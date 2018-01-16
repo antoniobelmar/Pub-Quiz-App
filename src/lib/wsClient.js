@@ -3,10 +3,11 @@
 const URL = 'ws://localhost:5000';
 
 class WsClient {
-  constructor(component, ws, timeout = 7000) {
+  constructor(component, ws, wsId, timeout = 10000) {
     this._component = component;
     this._ws = ws;
     this._timeout = timeout;
+    this._wsId = wsId
   };
 
   // incoming messages
@@ -15,19 +16,20 @@ class WsClient {
     this._ws.onmessage = this.getRoute(this);
   };
 
-  sendLeader() {
-    let self = this
-    this._ws.onopen = function(){
-      self._ws.send(JSON.stringify({ type: "here comes the leader"}));
-      console.log('Leader sent');
-    };
-  };
 
   start() {
     this.sendQuizStart();
     console.log("start message sent")
     this.startInterval(this._timeout);
   }
+    
+   sendLeader() {
+    let self = this
+    this._ws.onopen = function(){
+      self._ws.send(JSON.stringify({ type: "here comes the leader"}));
+      console.log('Leader sent');
+    };
+  };  
 
   getRoute(self) {
     return function route(event, json_obj = JSON) {
@@ -46,6 +48,7 @@ class WsClient {
           break;
         case 'scores':
           self.updateScores(data.scores);
+          self.sendKill();
           break;
       };
     };
@@ -141,6 +144,14 @@ class WsClient {
     );
   };
 
+  sendKill(json_obj = JSON) {
+    this._ws.send(this._killMessage(json_obj));
+  };
+
+  _killMessage(json_obj) {
+    return json_obj.stringify({ type: "kill", wsId: this._wsId});
+  };
+
   // intervals
 
   startInterval(timeout, func = setInterval) {
@@ -157,14 +168,14 @@ function newWs(url, constructor = WebSocket) {
   return new constructor(url);
 };
 
-function newWsClient(component, ws, constructor = WsClient) {
-  return new constructor(component, ws);
+function newWsClient(component, ws, id, constructor = WsClient) {
+  return new constructor(component, ws, id);
 };
 
-function buildWsClient(component, url, constructor = newWsClient,
+function buildWsClient(component, url, id, constructor = newWsClient,
                        ws_constructor = newWs) {
   let ws = ws_constructor(url);
-  let client = constructor(component, ws);
+  let client = constructor(component, ws, id);
   client.configure();
   client.sendLeader();
   return client;
