@@ -16,6 +16,8 @@ class WsClient {
   };
 
   start() {
+    this.sendQuizStart();
+    console.log("start message sent")
     this.startInterval(this._timeout);
   }
 
@@ -83,6 +85,14 @@ class WsClient {
       question: id,
       time: this._timeout
     });
+  };
+
+  sendQuizStart(json_obj = JSON) {
+    this._ws.send(this._quizStartMessage(json_obj))
+  };
+
+  _quizStartMessage(json_obj) {
+    return json_obj.stringify({ type: "startQuiz"})
   };
 
   sendQuizEnd(json_obj = JSON) {
