@@ -39,7 +39,6 @@ class Quiz extends Component {
           name: response.data.name,
           questions: response.data.questions,
           questionsRecieved: true,
-          disabledButton: false,
           client: client.buildWsClient(self, 'ws://localhost:5000/ws/1')
         });
       })
@@ -60,6 +59,10 @@ class Quiz extends Component {
 
   updateScores(scores) {
     this.setState({ allScores: scores });
+  };
+
+  updateDisable(){
+    this.setState({ disabledButton: false })
   };
 
   updateQuestion(id, time) {
