@@ -15,6 +15,14 @@ class WsClient {
     this._ws.onmessage = this.getRoute(this);
   };
 
+  sendLeader() {
+    let self = this
+    this._ws.onopen = function(){
+      self._ws.send(JSON.stringify({ type: "here comes the leader"}));
+      console.log('Leader sent');
+    };
+  };
+
   start() {
     this.sendQuizStart();
     console.log("start message sent")
@@ -24,7 +32,10 @@ class WsClient {
   getRoute(self) {
     return function route(event, json_obj = JSON) {
       let data = json_obj.parse(event.data);
+      console.log(data)
       switch(data.type) {
+        case 'startQuiz':
+          break;
         case 'question':
           self.updateQuestion(parseInt(data.question), parseInt(data.time));
           break;
@@ -87,6 +98,14 @@ class WsClient {
     });
   };
 
+  sendQuizLeader(json_obj = JSON) {
+    this._ws.send(this._quizLeaderMessage(json_obj))
+  };
+
+  _quizLeaderMessage(json_obj) {
+    return json_obj.stringify({ type: "Here comes the leader"})
+  }
+
   sendQuizStart(json_obj = JSON) {
     this._ws.send(this._quizStartMessage(json_obj))
   };
@@ -138,7 +157,7 @@ function buildWsClient(component, url, constructor = newWsClient,
   let ws = ws_constructor(url);
   let client = constructor(component, ws);
   client.configure();
-  // client.start();
+  client.sendLeader();
   return client;
 };
 
