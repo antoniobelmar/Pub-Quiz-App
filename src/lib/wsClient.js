@@ -10,6 +10,10 @@ class WsClient {
     this._wsId = wsId
   };
 
+  changeTimeout(time) {
+    this._timeout = time * 1000;
+  };
+
   // incoming messages
 
   configure() {
@@ -21,15 +25,15 @@ class WsClient {
     this.sendQuizStart();
     console.log("start message sent")
     this.startInterval(this._timeout);
-  }
-    
+  };
+
    sendLeader() {
     let self = this
     this._ws.onopen = function(){
       self._ws.send(JSON.stringify({ type: "here comes the leader"}));
       console.log('Leader sent');
     };
-  };  
+  };
 
   getRoute(self) {
     return function route(event, json_obj = JSON) {
@@ -86,6 +90,7 @@ class WsClient {
   updateDisable() {
     return this._component.updateDisable();
   }
+
   getScore() {
     return this._component.getScore();
   };
