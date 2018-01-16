@@ -68,8 +68,8 @@ class Quiz extends Component {
         if (option.checked === true && option.value === answer.text) {
           self.state.score += 1;
         };
+        option.checked = false
       });
-      option.checked = false
     } else {
       if (this.state.questions[this.state.number].answer[0].text.includes(textArea.value.toLowerCase())) {
         self.state.score += 1;
