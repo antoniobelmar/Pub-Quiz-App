@@ -28,10 +28,6 @@ class Quiz extends Component {
       time: 10000,
       wsId: null
     }
-    this.isFinished = this.isFinished.bind(this);
-    this.getName = this.getName.bind(this);
-    this.getScore = this.getScore.bind(this);
-    this.getQuestion = this.getQuestion.bind(this);
   };
 
   componentDidMount(){
@@ -87,7 +83,11 @@ class Quiz extends Component {
   };
 
   updateDisable(){
-    this.setState({ disabledButton: false })
+    this.setState({ disabledButton: false });
+  };
+
+  updateTimeout(time) {
+    this.setState({ time: time });
   };
 
   updateQuestion(id, time) {
@@ -126,8 +126,10 @@ class Quiz extends Component {
     return this.state.score;
   };
 
-  changeTimeout(event) {
-    this.state.client.changeTimeout(event.target.value);
+  changeTimeout(event, fallback = 10) {
+    let value = (event.target.value || fallback) * 1000;
+    this.setState({ time: value });
+    this.state.client.changeTimeout(value);
   }
 
   render() {
@@ -140,7 +142,7 @@ class Quiz extends Component {
       { !this.state.show && 
         <StartPage
           wsId={wsId}
-          timeoutCb={this.changeTimeout}
+          timeoutCb={this.changeTimeout.bind(this)}
           disabled={this.state.disabledButton}
           leader={this.state.leader}
           startQuiz={this.hideButtonShowQuiz.bind(this)}

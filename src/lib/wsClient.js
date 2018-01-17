@@ -11,7 +11,8 @@ class WsClient {
   };
 
   changeTimeout(time) {
-    this._timeout = time * 1000;
+    this._timeout = time;
+    this.updateTimeout(time);
   };
 
   // incoming messages
@@ -20,14 +21,12 @@ class WsClient {
     this._ws.onmessage = this.getRoute(this);
   };
 
-
   start() {
     this.sendQuizStart();
-    console.log("start message sent")
     this.startInterval(this._timeout);
   };
 
-   sendLeader() {
+  sendLeader() {
     let self = this
     this._ws.onopen = function(){
       self._ws.send(JSON.stringify({ type: "here comes the leader"}));
@@ -42,7 +41,8 @@ class WsClient {
         case 'Leader':
           self.showLeaderMessage()
         case 'startQuiz':
-          self.updateDisable()
+          self.changeTimeout(parseInt(data.time));
+          self.updateDisable();
           break;
         case 'question':
           self.updateQuestion(parseInt(data.question), parseInt(data.time));
@@ -64,6 +64,10 @@ class WsClient {
 
   updateScores(scores) {
     this._component.updateScores(scores);
+  };
+
+  updateTimeout(time) {
+    this._component.updateTimeout(time);
   };
 
   // outgoing messages
@@ -128,7 +132,7 @@ class WsClient {
   };
 
   _quizStartMessage(json_obj) {
-    return json_obj.stringify({ type: "startQuiz"})
+    return json_obj.stringify({ type: "startQuiz", time: this._timeout });
   };
 
   sendQuizEnd(json_obj = JSON) {
