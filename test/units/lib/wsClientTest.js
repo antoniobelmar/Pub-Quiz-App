@@ -1,14 +1,15 @@
 
 const expect = require('chai').expect;
 const sinon = require('sinon');
-const clientModule = require('../../src/lib/wsClient.js');
+const clientModule = require('../../../src/lib/wsClient.js');
 
 describe('WsClient', function() {
-  let client, component, ws, json_obj, json;
+  let client, component, ws, json_obj, json, wsId;
 
   beforeEach(function() {
     ws = { send: sinon.spy() };
-    component = { 
+    wsId = sinon.spy()
+    component = {
       updateQuestion: sinon.spy(),
       updateScores: sinon.spy(),
       getName: sinon.stub().returns('name'),
@@ -17,12 +18,11 @@ describe('WsClient', function() {
       isFinished: sinon.stub().returns('true'),
     };
     json_obj = { stringify: sinon.stub().returns('json') };
-    client = new clientModule.WsClient(component, ws, 5000);
+    client = new clientModule.WsClient(component, ws, wsId, 5000);
   });
 
   describe('#configure', function() {
     beforeEach(function() {
-      sinon.spy(client, 'startInterval');
       sinon.stub(client, 'getRoute').returns(0);
       client.configure();
     });
@@ -30,11 +30,24 @@ describe('WsClient', function() {
     it('sets onmessage to #route', function() {
       expect(ws.onmessage).to.equal(0);
     });
+  });
+
+  describe('#start', function() {
+    beforeEach(function() {
+      sinon.spy(client, 'startInterval');
+      sinon.spy(client, 'sendQuizStart');
+      client.start();
+    });
+
+    it('sends quiz start message', function() {
+      sinon.assert.called(client.sendQuizStart);
+    });
 
     it('starts interval', function() {
       sinon.assert.calledWith(client.startInterval, 5000);
     });
   });
+
 
   describe('#route', function() {
     let event, func, json_obj;
@@ -70,7 +83,7 @@ describe('WsClient', function() {
         sinon.assert.calledWith(client.sendScore, 'name', 'score');
       });
     });
-    
+
     describe('when receiving scores signal', function() {
       beforeEach(function() {
         event = { data: { type: 'scores', scores: 0 } };
@@ -161,16 +174,12 @@ describe('WsClient', function() {
       client.sendQuestionId(5, json_obj);
     });
 
-    it('stringifies message', function() {
-      sinon.assert.calledWith(json_obj.stringify, json);
-    });
-
     it('sends stringified json', function() {
       sinon.assert.calledWith(ws.send, 'json');
     });
   });
 
-  describe('#sendQuestionId', function() {
+  describe('#sendQuizEnd', function() {
     beforeEach(function() {
       json = { type: "endQuiz" };
       client.sendQuizEnd(json_obj);
@@ -234,14 +243,15 @@ describe('WsClient', function() {
 });
 
 describe('buildWsClient', function() {
-  let client, constructor, ws_constructor, output;
+  let client, constructor, ws_constructor, output, wsId;
 
   beforeEach(function() {
-    client = { configure: sinon.spy() };
+    wsId = sinon.spy()
+    client = { configure: sinon.spy(), sendLeader: sinon.spy() };
     constructor = sinon.stub().returns(client);
     ws_constructor = sinon.stub().returns('ws');
     output = clientModule.buildWsClient(
-      'component', 'url', constructor, ws_constructor
+      'component', 'url', wsId, constructor, ws_constructor
     );
   });
 

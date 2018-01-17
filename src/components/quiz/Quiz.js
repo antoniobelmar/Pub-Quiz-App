@@ -8,8 +8,8 @@ import client from '../../lib/wsClient';
 import axios from 'axios';
 import './Quiz.css'
 
-const URL = 'localhost:5000'
-// const URL = 'pub-quiz-api.herokuapp.com'
+// const URL = 'localhost:5000'
+const URL = 'pub-quiz-api.herokuapp.com'
 
 class Quiz extends Component {
   constructor(props){
@@ -45,7 +45,6 @@ class Quiz extends Component {
           name: response.data.name,
           questions: response.data.questions,
           questionsRecieved: true,
-          client: client.buildWsClient(self, 'ws://localhost:5000/ws/1')
         });
       })
       .catch(function (error) {

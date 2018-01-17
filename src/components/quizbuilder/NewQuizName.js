@@ -7,7 +7,7 @@ class NewQuizName extends Component {
         <h1> Quiz Name </h1>
         <input
           type="text"
-          className="input-field"
+          id="quiz-name-input"
           placeholder={this.props.placeholder}
           value={this.props.name}
           onChange={(event) => this.props.handleChangeName(event)}
