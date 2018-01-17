@@ -4,7 +4,7 @@ class NewQuizAnswer extends Component {
   render() {
     return(
       <div style={localStyles.answerRow}>
-        <div>
+        <div className='answer'>
           Answer
         </div>
         <div>

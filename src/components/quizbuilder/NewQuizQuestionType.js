@@ -13,7 +13,7 @@ class NewQuizQuestionType extends Component {
             onChange={(event)=> this.props.handleChangeQuestionType(this.props.questionIndex, event)}
             required='true'
             >
-              <option selected="selected" disabled="disabled">Select question type &#8964;</option>
+              <option selected="selected" disabled="disabled">Select question type</option>
               <option value='MultipleChoice'> Multiple Choice </option>
               <option value='text'> Text </option>
             </select>
