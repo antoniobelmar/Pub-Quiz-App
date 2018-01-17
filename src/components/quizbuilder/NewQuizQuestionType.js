@@ -9,6 +9,7 @@ class NewQuizQuestionType extends Component {
         </div>
         <div>
           <select
+            id='select-question-type'
             onChange={(event)=> this.props.handleChangeQuestionType(this.props.questionIndex, event)}
             required='true'
             >
