@@ -5,6 +5,14 @@
   src: url('../../DK Crayon Crumble.ttf');
 }
 
+.select-box {
+  border: white 1px solid;
+  background-color: #222322;
+  margin-left: 10px;
+  padding-bottom: 10px;
+  padding-left: 14px;
+}
+
 button:focus {outline:0;}
 
 .new-quiz-question {
