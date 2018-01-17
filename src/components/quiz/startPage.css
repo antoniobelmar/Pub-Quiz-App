@@ -43,6 +43,18 @@
   left: 35%;
 } */
 
+button:focus {outline:0;}
+
+.new-quiz-question {
+  border: solid 1px white;
+  padding: 20px;
+  margin: 15px 0;
+}
+
+.quiz-builder {
+  color: white;
+}
+
 #quiz-life-title {
   font-size: 10em;
   margin-bottom: -15px;

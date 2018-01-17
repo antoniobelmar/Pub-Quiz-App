@@ -106,32 +106,35 @@ class NewQuiz extends Component {
       return <Redirect to='/' />;
     }
     return(
-      <div>
+      <div className="quiz-builder col-sm-8 col-sm-offset-2">
         <NewQuizName
           name={this.state.name}
           placeholder={this.state.placeholder}
           handleChangeName = {this.handleChangeName}
         />
-        <AddQuestionButton
-          addQuestion={this.addQuestion}
-        />
         {this.state.questions.map((question, index) => {
           return (
-            <NewQuizQuestion
-              question={question}
-              key={index}
-              index={index}
-              handleChangeQuestion={this.handleChangeQuestion}
-              removeQuestion={this.removeQuestion}
-              handleChangeOption={this.handleChangeOption}
-              addOption={this.addOption}
-              removeOption={this.removeOption}
-              handleChangeAnswer={this.handleChangeAnswer}
-              handleChangeQuestionType={this.handleChangeQuestionType}
-            />
+            <div
+            className="new-quiz-question">
+              <NewQuizQuestion
+                question={question}
+                key={index}
+                index={index}
+                handleChangeQuestion={this.handleChangeQuestion}
+                removeQuestion={this.removeQuestion}
+                handleChangeOption={this.handleChangeOption}
+                addOption={this.addOption}
+                removeOption={this.removeOption}
+                handleChangeAnswer={this.handleChangeAnswer}
+                handleChangeQuestionType={this.handleChangeQuestionType}
+              />
+            </div>
           )
         })}
         <div>
+          <AddQuestionButton
+            addQuestion={this.addQuestion}
+          />
           <Button
             text='Add Quiz'
             callback={this.submitQuiz}
