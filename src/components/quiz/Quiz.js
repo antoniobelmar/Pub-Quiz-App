@@ -65,10 +65,14 @@ class Quiz extends Component {
   }
 
   hideButtonShowQuiz() {
+    if (this.state.leader) {
+      let time = this.getTimeout();
+      this.updateTimeout(time)
+      this.state.client.changeTimeout(time);
+    };
     this.setState({
       show: true,
       teamName: document.getElementById('team-name').value,
-      leader: false
     });
     this.state.client.start();
   };
@@ -125,11 +129,11 @@ class Quiz extends Component {
     return this.state.score;
   };
 
-  changeTimeout(event, fallback = 10) {
-    let value = (event.target.value || fallback) * 1000;
-    this.setState({ time: value });
-    this.state.client.changeTimeout(value);
-  }
+  getTimeout(fallback = 20) {
+    let node = document.getElementById('timeout-value');
+    let entry = parseInt(node.value);
+    return (Number.isNaN(entry) ? fallback : entry) * 1000;
+  };
 
   render() {
     let number = this.state.number;
@@ -141,7 +145,6 @@ class Quiz extends Component {
       { !this.state.show && 
         <StartPage
           wsId={wsId}
-          timeoutCb={this.changeTimeout.bind(this)}
           disabled={this.state.disabledButton}
           leader={this.state.leader}
           startQuiz={this.hideButtonShowQuiz.bind(this)}

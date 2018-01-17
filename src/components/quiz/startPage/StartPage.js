@@ -10,9 +10,7 @@ class StartPage extends Component {
       <div>
         <div>
           { this.props.leader && 
-            <LeaderSection
-              timeoutCb={this.props.timeoutCb}
-            />
+            <LeaderSection />
           }
           <GeneralSection
               startQuiz={this.props.startQuiz}
