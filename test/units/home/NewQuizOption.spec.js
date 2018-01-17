@@ -24,5 +24,5 @@ describe('NewQuizOption item', () => {
   it('its input tag should have as placeholder \'Marco\' ', () => {
     expect(wrapper.find('#new-option-input').props().placeholder).to.be.equal('Marco')
   });
-
+  
 });
