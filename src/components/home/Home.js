@@ -45,15 +45,17 @@ class Home extends Component {
     return(
       <div>
         <h1 id="quiz-life-title">QuizLife!</h1>
-        <div className="col-sm-8" id="create-button">
-          <a href="/quiz/new"><button>Create a quiz!</button></a>
+        <div className='col-sm-8 col-sm-offset-3'>
+          <div className='col-sm-8 col-sm-offset-2'>
+            <a href="/quiz/new"><button id='create-button'>Create a quiz!</button></a>
+          </div>
+          {this.state.quizzes.length > 0 &&
+            <QuizList
+              quizzes = {this.state.quizzes}
+              handleClickDeleteQuiz = {this.handleClickDeleteQuiz}
+            />
+          }
         </div>
-        {this.state.quizzes.length > 0 &&
-          <QuizList
-            quizzes = {this.state.quizzes}
-            handleClickDeleteQuiz = {this.handleClickDeleteQuiz}
-          />
-        }
       </div>
     )
   }
