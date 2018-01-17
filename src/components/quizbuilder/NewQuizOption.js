@@ -10,6 +10,7 @@ class NewQuizOption extends Component {
         </div>
         <div>
         <input
+          id='new-option-input'
           type='text'
           placeholder={this.props.option._placeholder}
           value={this.props.option._text}
