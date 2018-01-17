@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import MCQuestion from './MCQuestion';
-import TextQuestion from './textQuestion';
-import StartPage from './startPage';
-import ShareableLink from './ShareableLink'
+import ScorePage from './scorePage/ScorePage';
+import StartPage from './startPage/StartPage';
+import ShareableLink from './links/ShareableLink'
+import QuestionContainer from './questions/QuestionContainer';
 import ToggleDisplay from 'react-toggle-display';
 import client from '../../lib/wsClient';
 import axios from 'axios';
@@ -131,59 +131,37 @@ class Quiz extends Component {
 
   render() {
     let number = this.state.number;
-    let question = this.state.questions[number];
-    let time = this.state.time;
+    let wsId = this.state.wsId;
+    let show = this.state.show;
+
     return (
-      <div>
-        <div className='quiz'>
-
-          <ToggleDisplay show={this.state.leader}>
-            <h1> You are the leader </h1>
-            <input type="text" onChange={(event) => this.changeTimeout(event)} />
-          </ToggleDisplay>
-
-          <StartPage
-            disabled={this.state.disabledButton}
-            show={this.state.show}
-            hideFunction={ () => this.hideButtonShowQuiz() }
-          />
-
-          <ToggleDisplay show={this.state.show}>
+      <div className='quiz'>
+      { !this.state.show && 
+        <StartPage
+          wsId={wsId}
+          timeoutCb={this.changeTimeout}
+          disabled={this.state.disabledButton}
+          leader={this.state.leader}
+          startQuiz={this.hideButtonShowQuiz.bind(this)}
+        />
+      }
+      { show && this.isFinished() && 
+        <ScorePage 
+          scores={this.state.allScores} 
+          score={this.state.score} 
+        />
+      }
+      { show && !this.isFinished() && 
+        <div>
           <h1>{this.state.name}</h1>
-          { this.state.questions.length > 0 && this.state.number < this.state.questions.length && this.state.questions[this.state.number].type === 'MultipleChoice' &&
-              <MCQuestion
-                question={this.state.questions[this.state.number]}
-                time={time} id={number}
-              />
-          }
-          { this.state.questions.length > 0 && this.state.number < this.state.questions.length && this.state.questions[this.state.number].type === 'text' &&
-              <TextQuestion
-                question={this.state.questions[this.state.number]}
-                time={time}
-                id={number} />
-          }
-          { this.state.number >= this.state.questions.length &&
-            <div>
-              <h2> Thanks for playing! </h2>
-              <h3> Your score was {this.state.score} </h3>
-            </div>
-          }
-          {this.state.allScores.length > 0 &&
-            this.state.allScores.map(function(score, index) {
-            return(
-              <div key={index}>
-                <h4> {score.teamName}: {score.score} </h4>
-              </div>
-              )
-            })
-          }
-          </ToggleDisplay>
-       </div>
-       <div className='shareable-link'>
-          <ShareableLink
-            wsId={this.state.wsId}
+          <QuestionContainer
+            wsId={wsId}
+            question={this.state.questions[number]}
+            time={this.state.time}
+            id={number}
           />
         </div>
+      }
       </div>
     );
   };

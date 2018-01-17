@@ -1,0 +1,28 @@
+import React, { Component } from 'react';
+import LeaderSection from './LeaderSection';
+import GeneralSection from './GeneralSection';
+import ShareableLink from '../links/ShareableLink';
+import './StartPage.css'
+
+class StartPage extends Component {
+  render() {
+    return(
+      <div>
+        <div>
+          { this.props.leader && 
+            <LeaderSection
+              timeoutCb={this.props.timeoutCb}
+            />
+          }
+          <GeneralSection
+              startQuiz={this.props.startQuiz}
+              disabled={this.props.disabled}
+            />
+        </div>
+        <ShareableLink />
+      </div>
+    );
+  };
+};
+
+export default StartPage;
