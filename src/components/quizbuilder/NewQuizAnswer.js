@@ -9,6 +9,7 @@ class NewQuizAnswer extends Component {
         </div>
         <div>
           <select
+            className="answer-select-box"
             multiple='multiple'
             onChange={(event)=> this.props.handleChangeAnswer(this.props.questionIndex, this.props.index, event)}
             required='true'

@@ -86,6 +86,9 @@ button:focus {outline:0;}
   margin:5px;
 }
 
+.answer-select-box {
+  background-color: #222322;
+}
 .quiz-name-button {
   padding-top: 10px;
   font-size:2.4em;
