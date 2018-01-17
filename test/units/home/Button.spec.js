@@ -11,4 +11,9 @@ describe('Button item', () => {
     expect(fakeCallBack.calledWith("", "")).to.equal(true);
   });
 
+  it('ensures the button text is what is passed as props', function() {
+    wrapper.setProps({ text: 'button'})
+    expect(wrapper.find('#general-quiz-button').text()).to.equal('button')
+  })
+
 });
