@@ -19,7 +19,9 @@ class StartPage extends Component {
               disabled={this.props.disabled}
             />
         </div>
-        <ShareableLink />
+        <div>
+          <ShareableLink wsId={this.props.wsId}/>
+        </div>
       </div>
     );
   };

@@ -23,7 +23,9 @@ class ShareableLink extends Component {
     if (URL) {
       return (
         <div className='shareable-link' style={localStyles.linkRow}>
-          <p id='shareable-link'>{URL}</p>
+          <div>
+            Your shareable link: <p id='shareable-link'>{URL}</p>
+          </div>
           <CopyButton />
         </div>
       );
