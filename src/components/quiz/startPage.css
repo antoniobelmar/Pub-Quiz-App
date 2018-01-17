@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Bungee+Inline');
 @import url('https://fonts.googleapis.com/css?family=Days+One');
 
-*{
+/* *{
   margin: 0;
   padding: 0;
 }
@@ -28,11 +28,11 @@
 
   font-size: 20px;
   border-radius: 50px;
-  box-shadow: 5px 10px;
-  font-family: 'Bungee Inline', cursive;
-}
+  box-shadow: 5px 10px; */
+  /* font-family: 'Bungee Inline', cursive; */
+/* } */
 
-#startQuizButton:active {
+/* #startQuizButton:active {
   transform: translateY(3px);
   box-shadow: 2px 4px;
 }
@@ -41,4 +41,4 @@
   position: absolute;
   top: 3%;
   left: 35%;
-}
+} */
