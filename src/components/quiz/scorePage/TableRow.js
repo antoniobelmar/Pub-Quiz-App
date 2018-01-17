@@ -2,12 +2,17 @@ import React, { Component } from 'react';
 
 class TableRow extends Component {
   render() {
-    let team = this.props.team;
-
     return (
-      <div>
-        <h4>{team.teamName}: {team.score}</h4>
-      </div>
+      <tr key={this.props.index} >
+        <td> {this.props.teamName}</td>
+        <td> {this.props.score}</td>
+      {(this.props.maxScore === this.props.score) &&
+        <td>Winner</td>
+      }
+      {(this.props.maxScore !== this.props.score) &&
+        <td>Loser</td>
+      }
+      </tr>
     );
   };
 };

@@ -7,7 +7,7 @@ class ScorePage extends Component {
       <div>
         <div>
           <h2>Thanks for playing!</h2>
-          <h3>Your score was {this.props.score}</h3>
+          <h3>Your score was {this.props.score}/{this.props.questions.length} </h3>
         </div>
         <ScoreTable scores={this.props.scores} />
       </div>
