@@ -25,12 +25,57 @@ button:focus {outline:0;}
   color: white;
 }
 
+.q {
+  margin-right: 5px;
+  padding-top: 8px;
+}
+
+.a {
+  padding-top: 8px;
+}
+
+.answer {
+  padding-right: 7px;
+}
+
+.remove-question {
+  display: inline-flex;
+}
+
+.new-quiz {
+  padding: 6px;
+  background-color: #222322;
+  border: none;
+  font-size: 1.7em;
+  border-bottom: dashed 1px white;
+}
+
+.new-quiz-option {
+  padding: 6px;
+  background-color: #222322;
+  border: none;
+  border-bottom: dashed 1px white;
+}
+
+.new-quiz-borderless-question {
+  padding: 6px;
+  background-color: #222322;
+  border: none;
+  border-bottom: dashed 1px white;
+}
+
 #quiz-life-title {
   font-size: 6em;
   margin-bottom: -15px;
-  /* color: rgba(255, 255, 255, 0.8); */
   color:white;
   text-align: center;
+}
+
+.all-buttons {
+  margin: 5px;
+  background-color: #222322;
+  color: white;
+  border: solid 1px white;
 }
 
 .delete-button {
