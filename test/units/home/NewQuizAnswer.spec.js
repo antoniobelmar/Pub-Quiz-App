@@ -28,9 +28,9 @@ describe('NewQuizAnswer item', () => {
 
   it('when selected one option handleChangeAnswer is called', () => {
     let fakeHandleChangeAnswer = spy()
-    wrapper.setProps({ handleChangeAnswer: fakeHandleChangeAnswer })
+    wrapper.setProps({ handleChangeAnswer: fakeHandleChangeAnswer, questionIndex: 1, index: 5 })
     wrapper.find('#answer-selection').simulate('change', {target: {value : 'Allan' }})
-    expect(fakeHandleChangeAnswer.called).to.be.equal(true)
+    expect(fakeHandleChangeAnswer.calledWith(1, 5)).to.be.equal(true)
   });
 
 });
