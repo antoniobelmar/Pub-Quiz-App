@@ -20,6 +20,7 @@ class NewQuizQuestion extends Component {
             {'Q' + (this.props.index + 1)}
           </div>
           <input
+            id='text-input-question'
             type="text"
             placeholder={this.props.question._placeholder}
             value={this.props.question._text}
