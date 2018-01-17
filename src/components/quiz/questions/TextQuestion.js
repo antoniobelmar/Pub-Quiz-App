@@ -3,10 +3,6 @@ import './Question.css'
 import Timer from './Timer.js'
 
 class TextQuestion extends Component {
-  constructor(props){
-    super(props);
-  };
-
   render(){
     return(
       <div>
