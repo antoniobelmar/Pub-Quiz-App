@@ -138,7 +138,7 @@ class Quiz extends Component {
 
     return (
       <div className='quiz'>
-      { !this.state.show && 
+      { !this.state.show &&
         <StartPage
           wsId={wsId}
           timeoutCb={this.changeTimeout.bind(this)}
@@ -147,13 +147,14 @@ class Quiz extends Component {
           startQuiz={this.hideButtonShowQuiz.bind(this)}
         />
       }
-      { show && this.isFinished() && 
-        <ScorePage 
-          scores={this.state.allScores} 
-          score={this.state.score} 
+      { show && this.isFinished() &&
+        <ScorePage
+          questions={this.state.questions}
+          scores={this.state.allScores}
+          score={this.state.score}
         />
       }
-      { show && !this.isFinished() && 
+      { show && !this.isFinished() &&
         <div>
           <h1>{this.state.name}</h1>
           <QuestionContainer
