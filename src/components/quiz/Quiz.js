@@ -144,7 +144,9 @@ class Quiz extends Component {
           />
 
           <ToggleDisplay show={this.state.show}>
-          <h1>{this.state.name}</h1>
+            <div className="col-sm-8 col-sm-offset-2">
+              <h1>{this.state.name}</h1>
+            </div>
           { this.state.questions.length > 0 && this.state.number < this.state.questions.length && this.state.questions[this.state.number].type === 'MultipleChoice' &&
               <MCQuestion
                 question={this.state.questions[this.state.number]}
@@ -158,7 +160,7 @@ class Quiz extends Component {
                 id={number} />
           }
           { this.state.number >= this.state.questions.length &&
-            <div>
+            <div className="col-sm-8 col-sm-offset-2">
               <h2> Thanks for playing! </h2>
               <h3> Your score was {this.state.score} </h3>
             </div>
@@ -166,7 +168,7 @@ class Quiz extends Component {
           {this.state.allScores.length > 0 &&
             this.state.allScores.map(function(score, index) {
             return(
-              <div key={index}>
+              <div className="col-sm-8 col-sm-offset-2" key={index}>
                 <h4> {score.teamName}: {score.score} </h4>
               </div>
               )
@@ -177,7 +179,7 @@ class Quiz extends Component {
       <div className='leader'>
         <ToggleDisplay show={this.state.leader}>
           <h1> You are the leader </h1>
-          <input type="text" onChange={(event) => this.changeTimeout(event)} />
+          <input className="new-quiz-borderless-question" type="text" onChange={(event) => this.changeTimeout(event)} />
         </ToggleDisplay>
       </div>
        <div className='shareable-link'>
