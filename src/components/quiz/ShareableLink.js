@@ -22,7 +22,9 @@ class ShareableLink extends Component {
     let URL = this.getURL()
     if(URL){
       return(
-        <p> Your shareable URL is {URL} </p>
+        <div className='link'>
+          <p>Your shareable URL is {URL} </p>
+        </div>
       )
     } else {
       return (

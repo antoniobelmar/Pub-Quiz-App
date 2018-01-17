@@ -137,12 +137,6 @@ class Quiz extends Component {
     return (
       <div>
         <div className='quiz'>
-
-          <ToggleDisplay show={this.state.leader}>
-            <h1> You are the leader </h1>
-            <input type="text" onChange={(event) => this.changeTimeout(event)} />
-          </ToggleDisplay>
-
           <StartPage
             disabled={this.state.disabledButton}
             show={this.state.show}
@@ -180,6 +174,12 @@ class Quiz extends Component {
           }
           </ToggleDisplay>
        </div>
+      <div className='leader'>
+        <ToggleDisplay show={this.state.leader}>
+          <h1> You are the leader </h1>
+          <input type="text" onChange={(event) => this.changeTimeout(event)} />
+        </ToggleDisplay>
+      </div>
        <div className='shareable-link'>
           <ShareableLink
             wsId={this.state.wsId}

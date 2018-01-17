@@ -10,19 +10,20 @@ class StartPage extends Component {
   render() {
     return(
       <ToggleDisplay if={!this.props.show}>
-        <div>
-          <h1 id='titleApp'>Pub-Quiz</h1>
-          <input
-            className='textArea'
-            type='text'
-            placeholder='Team Name'
-            id='team-name'/>
-          <button
-            id='startQuizButton'
-            type="button" onClick={this.props.hideFunction}
-            disabled={this.props.disabled}>
-            Start QUIZ!
-          </button>
+        <div className='col-sm-8 col-sm-offset-2'>
+          <h1 id='titleApp' className='text-center'>Pub-Quiz</h1>
+            <input
+              className='textArea new-quiz'
+              type='text'
+              placeholder='Team Name'
+              id='team-name'/>
+            <button
+              className='start-button'
+              id='startQuizButton'
+              type="button" onClick={this.props.hideFunction}
+              disabled={this.props.disabled}>
+              Start Quiz!
+            </button>
         </div>
       </ToggleDisplay>
     )

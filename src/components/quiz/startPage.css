@@ -67,8 +67,24 @@ button:focus {outline:0;}
 #quiz-life-title {
   font-size: 6em;
   margin-bottom: -15px;
-  color:white;
+  color: white;
   text-align: center;
+}
+
+.leader {
+  color: white;
+  text-align: center;
+}
+
+.link {
+  color: white;
+  text-align: center;
+  width: 100%;
+  margin-top: 9px;
+}
+
+.quiz {
+  color: white;
 }
 
 .all-buttons {
@@ -76,6 +92,20 @@ button:focus {outline:0;}
   background-color: #222322;
   color: white;
   border: solid 1px white;
+}
+
+.start-button {
+  width: 100%;
+  height: 80px;
+  margin-top: 15px;
+  background-color: #222322;
+  color: white;
+  border: solid 1px white;
+  font-size: 3em;
+}
+
+.textArea {
+  width: 100%;
 }
 
 .delete-button {
@@ -89,6 +119,7 @@ button:focus {outline:0;}
 .answer-select-box {
   background-color: #222322;
 }
+
 .quiz-name-button {
   padding-top: 10px;
   font-size:2.4em;
