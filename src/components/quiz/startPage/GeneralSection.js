@@ -3,8 +3,7 @@ import React, { Component } from 'react';
 class GeneralSection extends Component {
   render() {
     return(
-      <div className='col-sm-8 col-sm-offset-2'>
-        <h1 id='titleApp'>Pub-Quiz</h1>
+      <div className='start-page col-sm-8 col-sm-offset-2'>
         <input
           className='textArea new-quiz'
           type='text'

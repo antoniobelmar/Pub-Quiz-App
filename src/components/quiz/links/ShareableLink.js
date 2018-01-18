@@ -26,7 +26,9 @@ class ShareableLink extends Component {
           <div className='link'>
             Your shareable link: <p id='shareable-link'>{URL}</p>
           </div>
-          <CopyButton />
+          <div className='copy-button'>
+            <CopyButton />
+          </div>
         </div>
       );
     } else {

@@ -28,6 +28,10 @@ button:focus {outline:0;}
   padding-top: 8px;
 }
 
+.pub-title {
+  text-align: center;
+}
+
 .a {
   padding-top: 8px;
 }
@@ -74,11 +78,28 @@ button:focus {outline:0;}
   text-align: center;
 }
 
+.timer-box {
+  background-color: #222322;
+  width: 80%;
+  height: 40px;
+  border: double 1.5px white;
+  margin: 5px;
+}
+
+.start-page{
+ margin: 25px;
+}
+
 .link {
   color: white;
   text-align: center;
   width: 100%;
   margin-top: 9px;
+  font-size: 1.5em;
+}
+
+.copy-button {
+  text-align: center;
 }
 
 .quiz {

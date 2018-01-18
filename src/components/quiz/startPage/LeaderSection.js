@@ -3,11 +3,13 @@ import React, { Component } from 'react';
 class LeaderSection extends Component {
   render() {
     return (
-      <div>
+      <div className='leader'>
         <h1> You are the leader </h1>
-        <input 
-          id="timeout-value" 
-          type="number" 
+        <input
+          className='timer-box'
+          placeholder='Choose your timer'
+          id="timeout-value"
+          type="number"
           min="0"
         />
       </div>
