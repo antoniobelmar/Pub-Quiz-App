@@ -14,7 +14,7 @@ class GeneralSection extends Component {
           id='startQuizButton'
           type="button" onClick={this.props.startQuiz}
           disabled={this.props.disabled}>
-          Start QUIZ!
+          Start!
         </button>
       </div>
     )
