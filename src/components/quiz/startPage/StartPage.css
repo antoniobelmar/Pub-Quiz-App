@@ -86,6 +86,15 @@ button:focus {outline:0;}
   margin: 5px;
 }
 
+div.timer {
+  margin-bottom: 1em;
+  color: grey;
+}
+
+div.timer p {
+  margin: 0em;
+}
+
 .start-page{
  margin: 25px;
 }
@@ -94,7 +103,17 @@ button:focus {outline:0;}
   color: white;
   text-align: center;
   width: 100%;
-  margin-top: 9px;
+  margin-top: 29px;
+}
+
+.shareable-link {
+  word-wrap:break-word;
+}
+
+.url {
+  padding-left: 17px;
+  padding-right: 17px;
+  word-wrap: break-word;
 }
 
 .copy-button {
@@ -142,6 +161,7 @@ button:focus {outline:0;}
 .score-card {
   text-align: center;
 }
+
 .quiz-name-button {
   padding-top: 10px;
   font-size:2.4em;
@@ -161,7 +181,9 @@ button:focus {outline:0;}
   text-align: center;
 }
 
-
+.questionText {
+  font-size: 1.4em;
+}
 
 #create-button {
   margin-bottom: 17px;
@@ -178,6 +200,7 @@ button:disabled {
     background-color: #858a91;
     color: #bec4ce;
     border-color: #212223;
+    opacity: 0.5;
   }
 
 table {
@@ -207,9 +230,9 @@ body {
 div.option {
   display: block;
   position: relative;
-  float: left;
   width: 100%;
   height: 100px;
+  border-top: 1px solid #333;
   border-bottom: 1px solid #333;
 }
 
@@ -221,7 +244,7 @@ div.option input[type=radio]{
 div.option label {
   display: block;
   position: relative;
-  padding: 25px 25px 25px 80px;
+  padding-top: 25px;
   margin: 10px auto;
   height: 30px;
   cursor: pointer;
