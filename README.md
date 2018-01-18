@@ -18,7 +18,7 @@ Visit http://localhost:3000/.
 
 To run tests:
 ```bash
-npm test
+$ npm test
 ```
 
 This project was done by [Allan Wazacz](https://www.github.com/cazwazacz/), [Antonio Belmar da Costa](https://github.com/antoniobelmar/), [Marco Vanali](https://github.com/Vanals/) & [Theo Breuer-Weil](https://www.github.com/somemarsupials/).
