@@ -11,7 +11,6 @@ class Home extends Component {
   componentDidMount() {
     let self = this;
     axios.get('http://pub-quiz-api.herokuapp.com/quiz')
-    // axios.get('http://localhost:5000/quiz')
       .then(function(response) {
         let state = self.state
         response.data.forEach(function(quiz, key) {
@@ -27,7 +26,6 @@ class Home extends Component {
   handleClickDeleteQuiz = (quizId) => {
     let self = this
     axios.delete(`http://pub-quiz-api.herokuapp.com/quiz/${quizId}`)
-    // axios.delete(`http://localhost:5000/quiz/${quizId}`)
       .then(function(response) {
         console.log('delete request sent')
         let state = self.state
