@@ -1,44 +1,185 @@
 @import url('https://fonts.googleapis.com/css?family=Bungee+Inline');
 @import url('https://fonts.googleapis.com/css?family=Days+One');
+@font-face {
+  font-family: crayonCrumble;
+  src: url('../../DK Crayon Crumble.ttf');
+}
 
-*{
-  margin: 0;
-  padding: 0;
+.select-box {
+  border: white 1px solid;
+  background-color: #222322;
+  margin-left: 10px;
+  padding-bottom: 10px;
+  padding-left: 14px;
+}
+
+button:focus {outline:0;}
+
+.new-quiz-question {
+  border: solid 1px white;
+  padding: 20px;
+  margin: 15px 0;
+}
+
+.quiz-builder {
+  color: white;
+}
+
+.q {
+  margin-right: 5px;
+  padding-top: 8px;
+}
+
+.a {
+  padding-top: 8px;
+}
+
+.answer {
+  padding-right: 7px;
+}
+
+.remove-question {
+  display: inline-flex;
+}
+
+.new-quiz {
+  padding: 6px;
+  background-color: #222322;
+  border: none;
+  font-size: 1.7em;
+  border-bottom: dashed 1px white;
+}
+
+.new-quiz-option {
+  padding: 6px;
+  background-color: #222322;
+  border: none;
+  border-bottom: dashed 1px white;
+}
+
+.new-quiz-borderless-question {
+  padding: 6px;
+  background-color: #222322;
+  border: none;
+  border-bottom: dashed 1px white;
+}
+
+#quiz-life-title {
+  font-size: 6em;
+  margin-bottom: -15px;
+  color: white;
+  text-align: center;
+}
+
+.leader {
+  color: white;
+  text-align: center;
+}
+
+.link {
+  color: white;
+  text-align: center;
+  width: 100%;
+  margin-top: 9px;
+}
+
+.quiz {
+  color: white;
+}
+
+.all-buttons {
+  margin: 5px;
+  background-color: #222322;
+  color: white;
+  border: solid 1px white;
+}
+
+.start-button {
+  width: 100%;
+  height: 80px;
+  margin-top: 15px;
+  background-color: #222322;
+  color: white;
+  border: solid 1px white;
+  font-size: 3em;
 }
 
 .textArea {
-  position: absolute;
-  top: 15%;
-  left: 30%;
-
-  width: 250px;
-  height: 60px;
-
-  font-size: 20px;
-  border-radius: 20px;
-  font-family: 'Days One', cursive;
+  width: 100%;
 }
 
-#startQuizButton {
-  position: absolute;
-  top: 30%;
-  left: 35%;
-  width: 170px;
+.delete-button {
+  border:none;
+  background-color: #222322;
+  color:white;
+  font-size:3em;
+  margin:5px;
+}
+
+.answer-select-box {
+  background-color: #222322;
+}
+
+.quiz-name-button {
+  padding-top: 10px;
+  font-size:2.4em;
+  margin:6px;
+  border:none;
+  background-color: #222322;
+  color: white;
+}
+
+#create-button {
+  margin-bottom: 17px;
+  border: double 5px white;
+  border-radius:8px;
+  color:white;
+  background-color:#222322;
+  font-size:2.5em;
+  margin: 0 auto;
+  width: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: crayonCrumble;
+  background-color: #222322;
+}
+
+div.option {
+  display: block;
+  position: relative;
+  float: left;
+  width: 100%;
   height: 100px;
-
-  font-size: 20px;
-  border-radius: 50px;
-  box-shadow: 5px 10px;
-  font-family: 'Bungee Inline', cursive;
+  border-bottom: 1px solid #333;
 }
 
-#startQuizButton:active {
-  transform: translateY(3px);
-  box-shadow: 2px 4px;
-}
-
-#titleApp {
+div.option input[type=radio]{
   position: absolute;
-  top: 3%;
-  left: 35%;
+  visibility: hidden;
+}
+
+div.option label {
+  display: block;
+  position: relative;
+  padding: 25px 25px 25px 80px;
+  margin: 10px auto;
+  height: 30px;
+  cursor: pointer;
+  -webkit-transition: all 0.25s linear;
+}
+
+div.option:hover label {
+  color: green;
+}
+
+div.option .check{
+  transition: border .25s linear;
+  -webkit-transition: border .25s linear;
+}
+
+input[type=radio]:checked ~ label{
+  color: green;
 }

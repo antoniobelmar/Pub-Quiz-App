@@ -8,11 +8,14 @@ class QuizList extends Component {
           return(
             <div key={index}>
               <a href={'/quiz/' + quiz.id}>
-                <li>{quiz.name}</li>
+                <button
+                  className='quiz-name-button'>
+                  {quiz.name}</button>
               </a>
               <button
+                className='delete-button'
                 onClick={(event) => this.props.handleClickDeleteQuiz(quiz.id)}>
-                Delete Quiz
+                X
               </button>
             </div>
           )

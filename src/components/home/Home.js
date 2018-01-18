@@ -44,14 +44,18 @@ class Home extends Component {
   render() {
     return(
       <div>
-        <h1>Home page</h1>
-        <a href="/quiz/new"><button>Create a quiz!</button></a>
-        {this.state.quizzes.length > 0 &&
-          <QuizList
-            quizzes = {this.state.quizzes}
-            handleClickDeleteQuiz = {this.handleClickDeleteQuiz}
-          />
-        }
+        <h1 id="quiz-life-title">QuizLife!</h1>
+        <div className='col-sm-8 col-sm-offset-3'>
+          <div className='col-sm-8 col-sm-offset-2'>
+            <a href="/quiz/new"><button id='create-button'>Create a quiz!</button></a>
+          </div>
+          {this.state.quizzes.length > 0 &&
+            <QuizList
+              quizzes = {this.state.quizzes}
+              handleClickDeleteQuiz = {this.handleClickDeleteQuiz}
+            />
+          }
+        </div>
       </div>
     )
   }

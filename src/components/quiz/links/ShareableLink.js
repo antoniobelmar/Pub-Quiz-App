@@ -22,8 +22,8 @@ class ShareableLink extends Component {
     let URL = this.getURL()
     if (URL) {
       return (
-        <div className='shareable-link' style={localStyles.linkRow}>
-          <div>
+        <div>
+          <div className='link'>
             Your shareable link: <p id='shareable-link'>{URL}</p>
           </div>
           <CopyButton />

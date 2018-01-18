@@ -6,7 +6,7 @@ class RemoveQuestionButton extends Component {
     return(
       <div>
         <Button
-          text="X"
+          text="Delete"
           callback={this.props.removeQuestion}
           arg1={this.props.index}
           arg2=''

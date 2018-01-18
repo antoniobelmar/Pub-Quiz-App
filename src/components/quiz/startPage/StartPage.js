@@ -6,7 +6,7 @@ import './StartPage.css'
 
 class StartPage extends Component {
   render() {
-    return(
+    return (
       <div>
         <div>
           { this.props.leader && 
