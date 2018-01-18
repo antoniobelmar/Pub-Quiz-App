@@ -7,7 +7,7 @@ class QuestionContainer extends Component {
   render() {
     let question = this.props.question;
     return (
-      <div>
+      <div className='question-container'>
         { question.type == 'MultipleChoice' &&
           <MCQuestion {...this.props} />
         }

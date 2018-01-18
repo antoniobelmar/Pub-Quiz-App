@@ -24,9 +24,12 @@ class ShareableLink extends Component {
       return (
         <div>
           <div className='link'>
-            Your shareable link: <p id='shareable-link'>{URL}</p>
+            <p className='shareable-link' >Your shareable link:</p>
+            <p className='url' id='shareable-link'>{URL}</p>
           </div>
-          <CopyButton />
+          <div className='copy-button'>
+            <CopyButton />
+          </div>
         </div>
       );
     } else {
@@ -37,13 +40,13 @@ class ShareableLink extends Component {
   };
 };
 
-const localStyles = {
-  linkRow: {
-    display: 'flex',
-    flexDirection: 'row',
-    padding: '5px',
-  },
-}
+// const localStyles = {
+//   linkRow: {
+//     display: 'flex',
+//     flexDirection: 'row',
+//     padding: '5px',
+//   },
+// }
 
 
 export default ShareableLink

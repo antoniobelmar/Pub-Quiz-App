@@ -84,6 +84,7 @@ class NewQuiz extends Component {
   }
 
   submitQuiz = () => {
+    // axios.post('http://localhost:5000/quiz', {
     axios.post('https://pub-quiz-api.herokuapp.com/quiz', {
       name: this.state.name,
       questions: this.state.questions
@@ -129,7 +130,7 @@ class NewQuiz extends Component {
             </div>
           )
         })}
-        <div>
+        <div className='new-quiz-bottom'>
           <AddQuestionButton
             addQuestion={this.addQuestion}
           />

@@ -5,7 +5,7 @@ class ScorePage extends Component {
   render() {
     return (
       <div>
-        <div>
+        <div className='score-page'>
           <h2>Thanks for playing!</h2>
           <h3>Your score was {this.props.score}/{this.props.questions.length} </h3>
         </div>

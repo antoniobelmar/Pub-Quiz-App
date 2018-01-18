@@ -24,22 +24,24 @@ class ScoreTable extends Component {
     return(
       <table>
         <tbody>
-          <tr>
-            <th> Team Name </th>
-            <th> Score </th>
-            <th> Result </th>
-          </tr>
-          {this.sortBy(this.scores, 'score').map(function(team, index) {
-            return(
-              <TableRow
-                key = {index}
-                index = {index}
-                teamName = {team.teamName}
-                score = {team.score}
-                maxScore = {maxScore}
-              />
-            )
-          })}
+          <div className='score-card col-sm-8 col-sm-offset-2'>
+            <tr>
+              <th>  Team Name  </th>
+              <th>  Score  </th>
+              <th>  Result  </th>
+            </tr>
+            {this.sortBy(this.scores, 'score').map(function(team, index) {
+              return(
+                <TableRow
+                  key = {index}
+                  index = {index}
+                  teamName = {team.teamName}
+                  score = {team.score}
+                  maxScore = {maxScore}
+                />
+              )
+            })}
+        </div>
         </tbody>
       </table>
     );

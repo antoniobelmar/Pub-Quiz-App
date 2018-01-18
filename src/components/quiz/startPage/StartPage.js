@@ -9,7 +9,8 @@ class StartPage extends Component {
     return (
       <div>
         <div>
-          { this.props.leader && 
+          <h1 className='pub-title' id='titleApp'>Pub-Quiz</h1>
+          { this.props.leader &&
             <LeaderSection />
           }
           <GeneralSection

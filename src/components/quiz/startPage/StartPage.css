@@ -3,29 +3,46 @@
   src: url('../../../DK Crayon Crumble.ttf');
 }
 
+div.new-quiz-bottom #general-quiz-button {
+  padding: 0;
+  margin: 1em 0em 0em 0em;
+}
+
 .select-box {
   border: white 1px solid;
   background-color: #222322;
   margin-left: 10px;
-  padding-bottom: 10px;
-  padding-left: 14px;
+  padding: 5px 0px 5px 14px;
+  text-align: center;
+  width: 8em;
 }
 
 button:focus {outline:0;}
 
+div.X button {
+  width: 2em;
+  border: none;
+  font-size: 2em;
+}
+
 .new-quiz-question {
   border: solid 1px white;
   padding: 20px;
-  margin: 15px 0;
+  margin-top: 1em;
 }
 
 .quiz-builder {
   color: white;
+  margin: 0em 1em;
 }
 
 .q {
   margin-right: 5px;
   padding-top: 8px;
+}
+
+.pub-title {
+  text-align: center;
 }
 
 .a {
@@ -74,19 +91,57 @@ button:focus {outline:0;}
   text-align: center;
 }
 
+.timer-box {
+  background-color: #222322;
+  width: 80%;
+  height: 40px;
+  border: double 1.5px white;
+  margin: 5px;
+}
+
+div.timer {
+  margin-bottom: 1em;
+  color: grey;
+}
+
+div.timer p {
+  margin: 0em;
+}
+
+.start-page{
+ margin: 25px;
+}
+
 .link {
   color: white;
   text-align: center;
   width: 100%;
-  margin-top: 9px;
+  margin-top: 29px;
+  font-size: 0.8em;
+}
+
+.shareable-link {
+  word-wrap:break-word;
+}
+
+.url {
+  padding-left: 17px;
+  padding-right: 17px;
+  word-wrap: break-word;
+}
+
+.copy-button {
+  text-align: center;
 }
 
 .quiz {
   color: white;
+  text-align: center;
 }
 
 .all-buttons {
   margin: 5px;
+  width: 8em;
   background-color: #222322;
   color: white;
   border: solid 1px white;
@@ -118,29 +173,70 @@ button:focus {outline:0;}
   background-color: #222322;
 }
 
+.score-card {
+  text-align: center;
+}
+
 .quiz-name-button {
-  padding-top: 10px;
-  font-size:2.4em;
-  margin:6px;
+  font-size: 2.4em;
+  margin: 0.2em;
   border:none;
   background-color: #222322;
   color: white;
 }
 
+.score-page {
+  text-align: center;
+}
+
+.question-container {
+  width: 100%;
+  font-size: 2em;
+  text-align: center;
+}
+
+.questionText {
+  font-size: 1.4em;
+}
+
 #create-button {
-  margin-bottom: 17px;
   border: double 5px white;
   border-radius:8px;
   color:white;
   background-color:#222322;
   font-size:2.5em;
-  margin: 0 auto;
+  margin: 1em auto;
   width: 100%;
+}
+
+button:disabled {
+    background-color: #858a91;
+    color: #bec4ce;
+    border-color: #212223;
+    opacity: 0.5;
+  }
+
+table {
+  display: inline-flex;
+  border: double;
+  font-size: 1.5em;
+  margin-top: 1em;
+}
+
+td {
+  border-spacing: 0px;
+  padding: 15px;
+}
+
+th {
+  text-decoration: underline;
+  text-decoration-style: double;
+  padding: 15px;
 }
 
 body {
   margin: 0;
-  padding: 0;
+  padding-top: 2em;
   font-family: crayonCrumble;
   background-color: #222322;
 }
@@ -148,9 +244,9 @@ body {
 div.option {
   display: block;
   position: relative;
-  float: left;
   width: 100%;
   height: 100px;
+  border-top: 1px solid #333;
   border-bottom: 1px solid #333;
 }
 
@@ -159,10 +255,14 @@ div.option input[type=radio]{
   visibility: hidden;
 }
 
+input {
+  background-color: #222322;
+}
+
 div.option label {
   display: block;
   position: relative;
-  padding: 25px 25px 25px 80px;
+  padding-top: 25px;
   margin: 10px auto;
   height: 30px;
   cursor: pointer;
