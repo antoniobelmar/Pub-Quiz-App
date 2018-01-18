@@ -11,29 +11,31 @@ class NewQuizQuestion extends Component {
   render(){
     return(
       <div>
-        <NewQuizQuestionType
-          questionIndex={this.props.index}
-          handleChangeQuestionType={this.props.handleChangeQuestionType}
-        />
+        <div className='remove-question'>
+          <NewQuizQuestionType
+            questionIndex={this.props.index}
+            handleChangeQuestionType={this.props.handleChangeQuestionType}
+          />
+          <RemoveQuestionButton
+            removeQuestion={this.props.removeQuestion}
+            index={this.props.index}
+            />
+      </div>
         <div style={localStyles.questionRow}>
-          <div>
+          <div className='q'>
             {'Q' + (this.props.index + 1)}
           </div>
           <input
+            className='new-quiz-borderless-question'
             id='text-input-question'
             type="text"
             placeholder={this.props.question._placeholder}
             value={this.props.question._text}
             onChange={(event)=>this.props.handleChangeQuestion(this.props.index, event)} >
           </input>
-          <RemoveQuestionButton
-            removeQuestion={this.props.removeQuestion}
-            index={this.props.index}
-          />
-
-          <AddOptionButton
-            questionIndex={this.props.index}
-            addOption={this.props.addOption}
+        <AddOptionButton
+          questionIndex={this.props.index}
+          addOption={this.props.addOption}
           />
         </div>
         <div>

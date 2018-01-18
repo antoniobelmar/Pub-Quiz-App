@@ -4,9 +4,12 @@ class NewQuizAnswer extends Component {
   render() {
     return(
       <div style={localStyles.answerRow}>
-        <div> Answer </div>
+        <div className='answer'>
+          Answer
+        </div>
         <div>
           <select
+            className="answer-select-box"
             multiple='multiple'
             onChange={(event)=> this.props.handleChangeAnswer(this.props.questionIndex, this.props.index, event)}
             required='true'

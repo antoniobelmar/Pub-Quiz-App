@@ -142,7 +142,7 @@ class Quiz extends Component {
 
     return (
       <div className='quiz'>
-      { !this.state.show &&
+      { !show &&
         <StartPage
           wsId={wsId}
           disabled={this.state.disabledButton}

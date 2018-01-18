@@ -4,6 +4,7 @@ class Button extends Component {
   render(){
     return(
       <button
+        className='all-buttons'
         id='general-quiz-button'
         onClick={(event)=> this.props.callback(this.props.arg1, this.props.arg2, event)}
         style={localStyles.button}>
