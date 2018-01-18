@@ -95,7 +95,6 @@ button:focus {outline:0;}
   text-align: center;
   width: 100%;
   margin-top: 9px;
-  font-size: 1.5em;
 }
 
 .copy-button {
@@ -104,6 +103,7 @@ button:focus {outline:0;}
 
 .quiz {
   color: white;
+  text-align: center;
 }
 
 .all-buttons {
@@ -139,6 +139,9 @@ button:focus {outline:0;}
   background-color: #222322;
 }
 
+.score-card {
+  text-align: center;
+}
 .quiz-name-button {
   padding-top: 10px;
   font-size:2.4em;
@@ -147,6 +150,17 @@ button:focus {outline:0;}
   background-color: #222322;
   color: white;
 }
+
+.score-page {
+  text-align: center;
+}
+
+.question-container {
+  width: 100%;
+  font-size: 2em;
+  text-align: center;
+}
+
 
 #create-button {
   margin-bottom: 17px;
@@ -157,6 +171,23 @@ button:focus {outline:0;}
   font-size:2.5em;
   margin: 0 auto;
   width: 100%;
+}
+
+table {
+  display: inline-flex;
+  border: double;
+  font-size: 1.5em;
+}
+
+td {
+  border-spacing: 0px;
+  padding: 15px;
+}
+
+th {
+  text-decoration: underline;
+  text-decoration-style: double;
+  padding: 15px;
 }
 
 body {
