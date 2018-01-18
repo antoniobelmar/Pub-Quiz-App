@@ -17,6 +17,6 @@ describe('User visit index page', function() {
   });
 
   it('the page should show Home Page', function() {
-    expect(browser.text('body')).contain('Home page')
+    expect(browser.text('body')).contain('QuizLife!')
   });
 });
