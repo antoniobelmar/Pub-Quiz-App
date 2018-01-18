@@ -162,6 +162,7 @@ button:focus {outline:0;}
 }
 
 
+
 #create-button {
   margin-bottom: 17px;
   border: double 5px white;
@@ -172,6 +173,12 @@ button:focus {outline:0;}
   margin: 0 auto;
   width: 100%;
 }
+
+button:disabled {
+    background-color: #858a91;
+    color: #bec4ce;
+    border-color: #212223;
+  }
 
 table {
   display: inline-flex;
