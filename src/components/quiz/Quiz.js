@@ -47,7 +47,7 @@ class Quiz extends Component {
         console.log(error);
       });
 
-    if(wsId) {
+    if (wsId) {
       self.connect(wsId)
     } else {
       axios.get(`http://${URL}/play`)
@@ -58,16 +58,16 @@ class Quiz extends Component {
   };
 
   connect(id) {
-    var state = this.state
-    state.client = client.buildWsClient(this, `ws://${URL}/play/${id}`, id)
-    state.wsId = id
-    this.setState(state)
+    var state = this.state;
+    state.client = client.buildWsClient(this, `ws://${URL}/play/${id}`, id);
+    state.wsId = id;
+    this.setState(state);
   }
 
   hideButtonShowQuiz() {
     if (this.state.leader) {
       let time = this.getTimeout();
-      this.updateTimeout(time)
+      this.updateTimeout(time);
       this.state.client.changeTimeout(time);
     };
     this.setState({
@@ -78,8 +78,8 @@ class Quiz extends Component {
   };
 
   showLeaderMessage() {
-    this.setState( { leader: true} );
-  }
+    this.setState({ leader: true });
+  };
 
   updateScores(scores) {
     this.setState({ allScores: scores });
@@ -93,8 +93,13 @@ class Quiz extends Component {
     this.setState({ time: time });
   };
 
+  updateQuestionIdOnly(id) {
+    this.setState({ number: id });
+  };
+
   updateQuestion(id, time) {
     let self = this;
+    console.log(this.state);
     let radios = document.getElementsByName('options');
     let textArea = document.getElementById('textAnswer')
     let answer = this.state.questions[this.state.number].answer[0];

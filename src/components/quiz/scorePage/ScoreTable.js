@@ -21,7 +21,6 @@ class ScoreTable extends Component {
 
   render() {
     let maxScore = this.maxScore(this.scores)
-    console.log(maxScore)
     return(
       <table>
         <tbody>
