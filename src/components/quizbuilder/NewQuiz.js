@@ -131,7 +131,7 @@ class NewQuiz extends Component {
             </div>
           )
         })}
-        <div>
+        <div className='new-quiz-bottom'>
           <AddQuestionButton
             addQuestion={this.addQuestion}
           />

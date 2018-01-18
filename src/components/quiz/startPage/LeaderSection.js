@@ -4,10 +4,10 @@ class LeaderSection extends Component {
   render() {
     return (
       <div className='leader'>
-        <h1> You are the leader </h1>
+        <h1>You are the leader</h1>
         <input
           className='timer-box'
-          placeholder='Choose your timer'
+          placeholder='  Set round time'
           id="timeout-value"
           type="number"
           min="0"

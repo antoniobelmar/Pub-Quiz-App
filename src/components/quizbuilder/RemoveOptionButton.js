@@ -4,7 +4,7 @@ import Button from './Button';
 class RemoveOptionButton extends Component {
   render() {
     return(
-      <div>
+      <div className='X'>
         <Button
           text='X'
           callback={this.props.removeOption}
