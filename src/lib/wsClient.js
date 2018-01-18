@@ -30,7 +30,6 @@ class WsClient {
     let self = this
     this._ws.onopen = function(){
       self._ws.send(JSON.stringify({ type: "here comes the leader"}));
-      console.log('Leader sent');
     };
   };
 
@@ -45,7 +44,7 @@ class WsClient {
           self.updateDisable();
           break;
         case 'question':
-          self.updateQuestion(parseInt(data.question), parseInt(data.time));
+          self.updateQuestion(parseInt(data.question), self._timeout);
           break;
         case 'endQuiz':
           self.sendScore(self.getName(), self.getScore());
@@ -114,8 +113,7 @@ class WsClient {
   _questionIdMessage(id, json_obj) {
     return json_obj.stringify({
       type: "question",
-      question: id,
-      time: this._timeout
+      question: id
     });
   };
 
