@@ -2,7 +2,7 @@
 const Browser = require('zombie');
 const expect = require('chai').expect;
 
-Browser.localhost('example.com', 5000);
+Browser.localhost('example.com', 3000);
 
 describe('User visit index page', function() {
 
@@ -16,7 +16,7 @@ describe('User visit index page', function() {
     browser.assert.success();
   });
 
-  it('the page should show Welcome to React', function() {
-    expect(browser.text('body')).contain('Welcome to React')
+  it('the page should show Home Page', function() {
+    expect(browser.text('body')).contain('Home page')
   });
 });
