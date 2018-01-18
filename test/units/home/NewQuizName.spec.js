@@ -13,17 +13,23 @@ describe('NewQuizName item', () => {
   });
 
   it('contains an input field', () => {
-    expect(wrapper.find('input.input-field')).to.have.lengthOf(1);
+    expect(wrapper.find('#quiz-name-input')).to.have.lengthOf(1);
   })
 
   it('includes whatever is passed as name in props as value in input field', () => {
     wrapper.setProps({name: 'quiz name'})
-    expect(wrapper.find('input.input-field').props().value).to.be.equal('quiz name')
+    expect(wrapper.find('#quiz-name-input').props().value).to.be.equal('quiz name')
   })
 
   it('includes whatever is passed as placeholder in props as placeholder in input field', () => {
     wrapper.setProps({placeholder: 'Add your quiz name'})
-    expect(wrapper.find('input.input-field').props().placeholder).to.be.equal('Add your quiz name')
+    expect(wrapper.find('#quiz-name-input').props().placeholder).to.be.equal('Add your quiz name')
   })
 
+  it('when something is written in the text box "handleChangeName" is called', () => {
+    let fakeHandleChangeName = spy()
+    wrapper.setProps({handleChangeName: fakeHandleChangeName})
+    wrapper.find('#quiz-name-input').simulate('change', {target: {value: 'Marco'}})
+    expect(fakeHandleChangeName.called).to.be.equal(true)
+  });
 });

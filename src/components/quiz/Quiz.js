@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import MCQuestion from './MCQuestion';
-import TextQuestion from './textQuestion';
-import StartPage from './startPage';
-import ShareableLink from './ShareableLink'
+import ScorePage from './scorePage/ScorePage';
+import StartPage from './startPage/StartPage';
+import ShareableLink from './links/ShareableLink'
+import QuestionContainer from './questions/QuestionContainer';
 import ToggleDisplay from 'react-toggle-display';
 import client from '../../lib/wsClient';
 import axios from 'axios';
 import './Quiz.css'
 
-const URL = 'localhost:5000'
-// const URL = 'pub-quiz-api.herokuapp.com'
+// const URL = 'localhost:5000'
+const URL = 'pub-quiz-api.herokuapp.com'
 
 class Quiz extends Component {
   constructor(props){
@@ -28,10 +28,6 @@ class Quiz extends Component {
       time: 10000,
       wsId: null
     }
-    this.isFinished = this.isFinished.bind(this);
-    this.getName = this.getName.bind(this);
-    this.getScore = this.getScore.bind(this);
-    this.getQuestion = this.getQuestion.bind(this);
   };
 
   componentDidMount(){
@@ -45,7 +41,6 @@ class Quiz extends Component {
           name: response.data.name,
           questions: response.data.questions,
           questionsRecieved: true,
-          client: client.buildWsClient(self, 'ws://localhost:5000/ws/1')
         });
       })
       .catch(function (error) {
@@ -70,10 +65,14 @@ class Quiz extends Component {
   }
 
   hideButtonShowQuiz() {
+    if (this.state.leader) {
+      let time = this.getTimeout();
+      this.updateTimeout(time)
+      this.state.client.changeTimeout(time);
+    };
     this.setState({
       show: true,
       teamName: document.getElementById('team-name').value,
-      leader: false
     });
     this.state.client.start();
   };
@@ -87,7 +86,11 @@ class Quiz extends Component {
   };
 
   updateDisable(){
-    this.setState({ disabledButton: false })
+    this.setState({ disabledButton: false });
+  };
+
+  updateTimeout(time) {
+    this.setState({ time: time });
   };
 
   updateQuestion(id, time) {
@@ -126,67 +129,45 @@ class Quiz extends Component {
     return this.state.score;
   };
 
-  changeTimeout(event) {
-    this.state.client.changeTimeout(event.target.value);
-  }
+  getTimeout(fallback = 20) {
+    let node = document.getElementById('timeout-value');
+    let entry = parseInt(node.value);
+    return (Number.isNaN(entry) ? fallback : entry) * 1000;
+  };
 
   render() {
     let number = this.state.number;
-    let question = this.state.questions[number];
-    let time = this.state.time;
-    return (
-      <div>
-        <div className='quiz'>
-          <StartPage
-            disabled={this.state.disabledButton}
-            show={this.state.show}
-            hideFunction={ () => this.hideButtonShowQuiz() }
-          />
+    let wsId = this.state.wsId;
+    let show = this.state.show;
 
-          <ToggleDisplay show={this.state.show}>
-            <div className="col-sm-8 col-sm-offset-2">
-              <h1>{this.state.name}</h1>
-            </div>
-          { this.state.questions.length > 0 && this.state.number < this.state.questions.length && this.state.questions[this.state.number].type === 'MultipleChoice' &&
-              <MCQuestion
-                question={this.state.questions[this.state.number]}
-                time={time} id={number}
-              />
-          }
-          { this.state.questions.length > 0 && this.state.number < this.state.questions.length && this.state.questions[this.state.number].type === 'text' &&
-              <TextQuestion
-                question={this.state.questions[this.state.number]}
-                time={time}
-                id={number} />
-          }
-          { this.state.number >= this.state.questions.length &&
-            <div className="col-sm-8 col-sm-offset-2">
-              <h2> Thanks for playing! </h2>
-              <h3> Your score was {this.state.score} </h3>
-            </div>
-          }
-          {this.state.allScores.length > 0 &&
-            this.state.allScores.map(function(score, index) {
-            return(
-              <div className="col-sm-8 col-sm-offset-2" key={index}>
-                <h4> {score.teamName}: {score.score} </h4>
-              </div>
-              )
-            })
-          }
-          </ToggleDisplay>
-       </div>
-      <div className='leader'>
-        <ToggleDisplay show={this.state.leader}>
-          <h1> You are the leader </h1>
-          <input className="new-quiz-borderless-question" type="text" onChange={(event) => this.changeTimeout(event)} />
-        </ToggleDisplay>
-      </div>
-       <div className='shareable-link'>
-          <ShareableLink
-            wsId={this.state.wsId}
+    return (
+      <div className='quiz'>
+      { !show &&
+        <StartPage
+          wsId={wsId}
+          disabled={this.state.disabledButton}
+          leader={this.state.leader}
+          startQuiz={this.hideButtonShowQuiz.bind(this)}
+        />
+      }
+      { show && this.isFinished() &&
+        <ScorePage
+          questions={this.state.questions}
+          scores={this.state.allScores}
+          score={this.state.score}
+        />
+      }
+      { show && !this.isFinished() &&
+        <div>
+          <h1>{this.state.name}</h1>
+          <QuestionContainer
+            wsId={wsId}
+            question={this.state.questions[number]}
+            time={this.state.time}
+            id={number}
           />
         </div>
+      }
       </div>
     );
   };

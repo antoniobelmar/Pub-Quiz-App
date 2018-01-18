@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+import CopyButton from './CopyButton';
 
 class ShareableLink extends Component {
-
   hasId() {
     return new URLSearchParams(window.location.search).get('id') !== null
   }
@@ -20,18 +20,30 @@ class ShareableLink extends Component {
 
   render() {
     let URL = this.getURL()
-    if(URL){
-      return(
-        <div className='link'>
-          <p>Your shareable URL is {URL} </p>
+    if (URL) {
+      return (
+        <div>
+          <div className='link'>
+            Your shareable link: <p id='shareable-link'>{URL}</p>
+          </div>
+          <CopyButton />
         </div>
-      )
+      );
     } else {
       return (
-        <div> </div>
-      )
-    }
-  }
+        <div></div>
+      );
+    };
+  };
+};
+
+const localStyles = {
+  linkRow: {
+    display: 'flex',
+    flexDirection: 'row',
+    padding: '5px',
+  },
 }
+
 
 export default ShareableLink

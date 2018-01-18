@@ -11,6 +11,7 @@ class NewQuizOption extends Component {
         <div>
         <input
           className='new-quiz-option'
+          id='new-option-input'
           type='text'
           placeholder={this.props.option._placeholder}
           value={this.props.option._text}
@@ -34,7 +35,5 @@ const localStyles = {
     padding: '5px',
   }
 }
-
-
 
 export default NewQuizOption;

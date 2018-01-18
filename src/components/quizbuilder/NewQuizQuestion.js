@@ -27,6 +27,7 @@ class NewQuizQuestion extends Component {
           </div>
           <input
             className='new-quiz-borderless-question'
+            id='text-input-question'
             type="text"
             placeholder={this.props.question._placeholder}
             value={this.props.question._text}

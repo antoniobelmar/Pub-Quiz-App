@@ -6,14 +6,12 @@ import NewQuiz from './components/quizbuilder/NewQuiz';
 
 const Routes = () => (
   <Router>
-    <div>
-      <Switch>
-        <Route exact path="/" component={Home}/>
-        <Route path="/quiz/new" component={NewQuiz}/>
-        <Route path="/quiz/:quizId" component={Quiz}/>
-      </Switch>
-    </div>
+    <Switch>
+      <Route exact path="/" component={Home}/>
+      <Route path="/quiz/new" component={NewQuiz}/>
+      <Route path="/quiz/:quizId" component={Quiz}/>
+    </Switch>
   </Router>
-)
+);
 
 export default Routes;
