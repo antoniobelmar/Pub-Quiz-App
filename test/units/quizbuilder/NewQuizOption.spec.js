@@ -18,11 +18,11 @@ describe('NewQuizOption item', () => {
 
   it('contain a div which in base of a props shows the answer\'s index ', () => {
     wrapper.setProps({ index: 1 })
-    expect(wrapper.contains(<div>A2</div>)).to.equal(true);
+    expect(wrapper.find('.a').text()).to.equal('A2');
   });
 
   it('its input tag should have as placeholder \'Marco\' ', () => {
     expect(wrapper.find('#new-option-input').props().placeholder).to.be.equal('Marco')
   });
-  
+
 });
