@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './Question.css'
 import Timer from './Timer.js'
 
 class MCQuestion extends Component {
