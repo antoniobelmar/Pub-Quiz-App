@@ -84,8 +84,8 @@ class NewQuiz extends Component {
   }
 
   submitQuiz = () => {
-    // axios.post('https://pub-quiz-api.herokuapp.com/quiz', {
-    axios.post('http://localhost:5000/quiz', {
+    // axios.post('http://localhost:5000/quiz', {
+    axios.post('https://pub-quiz-api.herokuapp.com/quiz', {
       name: this.state.name,
       questions: this.state.questions
     },
@@ -101,7 +101,6 @@ class NewQuiz extends Component {
   };
 
   render() {
-    {console.log(this.state)}
     if (this.state.redirect) {
       return <Redirect to='/' />;
     }
