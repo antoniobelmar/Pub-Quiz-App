@@ -14,13 +14,13 @@ describe('QuizList item', () => {
   });
 
   it('contains a li tag with the name of the quiz', () => {
-    expect(wrapper.find('li').text()).to.eql('test')
+    expect(wrapper.find('.quiz-name-button').text()).to.eql('test')
   });
 
   it('contains a button that when click deletes a quiz', () => {
     let fakeHandleClickDeleteQuiz = spy()
     wrapper.setProps({ handleClickDeleteQuiz: fakeHandleClickDeleteQuiz })
-    wrapper.find('button').simulate('click')
+    wrapper.find('.delete-button').simulate('click')
     expect(fakeHandleClickDeleteQuiz.calledWith(1)).to.be.equal(true)
   });
 
