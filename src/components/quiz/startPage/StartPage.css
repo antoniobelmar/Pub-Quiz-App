@@ -1,8 +1,6 @@
-@import url('https://fonts.googleapis.com/css?family=Bungee+Inline');
-@import url('https://fonts.googleapis.com/css?family=Days+One');
 @font-face {
   font-family: crayonCrumble;
-  src: url('../../DK Crayon Crumble.ttf');
+  src: url('../../../DK Crayon Crumble.ttf');
 }
 
 .select-box {
