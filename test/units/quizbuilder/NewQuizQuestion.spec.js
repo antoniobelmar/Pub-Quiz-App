@@ -11,7 +11,7 @@ describe('NewQuizQuestion', () => {
 
   it('contain the index of the question(Q1)', () => {
     wrapper.setProps({index: 0})
-    expect(wrapper.contains(<div>Q1</div>)).to.equal(true);
+    expect(wrapper.find('.q').text()).to.eql('Q1')
   });
 
   describe('"#text-input-question" text input', () => {

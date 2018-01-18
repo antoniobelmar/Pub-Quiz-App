@@ -11,7 +11,7 @@ describe('NewQuizAnswer item', () => {
   });
 
   it('should have a div tag containing the word "Answer"', () => {
-    expect(wrapper.contains(<div> Answer </div>)).to.equal(true);
+    expect(wrapper.find('.answer').text()).to.eql('Answer');
   });
 
   it('contains a select tag', () => {
