@@ -36,7 +36,6 @@ class WsClient {
   getRoute(self) {
     return function route(event, json_obj = JSON) {
       let data = json_obj.parse(event.data);
-      console.log(event.data);
       switch(data.type) {
         case 'Leader':
           self.showLeaderMessage()
@@ -138,8 +137,8 @@ class WsClient {
   };
 
   _quizStartMessage(json_obj) {
-    return json_obj.stringify({ 
-      type: "startQuiz", 
+    return json_obj.stringify({
+      type: "startQuiz",
       time: this._timeout,
       question: 0
     });

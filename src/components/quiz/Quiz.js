@@ -8,7 +8,6 @@ import client from '../../lib/wsClient';
 import axios from 'axios';
 import './Quiz.css'
 
-// const URL = 'localhost:5000'
 const URL = 'pub-quiz-api.herokuapp.com'
 
 class Quiz extends Component {
@@ -99,7 +98,6 @@ class Quiz extends Component {
 
   updateQuestion(id, time) {
     let self = this;
-    console.log(this.state);
     let radios = document.getElementsByName('options');
     let textArea = document.getElementById('textAnswer')
     let answer = this.state.questions[this.state.number].answer[0];
