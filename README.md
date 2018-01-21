@@ -12,11 +12,11 @@
  It is a full Javascript application that particularly focuses on React, as the front-end.
  This web app has been built mainly to be used on mobile phones.
 
-<b> If you want to try our app, here it is live <b/> <br> [here](http://quiz-life.surge.sh/) :computer:. </b>
+<b> If you want to try our app, here it is live <b/> <br> [here](http://quiz-life.surge.sh/) :computer:.
 
 <i> To create a Quiz click on  the 'Create a quiz' button, fill in  the form and add the quiz. <br>
 Once you are ready to play click on the quiz, share the game's link with your friends. Once you have decided the team names and the interval time for the questions, the leader have to press start and then all the other users will be able to join! </i> <br>
-<b> Enjoy! :tada: </b>
+<b> Enjoy! :tada: <b/>
 
 ---
 
