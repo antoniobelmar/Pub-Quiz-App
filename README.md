@@ -30,7 +30,7 @@ To run QuizLife locally you must run the back-end repository that you can find [
 As this is the front-end of the project, it requires the api data from the other project linked here: [node.JS API backened](https://www.github.com/cazwazacz/pub-quiz-api). Once you have this downloaded and running (instructions are on the linked repo, follow the steps below!) follow the instruction below>
 
 ```
-$ git clone https://github.com/Vanals/Pub_Quiz_FInalProject.git
+$ git clone https://github.com/Vanals/Pub-Quiz.git
 ```
 ```
 $ cd Pub-Quiz
