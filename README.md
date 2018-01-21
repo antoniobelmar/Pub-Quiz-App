@@ -3,11 +3,19 @@
 [How To Use](#how-to-use) | [Technologies](#technologies) | [Team](#team)
 
  QuizLife! is an app which has been developed as final project of the October cohort at Makers Academy. <br />
-   It allows you to create quizzes and play them live with your friends in a pub or at a party <br />
+ It allows you to create quizzes and play them live with your friends in a pub or at a party :tada:.<br />
+
+![](https://image.ibb.co/nbCHbw/Screen_Shot_2018_01_21_at_18_43_06.png)
+
+---   
  It is a full Javascript application whit particular focus on React for the front-end.
  This web app has been studied to be mainly used by mobile phone.
 
-<b> If you want to try our app  It is live <b> <br> [here](http://www.fearless-tomatoes.surge.sh).
+<b> If you want to try our app  It is live <b/> <br> [here](http://quiz-life.surge.sh/) :computer:.
+
+<i> To create a Quiz click on  the 'Create a quiz' button, fill in  the form and add the quiz. <br>
+Once you are ready to play click on the quiz, share the game's link with your friends and once you have decided the team names and the interval time for the questions the leader have to press start and then all the other users will be able to join! </i> <br>
+<b> Enjoy! :tada: </b>
 
 ---
 
@@ -41,14 +49,16 @@ $ npm test
 ```
 
 ## Technologies
-
-![](https://goo.gl/SwrVNv)
+This as all the technologies as been use in the whole project (back-end and front-end) <br> <br>
+![](https://image.ibb.co/emTOzG/Screen_Shot_2018_01_21_at_18_21_12.png)
 
 
 
 # Team
 
-This project was done by: <br>
-  :computer: Allan Wazacz(https://www.github.com/cazwazacz/),<br> :computer: Antonio Belmar da Costa  (https://github.com/antoniobelmar/),<br> :computer: Marco Vanali  (https://github.com/Vanals/) <br>
-:computer:Marie Kerkstoel (https://github.com/mariekerkstoel)<br>
-:computer:Theo Breuer-Weil  (https://www.github.com/somemarsupials/).
+This project was done by: <br> <br>
+* :computer: Allan Wazacz(https://www.github.com/cazwazacz/)
+* :computer: Antonio Belmar da Costa  (https://github.com/antoniobelmar/),
+* :computer: Marco Vanali  (https://github.com/Vanals/)
+* :computer:Marie Kerkstoel (https://github.com/mariekerkstoel)
+* :computer:Theo Breuer-Weil  (https://www.github.com/somemarsupials/).
