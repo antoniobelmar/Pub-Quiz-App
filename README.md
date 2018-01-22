@@ -28,13 +28,13 @@ The back-end API is deployed so you can run  To run QuizLife locally, you must r
 
 ## How to use
 
-Given this is the front-end of the project, it requires the API data from the other project which is linked here: [node.JS API backened](https://github.com/antoniobelmar/Pub-Quiz-API). Once you have this downloaded and running (instructions are on the linked repo) follow the instruction below>
+Given this is the front-end of the project, it requires the API data from the other project which is linked here: [node.JS API backened](https://github.com/antoniobelmar/Pub-Quiz-API). Once you have this downloaded and running (instructions are on the linked repo) follow the instruction below:
 
 ```
 $ git clone https://github.com/antoniobelmar/Pub-Quiz-App.git
 ```
 ```
-$ cd Pub-Quiz
+$ cd Pub-Quiz-App
 ```
 ```
 $ npm install
@@ -50,9 +50,8 @@ $ npm test
 ```
 
 ## Technologies
-These are all the technologies that have been used in the project ( both back-end and front-end) <br> <br>
+These are all the technologies that have been used in the project (both back-end and front-end) <br> <br>
 ![](https://image.ibb.co/emTOzG/Screen_Shot_2018_01_21_at_18_21_12.png)
-
 
 
 # Team
