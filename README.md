@@ -22,7 +22,7 @@ Once you are ready to play click on the quiz, share the game's link with your fr
 
 This repository is only the front-end part of our app.
 
-To run QuizLife locally, you must run the back-end repository that you can find [here](https://www.github.com/cazwazacz/pub-quiz-api), using the comand $ npm start.
+The back-end API is deployed so you can run  To run QuizLife locally, you must run the back-end repository that you can find [here](https://github.com/antoniobelmar/Pub-Quiz-API), using the comand $ npm start.
 
 ---
 
@@ -31,7 +31,7 @@ To run QuizLife locally, you must run the back-end repository that you can find 
 Given this is the front-end of the project, it requires the API data from the other project which is linked here: [node.JS API backened](https://github.com/antoniobelmar/Pub-Quiz-API). Once you have this downloaded and running (instructions are on the linked repo) follow the instruction below>
 
 ```
-$ git clone https://github.com/Vanals/Pub-Quiz.git
+$ git clone https://github.com/antoniobelmar/Pub-Quiz-App.git
 ```
 ```
 $ cd Pub-Quiz
