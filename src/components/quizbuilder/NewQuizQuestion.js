@@ -9,7 +9,7 @@ class NewQuizQuestion extends Component {
 
   render(){
     return(
-      <div>
+      <div className="new-quiz-question-div">
         <div className='remove-question'>
           <NewQuizQuestionType
             questionIndex={this.props.index}

@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 class QuizList extends Component {
   render() {
     return(
-      <div className='quiz-list-div'>
+      <div className='quiz-list-div col-sm-8 col-sm-offset-2 create-quiz-div'>
         {this.props.quizzes.map((quiz, index) => {
           return(
             <div key={index}>

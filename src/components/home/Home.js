@@ -43,7 +43,7 @@ class Home extends Component {
     return(
       <div>
         <h1 id="quiz-life-title">QuizLife!</h1>
-        <div className='col-sm-8 col-sm-offset-3'>
+        <div>
           <div className='col-sm-8 col-sm-offset-2 create-quiz-div'>
             <a href="/quiz/new"><button id='create-button'>Create a quiz!</button></a>
           </div>

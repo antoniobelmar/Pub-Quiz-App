@@ -27,7 +27,7 @@ div.X button {
 }
 
 .create-quiz-div {
-  text-align: center
+  text-align: left;
 }
 
 .quiz-list-div {
@@ -35,7 +35,7 @@ div.X button {
 }
 
 .new-quiz-div {
-  display: inline;
+  display: inline-block;
   position: absolute;
   width: 100%;
   margin: auto;
@@ -49,6 +49,14 @@ div.X button {
   padding: 20px;
   margin-top: 1em;
 }
+
+.new-quiz-question-div {
+  display: inline-block;
+  position: relative;
+  padding: 20px;
+  margin-top: 1em;
+}
+
 
 .new-quiz-name-div {
   text-align: center
