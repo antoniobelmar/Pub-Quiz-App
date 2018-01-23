@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class NewQuizName extends Component {
   render(){
     return(
-      <div >
+      <div className='new-quiz-name-div'>
         <h1> Quiz Name </h1>
         <input
           type="text"

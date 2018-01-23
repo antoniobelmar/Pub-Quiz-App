@@ -3,9 +3,10 @@
   src: url('../../../DK Crayon Crumble.ttf');
 }
 
-div.new-quiz-bottom #general-quiz-button {
+div.new-quiz-button #general-quiz-button {
   padding: 0;
   margin: 1em 0em 0em 0em;
+  text-align: center;
 }
 
 .select-box {
@@ -26,17 +27,31 @@ div.X button {
 }
 
 .create-quiz-div {
-  margin: 0;
+  text-align: center
 }
 
 .quiz-list-div {
   display: inline-grid;
 }
 
+.new-quiz-div {
+  display: inline;
+  position: absolute;
+  width: 100%;
+  margin: auto;
+  text-align: center
+}
+
 .new-quiz-question {
   border: solid 1px white;
+  display: inline-block;
+  position: relative;
   padding: 20px;
   margin-top: 1em;
+}
+
+.new-quiz-name-div {
+  text-align: center
 }
 
 .quiz-builder {

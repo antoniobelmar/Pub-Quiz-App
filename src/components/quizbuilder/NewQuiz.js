@@ -105,7 +105,7 @@ class NewQuiz extends Component {
       return <Redirect to='/' />;
     }
     return(
-      <div className="quiz-builder col-sm-8 col-sm-offset-2">
+      <div className="quiz-builder col-sm-8 col-sm-offset-2 new-quiz-div">
         <NewQuizName
           name={this.state.name}
           placeholder={this.state.placeholder}
@@ -130,7 +130,7 @@ class NewQuiz extends Component {
             </div>
           )
         })}
-        <div className='new-quiz-bottom'>
+        <div className='new-quiz-button'>
           <AddQuestionButton
             addQuestion={this.addQuestion}
           />
