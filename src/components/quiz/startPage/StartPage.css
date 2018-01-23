@@ -30,6 +30,10 @@ div.X button {
   text-align: left;
 }
 
+.start-quiz-div {
+  padding: 5%;
+}
+
 .quiz-list-div {
   display: inline-grid;
 }

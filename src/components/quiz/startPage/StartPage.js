@@ -9,14 +9,16 @@ class StartPage extends Component {
     return (
       <div>
         <div>
-          <h1 className='pub-title' id='titleApp'>Pub-Quiz</h1>
+            <h1 className='pub-title' id='titleApp'>Pub-Quiz</h1>
           { this.props.leader &&
             <LeaderSection />
           }
+        </div>
+        <div>
           <GeneralSection
-              startQuiz={this.props.startQuiz}
-              disabled={this.props.disabled}
-            />
+            startQuiz={this.props.startQuiz}
+            disabled={this.props.disabled}
+          />
         </div>
         <div>
           <ShareableLink wsId={this.props.wsId}/>
