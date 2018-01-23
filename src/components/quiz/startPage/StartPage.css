@@ -25,6 +25,14 @@ div.X button {
   font-size: 2em;
 }
 
+.create-quiz-div {
+  margin: 0;
+}
+
+.quiz-list-div {
+  display: inline-grid;
+}
+
 .new-quiz-question {
   border: solid 1px white;
   padding: 20px;
