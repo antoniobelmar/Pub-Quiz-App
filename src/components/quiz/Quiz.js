@@ -5,9 +5,7 @@ import ShareableLink from './links/ShareableLink'
 import QuestionContainer from './questions/QuestionContainer';
 import client from '../../lib/wsClient';
 import axios from 'axios';
-import './Quiz.css'
 
-// const URL = 'localhost:5000'
 const URL = 'pub-quiz-api.herokuapp.com'
 
 class Quiz extends Component {
