@@ -56,7 +56,7 @@ Tech | Where? | What it does
 --- | --- | ---
 mongoDB | Database | Stores all our quizzes and questions
 node.JS and express | Back-end | Contains a server. Communicates between our database and the user interface
-ws, ws-express-js | Back-end | Allows us to broadcast questions in real-time and to broadcast all scores when the quiz ends as well as playing multiple quizzes at the same
+ws, ws-express-ws | Back-end | Allows us to broadcast questions in real-time and to broadcast all scores when the quiz ends as well as playing multiple quizzes at the same
 React.js | Front-end | Provides the user interface for building and playing the quizzes
 sinon.js, chai, mocha | Testing | Test-runner, assertions library and spies and mocks library in both the back and front-end
 zombie.js, supertest, enzyme | Testing | Browser tests, API tests and testing all React components
