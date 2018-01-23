@@ -3,7 +3,6 @@ import ScorePage from './scorePage/ScorePage';
 import StartPage from './startPage/StartPage';
 import ShareableLink from './links/ShareableLink'
 import QuestionContainer from './questions/QuestionContainer';
-import ToggleDisplay from 'react-toggle-display';
 import client from '../../lib/wsClient';
 import axios from 'axios';
 import './Quiz.css'

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import NewQuizOption from './NewQuizOption';
 import AddOptionButton from './AddOptionButton'
 import RemoveQuestionButton from './RemoveQuestionButton'
-import ToggleDisplay from 'react-toggle-display';
 import NewQuizAnswer from './NewQuizAnswer'
 import NewQuizQuestionType from './NewQuizQuestionType'
 
