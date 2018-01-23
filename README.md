@@ -50,9 +50,16 @@ $ npm test
 ```
 
 ## Technologies
-These are all the technologies that have been used in the project (both back-end and front-end) <br> <br>
-![](https://image.ibb.co/emTOzG/Screen_Shot_2018_01_21_at_18_21_12.png)
+*These are the technologies which were used in both the front and back-end*
 
+Tech | Where? | What it does
+--- | --- | ---
+mongoDB | Database | Stores all our quizzes and questions
+node.JS and express | Back-end | Contains a server. Communicates between our database and the user interface
+ws, express-js | Back-end | Allows us to broadcast questions in real-time and to broadcast all scores when the quiz ends as well as playing multiple quizzes at the same
+React | Front-end | Provides the user interface for building and playing the quizzes
+sinon.js, chai, mocha | Testing | Test-runner, assertions library and spies and mocks library in both the back and front-end
+zombie.js, supertest, enzyme | Testing | Browser tests, API tests and testing all React components
 
 # Team
 
