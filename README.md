@@ -48,6 +48,7 @@ To run tests:
 ```bash
 $ npm test
 ```
+* Keep in mind that you would need to have your local server open if you are running any feature tests in order for the driver to be able to visit the page.
 
 ## Technologies
 *These are the technologies which were used in both the front and back-end*
