@@ -25,4 +25,8 @@ describe('NewQuizOption item', () => {
     expect(wrapper.find('#new-option-input').props().placeholder).to.be.equal('Marco')
   });
 
+  it("always renders a `RemoveOptionButton`", () => {
+    expect(wrapper.find('RemoveOptionButton').length).to.equal(1);
+  });
+
 });
